@@ -1,0 +1,189 @@
+<nav class="site-header" id="site-header">
+  <a href="{{ section.settings.logo_url | default: routes.root_url }}" class="header-logo" id="header-logo">
+    {% if section.settings.logo != blank %}
+      <img src="{{ section.settings.logo | image_url: width: 200 }}"
+           alt="{{ section.settings.name_first }} {{ section.settings.name_last }}"
+           class="header-logo-img" width="200" height="40" loading="eager">
+    {% else %}
+      {{ section.settings.name_first | default: 'Omar' }} <em>{{ section.settings.name_last | default: 'Emad El Din' }}</em>
+    {% endif %}
+  </a>
+
+  <ul class="header-nav" id="header-nav">
+    {% if section.settings.nav_menu != blank %}
+      {% for link in linklists[section.settings.nav_menu].links %}
+        {% if link.links.size > 0 %}
+          <li class="header-nav-item header-has-dropdown">
+            <a href="{{ link.url }}" {% if link.active %}class="active"{% endif %} aria-haspopup="true" aria-expanded="false">
+              {{ link.title }}
+              <svg class="header-dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><polyline points="6 9 12 15 18 9"/></svg>
+            </a>
+            <ul class="header-dropdown" aria-label="{{ link.title }}">
+              {% for child in link.links %}
+                {% if child.links.size > 0 %}
+                  <li class="header-has-dropdown header-dropdown-sub">
+                    <a href="{{ child.url }}" {% if child.active %}class="active"{% endif %} aria-haspopup="true" aria-expanded="false">
+                      {{ child.title }}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><polyline points="9 18 15 12 9 6"/></svg>
+                    </a>
+                    <ul class="header-dropdown header-dropdown--level2" aria-label="{{ child.title }}">
+                      {% for grandchild in child.links %}
+                        <li><a href="{{ grandchild.url }}" {% if grandchild.active %}class="active"{% endif %}>{{ grandchild.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                {% else %}
+                  <li><a href="{{ child.url }}" {% if child.active %}class="active"{% endif %}>{{ child.title }}</a></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </li>
+        {% else %}
+          <li class="header-nav-item"><a href="{{ link.url }}" {% if link.active %}class="active"{% endif %}>{{ link.title }}</a></li>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <li class="header-nav-item"><a href="#about"   data-i18n="nav-about">About</a></li>
+      <li class="header-nav-item"><a href="#reel"    data-i18n="nav-reel">Reel</a></li>
+      <li class="header-nav-item"><a href="#films"   data-i18n="nav-films">Films</a></li>
+      <li class="header-nav-item"><a href="#gallery" data-i18n="nav-gallery">Gallery</a></li>
+      <li class="header-nav-item"><a href="#craft"   data-i18n="nav-craft">Craft</a></li>
+      <li class="header-nav-item"><a href="#contact" data-i18n="nav-contact">Contact</a></li>
+    {% endif %}
+  </ul>
+
+  <div class="header-right">
+    <button class="header-icon-btn" id="header-search-btn" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    </button>
+    <button class="header-icon-btn" id="header-cart-btn" aria-label="Cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-count" id="header-cart-count">{{ cart.item_count }}</span>
+    </button>
+    <div class="header-now">
+      <span class="header-now-dot"></span>
+      <span id="scene-num-nav">Hero</span>
+    </div>
+    <!-- Country/Language selectors -->
+    {% if localization.available_countries.size > 1 or localization.available_languages.size > 1 %}
+      <div class="header-localization">
+        {% form 'localization', class: 'header-localization-form' %}
+          {% if localization.available_countries.size > 1 %}
+            <div class="header-localization-select-wrap">
+              <label for="header-country-select" class="visually-hidden">Country</label>
+              <select id="header-country-select" name="country_code" class="header-localization-select" onchange="this.form.submit()">
+                {% for country in localization.available_countries %}
+                  <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>
+                    {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endif %}
+          {% if localization.available_languages.size > 1 %}
+            <div class="header-localization-select-wrap">
+              <label for="header-language-select" class="visually-hidden">Language</label>
+              <select id="header-language-select" name="locale_code" class="header-localization-select" onchange="this.form.submit()">
+                {% for language in localization.available_languages %}
+                  <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>
+                    {{ language.endonym_name }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endif %}
+        {% endform %}
+      </div>
+    {% endif %}
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu overlay -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <button class="mobile-close" id="mobile-close" aria-label="Close menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22">
+      <path d="M18 6L6 18M6 6l12 12"/>
+    </svg>
+  </button>
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-num" data-i18n="menu-label">MENU</div>
+    <ul class="mobile-nav" id="mobile-nav">
+      {% assign mobile_list = section.settings.mobile_menu | default: section.settings.nav_menu %}
+      {% if mobile_list != blank %}
+        {% for link in linklists[mobile_list].links %}
+          <li><a href="{{ link.url }}" {% if link.active %}class="active"{% endif %}>{{ link.title }}</a></li>
+        {% endfor %}
+      {% else %}
+        <li><a href="#about"   data-i18n="nav-about">About</a></li>
+        <li><a href="#reel"    data-i18n="nav-reel">Reel</a></li>
+        <li><a href="#films"   data-i18n="nav-films">Films</a></li>
+        <li><a href="#gallery" data-i18n="nav-gallery">Gallery</a></li>
+        <li><a href="#craft"   data-i18n="nav-craft">Craft</a></li>
+        <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
+      {% endif %}
+    </ul>
+    <div class="mobile-menu-foot">
+      <button id="mobile-theme" class="mobile-ctrl-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        Theme
+      </button>
+      <button id="mobile-lang" class="mobile-ctrl-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
+          <path d="M2 5h8M6 3v2M11 5c-.5 3.5-2 6.5-5 8.5M7 11c1 1.5 3 3 5 3.5M12 20l4-10 4 10M14.5 15h3"/>
+        </svg>
+        AR / EN
+      </button>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image (optional)"
+    },
+    {
+      "type": "text",
+      "id": "name_first",
+      "label": "First name",
+      "default": "Omar"
+    },
+    {
+      "type": "text",
+      "id": "name_last",
+      "label": "Last name",
+      "default": "Emad El Din"
+    },
+    {
+      "type": "url",
+      "id": "logo_url",
+      "label": "Logo link (leave blank for home)"
+    },
+    {
+      "type": "link_list",
+      "id": "nav_menu",
+      "label": "Desktop navigation menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "mobile_menu",
+      "label": "Mobile navigation menu (uses desktop menu if blank)",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

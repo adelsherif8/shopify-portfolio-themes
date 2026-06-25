@@ -1,0 +1,141 @@
+<div class="cart-page section">
+  <div class="s-label reveal">Cart</div>
+  <h1 class="cart-page-title reveal">Your<br><em>selection.</em></h1>
+
+  {% if cart.item_count > 0 %}
+    <form action="{{ routes.cart_url }}" method="post" class="cart-form">
+      <div class="cart-layout">
+
+        <!-- Items -->
+        <div class="cart-items">
+          {% for item in cart.items %}
+            <div class="cart-item reveal" style="transition-delay:{{ forloop.index0 | times: 0.06 }}s;">
+              <a href="{{ item.url }}" class="cart-item-img-wrap">
+                {% if item.image %}
+                  <img src="{{ item.image | image_url: width: 240 }}" alt="{{ item.image.alt | escape }}" class="cart-item-img" width="240" height="240" loading="lazy">
+                {% else %}
+                  <div class="cart-item-placeholder"></div>
+                {% endif %}
+              </a>
+              <div class="cart-item-body">
+                <div class="cart-item-top">
+                  <div>
+                    <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
+                    {% unless item.product.has_only_default_variant %}
+                      <div class="cart-item-variant">{{ item.variant.title }}</div>
+                    {% endunless %}
+                    {% if item.selling_plan_allocation %}
+                      <div class="cart-item-variant">{{ item.selling_plan_allocation.selling_plan.name }}</div>
+                    {% endif %}
+                    {% for option in item.options_with_values %}
+                      <div class="cart-item-option">{{ option.name }}: {{ option.value }}</div>
+                    {% endfor %}
+                    {% if item.unit_price %}
+                      <div class="cart-item-unit-price">{{ item.unit_price | money }}/{{ item.unit_price_measurement.reference_value }}{{ item.unit_price_measurement.reference_unit }}</div>
+                    {% endif %}
+                  </div>
+                  <div class="cart-item-price">
+                    {% if item.original_line_price != item.final_line_price %}
+                      <s class="cart-item-original-price">{{ item.original_line_price | money }}</s>
+                    {% endif %}
+                    {{ item.final_line_price | money }}
+                  </div>
+                </div>
+                <div class="cart-item-bottom">
+                  <div class="cart-item-qty">
+                    <button type="button" class="cart-qty-btn" data-line="{{ forloop.index }}" data-change="-1">−</button>
+                    <span class="cart-qty-num">{{ item.quantity }}</span>
+                    <button type="button" class="cart-qty-btn" data-line="{{ forloop.index }}" data-change="1">+</button>
+                  </div>
+                  <button type="button" class="cart-remove-btn" data-line="{{ forloop.index }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Summary -->
+        <div class="cart-summary reveal">
+          <div class="cart-summary-inner">
+            <div class="cart-summary-label">Order summary</div>
+            <div class="cart-summary-row">
+              <span>Subtotal</span>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
+            {% if cart.total_discount > 0 %}
+              <div class="cart-summary-row cart-summary-row--discount">
+                <span>Discount</span>
+                <span>−{{ cart.total_discount | money }}</span>
+              </div>
+            {% endif %}
+            <div class="cart-summary-row cart-summary-row--shipping">
+              <span>Shipping</span>
+              <span>Calculated at checkout</span>
+            </div>
+            <div class="cart-summary-divider"></div>
+            <div class="cart-summary-row cart-summary-row--total">
+              <span>Total</span>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
+
+            {% if cart.taxes_included %}
+              <p class="cart-tax-note">Tax included.</p>
+            {% endif %}
+
+            {% if cart.cart_level_discount_applications.size > 0 %}
+              <div class="cart-discounts">
+                {% for discount in cart.cart_level_discount_applications %}
+                  <div class="cart-discount-row">
+                    <span>{{ discount.title }}</span>
+                    <span>−{{ discount.total_allocated_amount | money }}</span>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if section.settings.note_enabled %}
+              <div class="cart-note-wrap">
+                <label class="cart-note-label" for="cart-note">Order note</label>
+                <textarea id="cart-note" name="note" class="cart-note-input" rows="3" placeholder="{{ section.settings.note_placeholder | default: 'Any special instructions...' }}">{{ cart.note }}</textarea>
+              </div>
+            {% endif %}
+
+            <button type="submit" name="checkout" class="cart-checkout-btn">
+              Proceed to checkout
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+
+            <!-- Accelerated checkout -->
+            <div class="cart-payment-btns">
+              {{ cart | payment_button }}
+            </div>
+
+            <a href="{{ routes.root_url }}" class="cart-continue-link">← Continue shopping</a>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  {% else %}
+    <div class="cart-empty reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="56" height="56" style="color:var(--gold);opacity:.2;margin-bottom:24px;">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      <p class="cart-empty-text">Your cart is empty.</p>
+      <a href="{{ routes.root_url }}" class="cart-empty-btn">Start exploring</a>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+    { "type": "checkbox", "id": "note_enabled", "label": "Show order note field", "default": true },
+    { "type": "text", "id": "note_placeholder", "label": "Note placeholder", "default": "Any special instructions..." }
+  ]
+}
+{% endschema %}

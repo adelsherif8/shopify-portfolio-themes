@@ -1,0 +1,52 @@
+<div class="section blog-page">
+  <div class="s-label reveal">{{ blog.title }}</div>
+  <h1 class="blog-page-title reveal">Thoughts on<br><em>the craft.</em></h1>
+
+  {% paginate blog.articles by 12 %}
+    <div class="blog-grid">
+      {% for article in blog.articles %}
+        <article class="journal-card reveal" style="transition-delay:{{ forloop.index0 | modulo: 3 | times: 0.08 }}s;">
+          <a href="{{ article.url }}">
+            {% if article.image %}
+              <div class="journal-card-img-wrap">
+                <img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.image.alt | escape | default: article.title }}" class="journal-card-img" width="600" height="340" loading="lazy">
+              </div>
+            {% else %}
+              <div class="journal-card-img-wrap journal-card-img-placeholder"></div>
+            {% endif %}
+            <div class="journal-card-body">
+              <div class="journal-card-meta">
+                <span class="journal-card-date">{{ article.published_at | date: '%B %d, %Y' }}</span>
+                {% for tag in article.tags limit: 1 %}
+                  <span class="journal-card-tag">{{ tag }}</span>
+                {% endfor %}
+              </div>
+              <h2 class="journal-card-title">{{ article.title }}</h2>
+              <p class="journal-card-excerpt">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+              <span class="journal-card-link">
+                Read more
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+        </article>
+      {% endfor %}
+    </div>
+
+    {% if paginate.pages > 1 %}
+      <div class="coll-pagination">
+        {% if paginate.previous %}<a href="{{ paginate.previous.url }}" class="coll-page-btn">← Prev</a>{% endif %}
+        {% for part in paginate.parts %}
+          {% if part.is_link %}<a href="{{ part.url }}" class="coll-page-num">{{ part.title }}</a>
+          {% elsif part.title == paginate.current_page %}<span class="coll-page-num active">{{ part.title }}</span>
+          {% else %}<span class="coll-page-ellipsis">…</span>{% endif %}
+        {% endfor %}
+        {% if paginate.next %}<a href="{{ paginate.next.url }}" class="coll-page-btn">Next →</a>{% endif %}
+      </div>
+    {% endif %}
+  {% endpaginate %}
+</div>
+
+{% schema %}
+{ "name": "Blog", "settings": [] }
+{% endschema %}

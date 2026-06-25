@@ -1,0 +1,44 @@
+{% if section.settings.custom_liquid != blank %}
+  <div class="custom-liquid-section section">
+    {{ section.settings.custom_liquid }}
+  </div>
+{% endif %}
+
+{% for block in section.blocks %}
+  {% if block.type == 'custom_liquid' %}
+    <div class="custom-liquid-block" {{ block.shopify_attributes }}>
+      {{ block.settings.custom_liquid }}
+    </div>
+  {% endif %}
+{% endfor %}
+
+{% schema %}
+{
+  "name": "Custom Liquid",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "Liquid code",
+      "info": "Add app-specific Liquid code or any valid Liquid template code."
+    }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "custom_liquid",
+      "name": "Custom Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Liquid code"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Custom Liquid" }
+  ]
+}
+{% endschema %}

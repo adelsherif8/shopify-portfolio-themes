@@ -1,0 +1,120 @@
+<section id="influences" class="section" data-section-num="007">
+  <div class="s-label reveal">{{ section.settings.label | default: '06 — Influences' }}</div>
+  <h2 class="influences-heading reveal">
+    {{ section.settings.heading_prefix | default: 'The films that ' }}<em>{{ section.settings.heading_em | default: 'shaped the eye.' }}</em>
+  </h2>
+
+  <div class="influences-carousel" id="influences-carousel-{{ section.id }}">
+    <div class="influences-track" id="influences-track-{{ section.id }}">
+      {% for block in section.blocks %}
+        {% if block.type == 'film' %}
+          <div class="influence-slide" {{ block.shopify_attributes }}>
+            <div class="influence-card">
+              <div class="influence-card-bg" style="background: {{ block.settings.bg_gradient | default: 'linear-gradient(135deg,#0a0400 0%,#1a0800 100%)' }};"></div>
+              <div class="influence-year">{{ block.settings.year | default: '—' }}</div>
+              <div class="influence-title">{{ block.settings.title | default: 'Film Title' }}</div>
+              <div class="influence-dir">{{ section.settings.dir_label | default: 'dir.' }} {{ block.settings.director | default: 'Director Name' }}</div>
+              <blockquote class="influence-quote">{{ block.settings.quote | default: 'What this film means to your work as a filmmaker.' }}</blockquote>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="influences-nav">
+      <button class="influences-btn influences-btn-prev" aria-label="Previous" data-carousel="influences-carousel-{{ section.id }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <div class="influences-dots" id="influences-dots-{{ section.id }}"></div>
+      <button class="influences-btn influences-btn-next" aria-label="Next" data-carousel="influences-carousel-{{ section.id }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Influences",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "06 — Influences"
+    },
+    {
+      "type": "text",
+      "id": "heading_prefix",
+      "label": "Heading prefix",
+      "default": "The films that "
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Heading (italic gold)",
+      "default": "shaped the eye."
+    },
+    {
+      "type": "text",
+      "id": "dir_label",
+      "label": "Director label",
+      "default": "dir."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "film",
+      "name": "Influence",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Film title",
+          "default": "Film Title"
+        },
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "—"
+        },
+        {
+          "type": "text",
+          "id": "director",
+          "label": "Director",
+          "default": "Director Name"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "What this film means to you",
+          "default": "What this film means to your work as a filmmaker."
+        },
+        {
+          "type": "text",
+          "id": "bg_gradient",
+          "label": "Card background gradient (CSS)",
+          "default": "linear-gradient(135deg,#0a0400 0%,#1a0800 100%)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Influences",
+      "blocks": [
+        { "type": "film", "settings": { "title": "Add Film Title", "year": "—", "director": "Director Name", "quote": "What this film means to your work as a filmmaker.", "bg_gradient": "linear-gradient(135deg,#0a0400 0%,#1a0800 100%)" } },
+        { "type": "film", "settings": { "title": "Add Film Title", "year": "—", "director": "Director Name", "quote": "What this film means to your work as a filmmaker.", "bg_gradient": "linear-gradient(135deg,#000a04 0%,#001a08 100%)" } },
+        { "type": "film", "settings": { "title": "Add Film Title", "year": "—", "director": "Director Name", "quote": "What this film means to your work as a filmmaker.", "bg_gradient": "linear-gradient(135deg,#050500 0%,#0f0e00 100%)" } },
+        { "type": "film", "settings": { "title": "Add Film Title", "year": "—", "director": "Director Name", "quote": "What this film means to your work as a filmmaker.", "bg_gradient": "linear-gradient(135deg,#04040a 0%,#08081a 100%)" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

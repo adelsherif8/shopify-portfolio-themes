@@ -1,0 +1,25 @@
+.reel { height:100vh; position:relative; display:flex; align-items:center; justify-content:center; background:var(--black); overflow:hidden; border-top:1px solid var(--border); padding:0; }
+.canvas { position:absolute; inset:0; width:100%; height:100%; opacity:.6; }
+.lb    { position:absolute; top:0; left:0; right:0; height:70px; background:var(--black); z-index:2; }
+.lbBot { position:absolute; bottom:0; left:0; right:0; height:70px; background:var(--black); z-index:2; }
+.center { position:relative; z-index:3; text-align:center; padding:0 24px; }
+.eyebrow { font-size:8px; text-transform:uppercase; letter-spacing:.45em; color:var(--gold); margin-bottom:18px; font-family:var(--font-mono); }
+.title { font-family:var(--font-serif); font-size:clamp(40px,7vw,96px); font-weight:200; line-height:1; color:var(--text); margin-bottom:40px; }
+.title em { font-style:italic; color:var(--gold2); }
+.playerWrap { width:min(720px,80vw); margin:0 auto; }
+.thumb { position:relative; aspect-ratio:16/9; overflow:hidden; border:1px solid var(--border2); cursor:none; }
+.thumbImg { width:100%; height:100%; object-fit:cover; filter:grayscale(.7) brightness(.45) contrast(1.1); display:block; transition:filter .5s; }
+.thumb:hover .thumbImg { filter:grayscale(.3) brightness(.6); }
+.overlay  { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(4,4,4,.15),rgba(4,4,4,.5)); }
+.scanlines { position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.12) 2px,rgba(0,0,0,.12) 3px); pointer-events:none; }
+.play { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; }
+.playRing { width:72px; height:72px; border-radius:50%; border:1px solid rgba(184,151,58,.5); display:flex; align-items:center; justify-content:center; position:relative; }
+.playRing::before { content:''; position:absolute; inset:-10px; border-radius:50%; border:1px solid rgba(184,151,58,.15); animation:ripple 2s ease-in-out infinite; }
+.playRing svg { width:22px; height:22px; margin-left:4px; }
+.playLbl { font-size:8px; text-transform:uppercase; letter-spacing:.35em; color:rgba(255,255,255,.45); }
+.dur { position:absolute; bottom:16px; right:16px; font-family:var(--font-mono); font-size:9px; color:rgba(255,255,255,.35); }
+.dur::before { content:''; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--gold); margin-right:6px; vertical-align:middle; animation:pulse 2s ease-in-out infinite; }
+.modal { position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.95); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; }
+.iframe { width:min(900px,90vw); height:min(506px,50.6vw); border:none; }
+.close { font-size:11px; text-transform:uppercase; letter-spacing:.3em; color:var(--dim); background:none; border:1px solid var(--border2); padding:8px 24px; cursor:none; font-family:var(--font-sans); transition:color .3s,border-color .3s; }
+.close:hover { color:var(--text); border-color:var(--gold); }

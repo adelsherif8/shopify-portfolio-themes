@@ -1,0 +1,12 @@
+.wrap {
+  position: fixed; right: 28px; bottom: 80px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  z-index: 500; pointer-events: none;
+}
+.label { font-family: var(--font-mono); font-size: 6px; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.15); }
+.num   { font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--gold); line-height: 1; }
+.sep   { font-size: 8px; color: rgba(255,255,255,.1); }
+.tot   { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.2); }
+.bar   { width: 1px; height: 50px; background: rgba(255,255,255,.06); position: relative; overflow: hidden; }
+.fill  { position: absolute; bottom: 0; left: 0; width: 100%; background: var(--gold); transition: height .6s ease; }
+@media (max-width: 900px) { .wrap { display: none; } }

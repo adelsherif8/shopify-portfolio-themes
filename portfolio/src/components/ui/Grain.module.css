@@ -1,0 +1,24 @@
+.grain {
+  position: fixed; inset: -200%; width: 400%; height: 400%;
+  pointer-events: none; z-index: 9990;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grainAnim .12s steps(1) infinite;
+}
+.dcOverlay {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9989;
+}
+.dcVignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.55) 100%);
+}
+.dcWatermark {
+  position: absolute; bottom: 60px; right: 40px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: .3em;
+  text-transform: uppercase; color: rgba(184,151,58,.18);
+  transform: rotate(-90deg) translateX(100%); transform-origin: right bottom;
+}
+.dcScanline {
+  position: absolute; left: 0; right: 0; height: 3px;
+  background: linear-gradient(to right, transparent, rgba(184,151,58,.04), transparent);
+  animation: scanLine 8s linear infinite;
+}

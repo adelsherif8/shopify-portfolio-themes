@@ -1,0 +1,161 @@
+<section id="process" class="section" data-section-num="005">
+  <div class="s-label reveal">{{ section.settings.label | default: '04 — The Process' }}</div>
+  <h2 class="process-heading reveal">
+    {{ section.settings.heading_prefix | default: 'How a film ' }}<em>{{ section.settings.heading_em | default: 'comes to life.' }}</em>
+  </h2>
+
+  <div class="process-steps">
+    {% for block in section.blocks %}
+      {% if block.type == 'step' %}
+        <div class="process-step reveal" style="transition-delay: {{ forloop.index0 | times: 0.15 }}s;" {{ block.shopify_attributes }}>
+          <div class="process-step-top">
+            <span class="process-step-num">0{{ forloop.index }}</span>
+            <div class="process-step-icon">
+              {% case block.settings.icon %}
+                {% when 'pen' %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                  </svg>
+                {% when 'camera' %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path d="M14.5 4h-5L7 7H4a2 2 0 00-2 2v9a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2h-3l-2.5-3z"/>
+                    <circle cx="12" cy="13" r="3"/>
+                  </svg>
+                {% when 'film' %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <rect x="2" y="2" width="20" height="20" rx="2"/>
+                    <path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5"/>
+                  </svg>
+                {% else %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 8v4M12 16h.01"/>
+                  </svg>
+              {% endcase %}
+            </div>
+            {% unless forloop.last %}
+              <div class="process-connector"><div class="process-conn-dot"></div></div>
+            {% endunless %}
+          </div>
+          <h3 class="process-step-title"
+              data-i18n-en="{{ block.settings.title }}"
+              data-i18n-ar="{{ block.settings.title_ar }}">
+            {{ block.settings.title }}
+          </h3>
+          <p class="process-step-desc"
+             data-i18n-en="{{ block.settings.description }}"
+             data-i18n-ar="{{ block.settings.description_ar }}">
+            {{ block.settings.description }}
+          </p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Process",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "04 — The Process"
+    },
+    {
+      "type": "text",
+      "id": "heading_prefix",
+      "label": "Heading prefix",
+      "default": "How a film "
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Heading (italic gold)",
+      "default": "comes to life."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Process step",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "pen",    "label": "Pen (Script)" },
+            { "value": "camera", "label": "Camera (Production)" },
+            { "value": "film",   "label": "Film (Edit)" }
+          ],
+          "default": "pen"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title (EN)",
+          "default": "The Script"
+        },
+        {
+          "type": "text",
+          "id": "title_ar",
+          "label": "Title (AR)",
+          "default": "السيناريو"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description (EN)",
+          "default": "Every frame begins as a word."
+        },
+        {
+          "type": "textarea",
+          "id": "description_ar",
+          "label": "Description (AR)",
+          "default": "كل لقطة تبدأ بكلمة."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Process",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "icon": "pen",
+            "title": "The Script",
+            "title_ar": "السيناريو",
+            "description": "Every frame begins as a word. Character, conflict, and world are built on the page — where story logic, emotional truth, and visual possibility are tested before a single camera rolls.",
+            "description_ar": "كل لقطة تبدأ بكلمة. الشخصية والصراع والعالم تُبنى على الورق."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "camera",
+            "title": "Production",
+            "title_ar": "التصوير",
+            "description": "On set, every department decision is a storytelling decision. From sound placement to actor blocking, the director's job is to translate the written word into something the camera can feel.",
+            "description_ar": "في موقع التصوير، كل قرار من أي قسم هو قرار سردي."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "film",
+            "title": "The Cut",
+            "title_ar": "المونتاج",
+            "description": "The final story is found in the edit. Pacing, rhythm, and silence are the tools. What survives the cut is what the film actually says.",
+            "description_ar": "القصة الأخيرة تُكتشف في المونتاج. الإيقاع والصمت والتوقيت هي الأدوات."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

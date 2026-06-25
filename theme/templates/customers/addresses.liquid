@@ -1,0 +1,193 @@
+{% layout 'theme' %}
+
+<div class="account-page section">
+
+  <div class="account-header">
+    <a href="{{ routes.account_url }}" class="account-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Account
+    </a>
+    <div class="account-label">Addresses</div>
+  </div>
+
+  <!-- Add new address -->
+  <div class="addr-section">
+    <button class="addr-toggle-btn" id="addr-add-toggle" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add new address
+    </button>
+
+    <div class="addr-form-wrap" id="addr-add-form" style="display:none;">
+      {% form 'customer_address', customer.new_address %}
+        <div class="addr-form-grid">
+          <div class="addr-form-group">
+            <label class="addr-label">First name</label>
+            <input class="addr-input" type="text" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name">
+          </div>
+          <div class="addr-form-group">
+            <label class="addr-label">Last name</label>
+            <input class="addr-input" type="text" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name">
+          </div>
+          <div class="addr-form-group addr-form-group--full">
+            <label class="addr-label">Company (optional)</label>
+            <input class="addr-input" type="text" name="address[company]" value="{{ form.company }}" autocomplete="organization">
+          </div>
+          <div class="addr-form-group addr-form-group--full">
+            <label class="addr-label">Address line 1</label>
+            <input class="addr-input" type="text" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1">
+          </div>
+          <div class="addr-form-group addr-form-group--full">
+            <label class="addr-label">Address line 2 (optional)</label>
+            <input class="addr-input" type="text" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2">
+          </div>
+          <div class="addr-form-group">
+            <label class="addr-label">City</label>
+            <input class="addr-input" type="text" name="address[city]" value="{{ form.city }}" autocomplete="address-level2">
+          </div>
+          <div class="addr-form-group">
+            <label class="addr-label">Country</label>
+            <select class="addr-input" name="address[country]" id="addr-add-country" data-default="{{ form.country }}">
+              {{ all_country_option_tags }}
+            </select>
+          </div>
+          <div class="addr-form-group">
+            <label class="addr-label">Province / State</label>
+            <select class="addr-input" name="address[province]" id="addr-add-province">
+              <option value="">Select province</option>
+            </select>
+          </div>
+          <div class="addr-form-group">
+            <label class="addr-label">Zip / Postal code</label>
+            <input class="addr-input" type="text" name="address[zip]" value="{{ form.zip }}" autocomplete="postal-code">
+          </div>
+          <div class="addr-form-group">
+            <label class="addr-label">Phone (optional)</label>
+            <input class="addr-input" type="tel" name="address[phone]" value="{{ form.phone }}" autocomplete="tel">
+          </div>
+        </div>
+        <div class="addr-form-actions">
+          <label class="addr-default-check">
+            <input type="checkbox" name="address[default]" value="1"> Set as default address
+          </label>
+          <button type="submit" class="addr-submit">Save address</button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+
+  <!-- Existing addresses -->
+  {% if customer.addresses_count == 0 %}
+    <p class="account-empty">No saved addresses.</p>
+  {% else %}
+    <div class="addr-list">
+      {% for address in customer.addresses %}
+        <div class="addr-card {% if address == customer.default_address %}addr-card--default{% endif %}">
+          {% if address == customer.default_address %}
+            <div class="addr-default-badge">Default</div>
+          {% endif %}
+          <address class="addr-text">
+            {{ address.name }}<br>
+            {% if address.company != blank %}{{ address.company }}<br>{% endif %}
+            {{ address.address1 }}<br>
+            {% if address.address2 != blank %}{{ address.address2 }}<br>{% endif %}
+            {{ address.city }}{% if address.province != blank %}, {{ address.province }}{% endif %} {{ address.zip }}<br>
+            {{ address.country }}<br>
+            {% if address.phone != blank %}{{ address.phone }}{% endif %}
+          </address>
+          <div class="addr-card-actions">
+            <button class="addr-edit-btn" data-id="{{ address.id }}" aria-expanded="false">Edit</button>
+            {% form 'customer_address', address %}
+              <input type="hidden" name="_method" value="delete">
+              <button type="submit" class="addr-delete-btn" onclick="return confirm('Remove this address?')">Remove</button>
+            {% endform %}
+            {% unless address == customer.default_address %}
+              {% form 'customer_address', address %}
+                <input type="hidden" name="_method" value="put">
+                <input type="hidden" name="address[default]" value="1">
+                <button type="submit" class="addr-default-btn">Set default</button>
+              {% endform %}
+            {% endunless %}
+          </div>
+
+          <!-- Edit form (toggled) -->
+          <div class="addr-form-wrap addr-edit-form" id="addr-edit-{{ address.id }}" style="display:none;">
+            {% form 'customer_address', address %}
+              <input type="hidden" name="_method" value="put">
+              <div class="addr-form-grid">
+                <div class="addr-form-group">
+                  <label class="addr-label">First name</label>
+                  <input class="addr-input" type="text" name="address[first_name]" value="{{ address.first_name }}">
+                </div>
+                <div class="addr-form-group">
+                  <label class="addr-label">Last name</label>
+                  <input class="addr-input" type="text" name="address[last_name]" value="{{ address.last_name }}">
+                </div>
+                <div class="addr-form-group addr-form-group--full">
+                  <label class="addr-label">Company</label>
+                  <input class="addr-input" type="text" name="address[company]" value="{{ address.company }}">
+                </div>
+                <div class="addr-form-group addr-form-group--full">
+                  <label class="addr-label">Address line 1</label>
+                  <input class="addr-input" type="text" name="address[address1]" value="{{ address.address1 }}">
+                </div>
+                <div class="addr-form-group addr-form-group--full">
+                  <label class="addr-label">Address line 2</label>
+                  <input class="addr-input" type="text" name="address[address2]" value="{{ address.address2 }}">
+                </div>
+                <div class="addr-form-group">
+                  <label class="addr-label">City</label>
+                  <input class="addr-input" type="text" name="address[city]" value="{{ address.city }}">
+                </div>
+                <div class="addr-form-group">
+                  <label class="addr-label">Country</label>
+                  <select class="addr-input" name="address[country]" id="addr-edit-country-{{ address.id }}" data-default="{{ address.country }}">
+                    {{ all_country_option_tags }}
+                  </select>
+                </div>
+                <div class="addr-form-group">
+                  <label class="addr-label">Province</label>
+                  <select class="addr-input" name="address[province]" id="addr-edit-province-{{ address.id }}">
+                    <option value="">Select province</option>
+                  </select>
+                </div>
+                <div class="addr-form-group">
+                  <label class="addr-label">Zip</label>
+                  <input class="addr-input" type="text" name="address[zip]" value="{{ address.zip }}">
+                </div>
+                <div class="addr-form-group">
+                  <label class="addr-label">Phone</label>
+                  <input class="addr-input" type="tel" name="address[phone]" value="{{ address.phone }}">
+                </div>
+              </div>
+              <div class="addr-form-actions">
+                <label class="addr-default-check">
+                  <input type="checkbox" name="address[default]" value="1" {% if address == customer.default_address %}checked{% endif %}> Default address
+                </label>
+                <button type="submit" class="addr-submit">Update address</button>
+              </div>
+            {% endform %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+</div>
+
+<script>
+  document.getElementById('addr-add-toggle')?.addEventListener('click', function() {
+    const form = document.getElementById('addr-add-form');
+    const open = form.style.display !== 'none';
+    form.style.display = open ? 'none' : 'block';
+    this.setAttribute('aria-expanded', !open);
+  });
+  document.querySelectorAll('.addr-edit-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const id = this.dataset.id;
+      const form = document.getElementById('addr-edit-' + id);
+      const open = form.style.display !== 'none';
+      form.style.display = open ? 'none' : 'block';
+      this.setAttribute('aria-expanded', !open);
+    });
+  });
+</script>

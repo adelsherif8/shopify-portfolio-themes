@@ -1,0 +1,134 @@
+<section id="press" class="section" data-section-num="013">
+  <div class="s-label reveal">{{ section.settings.label | default: '12 — Screenings & Work' }}</div>
+  <h2 class="press-heading reveal">
+    {{ section.settings.heading_line1 | default: 'Where the work' }}<br>
+    <em>{{ section.settings.heading_line2 | default: 'has been seen.' }}</em>
+  </h2>
+
+  <div class="press-list">
+    {% for block in section.blocks %}
+      {% if block.type == 'item' %}
+        <div class="press-item {% if block.settings.placeholder %}placeholder{% endif %} reveal"
+             style="transition-delay: {{ forloop.index0 | times: 0.1 }}s;"
+             {{ block.shopify_attributes }}>
+          <div class="press-item-left">
+            <div class="press-icon-wrap">
+              {% render 'icon', icon: block.settings.icon, size: 18 %}
+            </div>
+          </div>
+          <div class="press-item-right">
+            <div class="press-meta">
+              <span class="press-type">{{ block.settings.type }}</span>
+              {% if block.settings.year != blank and block.settings.year != '—' %}
+                <span class="press-year">{{ block.settings.year }}</span>
+              {% endif %}
+            </div>
+            <div class="press-venue">{{ block.settings.venue }}</div>
+            <div class="press-project">{{ block.settings.project }}</div>
+            {% if block.settings.note != blank %}
+              <p class="press-note">{{ block.settings.note }}</p>
+            {% endif %}
+          </div>
+          <div class="press-item-line"></div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Press & Screenings",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "12 — Screenings & Work"
+    },
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading line 1",
+      "default": "Where the work"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading line 2 (italic gold)",
+      "default": "has been seen."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Press / Screening item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "film",
+          "options": [
+            { "value": "film",        "label": "Film strip" },
+            { "value": "festival",    "label": "Festival / Ticket" },
+            { "value": "award",       "label": "Award" },
+            { "value": "trophy",      "label": "Trophy" },
+            { "value": "star",        "label": "Star" },
+            { "value": "press",       "label": "Press / Newspaper" },
+            { "value": "brand",       "label": "Brand" },
+            { "value": "documentary", "label": "Documentary / Video" },
+            { "value": "recognition", "label": "Recognition / Check" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "type",
+          "label": "Type label",
+          "default": "Festival Screening"
+        },
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "—"
+        },
+        {
+          "type": "text",
+          "id": "venue",
+          "label": "Venue / Publication",
+          "default": "Festival Name"
+        },
+        {
+          "type": "text",
+          "id": "project",
+          "label": "Project name",
+          "default": "Project Title"
+        },
+        {
+          "type": "textarea",
+          "id": "note",
+          "label": "Note / Description"
+        },
+        {
+          "type": "checkbox",
+          "id": "placeholder",
+          "label": "Mark as placeholder (dimmed)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "max_blocks": 15,
+  "presets": [
+    {
+      "name": "Press & Screenings",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "film",        "type": "Graduation Screening", "venue": "British University in Egypt", "project": "Qahwet El Mayteen — قهوة الميتين", "year": "—", "note": "Official graduation short film screening, BUE Faculty of Arts & Sciences." } },
+        { "type": "item", "settings": { "icon": "brand",       "type": "Brand Release",         "venue": "Placid Essentials",           "project": "Placid Disruption Campaign",       "year": "—", "note": "Full campaign launched across Placid Essentials brand platforms." } },
+        { "type": "item", "settings": { "icon": "press",       "type": "Placeholder",           "venue": "Add Festival / Press",        "project": "—",                                "year": "—", "note": "Replace this with real festival selections, press features, or screening events.", "placeholder": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

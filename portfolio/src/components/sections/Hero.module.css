@@ -1,0 +1,40 @@
+.hero { height:100vh; position:relative; display:flex; align-items:flex-end; overflow:hidden; background:var(--black); }
+.canvas { position:absolute; inset:0; width:100%; height:100%; }
+.spotlight { position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle 800px at var(--sx,50%) var(--sy,50%), rgba(184,151,58,.055) 0%, transparent 72%); transition:background .08s; }
+.vline { position:absolute; left:44%; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,transparent,var(--border) 20%,var(--border) 80%,transparent); }
+.fc { position:absolute; border-color:rgba(184,151,58,.25); border-style:solid; }
+.fc_tl { top:42px; left:42px; width:30px; height:30px; border-width:1px 0 0 1px; }
+.fc_tr { top:42px; right:42px; width:30px; height:30px; border-width:1px 1px 0 0; }
+.fc_bl { bottom:42px; left:42px; width:30px; height:30px; border-width:0 0 1px 1px; }
+.fc_br { bottom:42px; right:42px; width:30px; height:30px; border-width:0 1px 1px 0; }
+.metaRight { position:absolute; right:64px; top:50%; transform:translateY(-50%); text-align:right; pointer-events:none; }
+.metaNum { font-family:var(--font-mono); font-size:110px; font-weight:700; color:rgba(255,255,255,.025); line-height:1; }
+.metaTag { font-size:7px; letter-spacing:.4em; text-transform:uppercase; color:rgba(255,255,255,.05); display:block; margin-top:-10px; }
+.content { position:relative; z-index:2; padding:0 64px 84px; max-width:980px; }
+.eyebrow { display:flex; align-items:center; gap:14px; margin-bottom:28px; }
+.eyebrowDot { width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pulse 2.5s ease-in-out infinite; flex-shrink:0; }
+.eyebrowText { font-size:9px; text-transform:uppercase; letter-spacing:.35em; color:var(--gold); font-family:var(--font-mono); }
+.name { font-family:var(--font-serif); font-size:clamp(60px,10vw,132px); font-weight:200; line-height:.88; letter-spacing:-.025em; color:var(--text); position:relative; }
+.nameLine { display:block; overflow:hidden; }
+.nameLine span { display:block; }
+.italic span { font-style:italic; color:var(--gold2); font-weight:300; }
+
+/* Glitch */
+.glitch { animation:none; }
+.glitch::before, .glitch::after {
+  content:attr(data-text); position:absolute; top:0; left:0; width:100%;
+  font-family:var(--font-serif); font-size:clamp(60px,10vw,132px); font-weight:200;
+  line-height:.88; letter-spacing:-.025em; pointer-events:none;
+}
+.glitch::before { color:rgba(255,80,80,.7); animation:glitch1 .18s infinite; }
+.glitch::after  { color:rgba(80,180,255,.7); animation:glitch2 .22s infinite; }
+
+.tagline { margin-top:28px; font-size:13px; font-weight:300; color:var(--dim); max-width:380px; line-height:1.9; }
+.chips { display:flex; gap:8px; flex-wrap:wrap; margin-top:26px; }
+.chip { font-size:8px; text-transform:uppercase; letter-spacing:.18em; padding:5px 13px; border:1px solid var(--border2); color:var(--dim); transition:border-color .3s,color .3s; }
+.chip:hover { border-color:var(--gold); color:var(--text); }
+.scrollInd { position:absolute; bottom:44px; right:64px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+.scrollTrack { width:1px; height:66px; background:rgba(255,255,255,.06); position:relative; overflow:hidden; }
+.scrollThumb { position:absolute; top:0; left:0; width:100%; height:40%; background:linear-gradient(to bottom,var(--gold),transparent); animation:scrollDown 1.8s ease-in-out infinite; }
+.scrollLbl { font-size:7px; letter-spacing:.3em; text-transform:uppercase; color:var(--muted); writing-mode:vertical-rl; }
+@media (max-width:900px) { .content{padding:0 24px 64px} .metaRight{display:none} }

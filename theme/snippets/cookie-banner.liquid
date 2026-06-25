@@ -1,0 +1,17 @@
+<div id="cookie-banner" class="cookie-banner" aria-live="polite" aria-label="Cookie consent">
+  <div class="cookie-inner">
+    <div class="cookie-text">
+      <span class="cookie-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 8h.01M12 12v4"/>
+        </svg>
+      </span>
+      {{ cookie_text | default: 'This site uses cookies to ensure you get the best experience.' }}
+    </div>
+    <div class="cookie-actions">
+      <button id="cookie-accept" class="cookie-btn cookie-btn-accept">{{ accept_label | default: 'Accept' }}</button>
+      <button id="cookie-decline" class="cookie-btn cookie-btn-decline">{{ decline_label | default: 'Decline' }}</button>
+    </div>
+  </div>
+</div>

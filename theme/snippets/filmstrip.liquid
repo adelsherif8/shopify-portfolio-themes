@@ -1,0 +1,11 @@
+<div class="filmstrip" aria-hidden="true">
+  {% for i in (1..6) %}
+    <div class="filmstrip-hole"></div>
+  {% endfor %}
+  <div class="filmstrip-line"></div>
+  <div class="filmstrip-label">{{ label | default: '35mm · CINEMATIC PORTFOLIO' }}</div>
+  <div class="filmstrip-line"></div>
+  {% for i in (1..6) %}
+    <div class="filmstrip-hole"></div>
+  {% endfor %}
+</div>

@@ -1,0 +1,38 @@
+<div class="section account-page account-page--dashboard">
+  <div class="s-label reveal">Account</div>
+  <h1 class="account-title reveal">Welcome,<br><em>{{ customer.first_name | default: 'back' }}.</em></h1>
+
+  <div class="account-dashboard">
+    <!-- Sidebar -->
+    <div class="account-sidebar">
+      <nav class="account-nav">
+        <a href="{{ routes.account_url }}" class="account-nav-link active">Orders</a>
+        <a href="{{ routes.account_addresses_url }}" class="account-nav-link">Addresses</a>
+        <a href="{{ routes.account_logout_url }}" class="account-nav-link account-nav-link--logout">Sign out</a>
+      </nav>
+    </div>
+
+    <!-- Orders -->
+    <div class="account-content">
+      <div class="account-section-label">Order history</div>
+      {% if customer.orders.size > 0 %}
+        <div class="account-orders">
+          {% for order in customer.orders %}
+            <a href="{{ order.customer_url }}" class="account-order">
+              <div class="account-order-num">#{{ order.name }}</div>
+              <div class="account-order-date">{{ order.created_at | date: '%B %d, %Y' }}</div>
+              <div class="account-order-status account-order-status--{{ order.financial_status }}">{{ order.financial_status | capitalize }}</div>
+              <div class="account-order-total">{{ order.total_price | money }}</div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="account-empty">
+          <p>No orders yet.</p>
+          <a href="{{ routes.root_url }}" class="coll-empty-link">Start shopping</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

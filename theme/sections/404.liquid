@@ -1,0 +1,22 @@
+<section class="not-found section" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;">
+  <div class="not-found-num">404</div>
+  <div class="s-label" style="justify-content:center;margin-bottom:32px;">{{ section.settings.label | default: 'Scene Not Found' }}</div>
+  <h1 class="not-found-heading">
+    {{ section.settings.heading_1 | default: 'This frame ' }}<em>{{ section.settings.heading_2 | default: "doesn't exist." }}</em>
+  </h1>
+  <p class="not-found-sub">{{ section.settings.sub | default: 'The scene you were looking for has been cut from the final edit.' }}</p>
+  <a href="{{ routes.root_url }}" class="not-found-cta">{{ section.settings.cta | default: '← Back to Home' }}</a>
+</section>
+
+{% schema %}
+{
+  "name": "404 page",
+  "settings": [
+    { "type": "text",     "id": "label",     "label": "Scene label",    "default": "Scene Not Found" },
+    { "type": "text",     "id": "heading_1", "label": "Heading prefix", "default": "This frame " },
+    { "type": "text",     "id": "heading_2", "label": "Heading (italic gold)", "default": "doesn't exist." },
+    { "type": "textarea", "id": "sub",       "label": "Sub text",       "default": "The scene you were looking for has been cut from the final edit." },
+    { "type": "text",     "id": "cta",       "label": "Button label",      "default": "← Back to Home" }
+  ]
+}
+{% endschema %}

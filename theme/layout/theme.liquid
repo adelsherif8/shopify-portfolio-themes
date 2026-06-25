@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}" data-theme="dark" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title }}{% unless page_title == shop.name %} — {{ shop.name }}{% endunless %}</title>
+  <meta name="description" content="{{ page_description | escape }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <!-- Open Graph / Social sharing -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="{{ canonical_url }}">
+  <meta property="og:title"       content="{{ page_title | escape }}">
+  <meta property="og:description" content="{{ page_description | escape }}">
+  {% if settings.og_image != blank %}
+    <meta property="og:image" content="{{ settings.og_image | image_url: width: 1200 }}">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+  {% elsif shop.metafields.global.og_image != blank %}
+    <meta property="og:image" content="{{ shop.metafields.global.og_image | image_url: width: 1200 }}">
+  {% endif %}
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="{{ settings.social_twitter | replace: 'https://twitter.com/', '@' | replace: 'https://x.com/', '@' }}">
+  <meta name="twitter:title"       content="{{ page_title | escape }}">
+  <meta name="twitter:description" content="{{ page_description | escape }}">
+  {% if page_image %}<meta name="twitter:image" content="{{ page_image | image_url: width: 1200 }}">{% endif %}
+
+  <!-- Google rich product snippets -->
+  {% if template == 'product' %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "url": {{ canonical_url | json }},
+      "description": {{ product.description | strip_html | json }},
+      {% if product.featured_image %}
+      "image": {{ product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }},
+      {% endif %}
+      {% if product.vendor != blank %}
+      "brand": { "@type": "Brand", "name": {{ product.vendor | json }} },
+      {% endif %}
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "lowPrice": {{ product.price_min | money_without_currency | remove: ',' }},
+        "highPrice": {{ product.price_max | money_without_currency | remove: ',' }},
+        "offerCount": {{ product.variants.size }},
+        "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}"
+      }
+    }
+    </script>
+  {% endif %}
+
+  <!-- Favicon -->
+  {% if settings.favicon != blank %}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">
+    <link rel="apple-touch-icon"      href="{{ settings.favicon | image_url: width: 180 }}">
+  {% else %}
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23040404'/><text y='22' x='4' font-size='20' fill='%23b8973a'>▶</text></svg>">
+  {% endif %}
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  {%- liquid
+    assign fh_bold   = settings.font_heading | font_modify: 'weight', 'bolder'
+    assign fh_italic = settings.font_heading | font_modify: 'style', 'italic'
+    assign fh_bi     = settings.font_heading | font_modify: 'weight', 'bolder' | font_modify: 'style', 'italic'
+    assign fb_bold   = settings.font_body | font_modify: 'weight', 'bolder'
+    assign fb_italic = settings.font_body | font_modify: 'style', 'italic'
+    assign fb_bi     = settings.font_body | font_modify: 'weight', 'bolder' | font_modify: 'style', 'italic'
+  -%}
+  {% style %}
+    {{ settings.font_heading | font_face: font_display: 'swap' }}
+    {{ fh_bold   | font_face: font_display: 'swap' }}
+    {{ fh_italic | font_face: font_display: 'swap' }}
+    {{ fh_bi     | font_face: font_display: 'swap' }}
+    {{ settings.font_body | font_face: font_display: 'swap' }}
+    {{ fb_bold   | font_face: font_display: 'swap' }}
+    {{ fb_italic | font_face: font_display: 'swap' }}
+    {{ fb_bi     | font_face: font_display: 'swap' }}
+    {{ settings.font_mono | font_face: font_display: 'swap' }}
+    :root {
+      --font-serif: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+      --font-sans:  {{ settings.font_body.family }},    {{ settings.font_body.fallback_families }};
+      --font-mono:  {{ settings.font_mono.family }},    {{ settings.font_mono.fallback_families }};
+      --gold:  {{ settings.color_gold  | default: '#b8973a' }};
+      --gold2: {{ settings.color_gold2 | default: '#d4af6a' }};
+      --black: {{ settings.color_bg_dark | default: '#040404' }};
+      --bg:    {{ settings.color_bg_dark | default: '#040404' }};
+      --text:  {{ settings.color_text_dark | default: 'rgba(224,216,200,.88)' }};
+      --gold3: color-mix(in srgb, {{ settings.color_gold | default: '#b8973a' }} 12%, transparent);
+    }
+    [data-theme="day"] {
+      --gold:  {{ settings.color_gold_day  | default: '#8a6d1c' }};
+      --gold2: {{ settings.color_gold2_day | default: '#a07820' }};
+      --black: {{ settings.color_bg_day | default: '#f2ece0' }};
+      --bg:    {{ settings.color_bg_day | default: '#f2ece0' }};
+      --text:  color-mix(in srgb, {{ settings.color_text_day | default: '#140e04' }} 88%, transparent);
+      --gold3: color-mix(in srgb, {{ settings.color_gold_day | default: '#8a6d1c' }} 10%, transparent);
+    }
+  {% endstyle %}
+
+  {{ content_for_header }}
+</head>
+<body>
+
+  <!-- Global overlays -->
+  <div id="global-spotlight" class="global-spotlight"></div>
+  {% if settings.enable_grain != false %}
+    <div id="grain-overlay" class="grain-overlay"></div>
+  {% endif %}
+  <div id="progress-bar" class="progress-bar-el"></div>
+  {% if settings.enable_letterbox != false %}
+    <div class="letterbox letterbox-top"></div>
+    <div class="letterbox letterbox-bot"></div>
+  {% endif %}
+  <div id="scene-counter" class="scene-counter"><span id="scene-num">001</span></div>
+
+  <div id="controls" class="controls">
+    <button id="ctrl-theme" class="ctrl-btn" title="Toggle Theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
+        <circle cx="12" cy="12" r="5"/>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+    </button>
+    <button id="ctrl-dc" class="ctrl-btn ctrl-dc" title="Director's Cut">DC</button>
+    <button id="ctrl-lang" class="ctrl-btn ctrl-lang" title="Toggle Language">AR</button>
+  </div>
+
+  <div id="page-transition" class="page-transition"></div>
+
+  {% if settings.enable_preloader != false %}
+    <div id="preloader" class="preloader">
+      <div class="preloader-inner">
+        <div class="preloader-num">001</div>
+        {% if settings.preloader_image != blank %}
+          <img src="{{ settings.preloader_image | image_url: width: 320 }}"
+               alt="{{ settings.site_title | default: shop.name }}"
+               class="preloader-img" width="320" height="160" loading="eager">
+        {% else %}
+          <div class="preloader-title">{{ settings.site_title | default: shop.name }}</div>
+        {% endif %}
+        <div class="preloader-bar"><div class="preloader-fill"></div></div>
+        <div class="preloader-sub">{{ settings.preloader_text | default: 'Loading the frame...' }}</div>
+      </div>
+      <div class="preloader-scanlines"></div>
+    </div>
+  {% endif %}
+
+  {% sections 'header-group' %}
+
+  <main id="main-content">
+    {{ content_for_layout }}
+  </main>
+
+  {% sections 'footer-group' %}
+
+  <!-- Back to top -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <!-- Search modal -->
+  <div id="search-modal" class="search-modal" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="search-modal-bg" id="search-modal-bg"></div>
+    <div class="search-modal-inner">
+      <form action="{{ routes.search_url }}" method="get" class="search-modal-form" role="search">
+        <input type="hidden" name="type" value="product,article,page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20" class="search-modal-icon"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="search" name="q" id="search-modal-input" class="search-modal-input" placeholder="Search products, journal, pages…" data-i18n-placeholder="search-placeholder" autocomplete="off" aria-label="Search">
+        <button type="button" class="search-modal-close" id="search-modal-close" aria-label="Close search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </form>
+      <div class="search-modal-results" id="search-modal-results"></div>
+    </div>
+  </div>
+
+  <!-- Cart drawer -->
+  <div id="cart-drawer" class="cart-drawer" aria-hidden="true">
+    <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+    <div class="cart-drawer-panel">
+      <div class="cart-drawer-head">
+        <span class="cart-drawer-title"><span data-i18n="cart-title">Cart</span> <span id="cart-drawer-count" class="cart-drawer-count">0</span></span>
+        <button class="cart-drawer-close" id="cart-drawer-close" aria-label="Close cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="cart-drawer-body" id="cart-drawer-body">
+        <div class="cart-drawer-loading">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24" class="cart-drawer-spinner"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+      </div>
+      <div class="cart-drawer-foot" id="cart-drawer-foot" style="display:none;">
+        <div class="cart-drawer-subtotal">
+          <span data-i18n="cart-subtotal">Subtotal</span>
+          <span id="cart-drawer-total"></span>
+        </div>
+        <a href="{{ routes.cart_url }}" class="cart-drawer-view" data-i18n="cart-view">View cart</a>
+        <a href="{{ routes.checkout_url }}" class="cart-drawer-checkout" data-i18n="cart-checkout">Checkout →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick view modal -->
+  <div id="quick-view" class="quick-view" aria-hidden="true">
+    <div class="quick-view-overlay" id="quick-view-overlay"></div>
+    <div class="quick-view-panel">
+      <button class="quick-view-close" id="quick-view-close" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="quick-view-body" id="quick-view-body">
+        <div class="cart-drawer-loading">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24" class="cart-drawer-spinner"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cookie banner -->
+  {% if settings.enable_cookies %}
+    {% render 'cookie-banner',
+       cookie_text:    settings.cookie_text,
+       accept_label:   settings.cookie_accept_label,
+       decline_label:  settings.cookie_decline_label %}
+  {% endif %}
+
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% render 'ticker', items: section.settings.items %}
+
+{% schema %}
+{
+  "name": "Scrolling ticker",
+  "settings": [
+    {
+      "type": "text",
+      "id": "items",
+      "label": "Ticker items (comma-separated)",
+      "default": "Scriptwriter,Film Production,Sound Design,Creative Direction,Visual Storytelling,Story Development,Cairo, Egypt,قهوة الميتين"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling ticker"
+    }
+  ]
+}
+{% endschema %}

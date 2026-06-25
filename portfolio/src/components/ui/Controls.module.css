@@ -1,0 +1,17 @@
+.panel {
+  position: fixed; left: 24px; bottom: 80px;
+  display: flex; flex-direction: column; gap: 4px;
+  z-index: 500;
+}
+.btn {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 10px 12px; background: rgba(10,10,10,.8);
+  border: 1px solid var(--border); color: var(--dim);
+  transition: border-color .3s, color .3s, background .3s;
+  cursor: none; text-decoration: none;
+}
+.btn:hover { border-color: var(--gold); color: #fff; background: rgba(184,151,58,.06); }
+.btn.active { border-color: var(--gold); color: var(--gold2); background: rgba(184,151,58,.08); }
+.icon { font-size: 13px; line-height: 1; width: 14px; text-align: center; }
+.lbl  { font-family: var(--font-mono); font-size: 6px; letter-spacing: .18em; text-transform: uppercase; }
+@media (max-width: 900px) { .panel { display: none; } }

@@ -1,0 +1,132 @@
+<section id="next" class="section" data-section-num="014">
+  <div class="s-label reveal">{{ section.settings.label | default: '13 — Next Project' }}</div>
+
+  <div class="next-card reveal">
+    <div class="next-stamp">{{ section.settings.stamp | default: 'CLASSIFIED' }}</div>
+    <div class="next-scanlines"></div>
+    <div class="next-corner-tl"></div>
+    <div class="next-corner-br"></div>
+
+    <div class="next-ref">{{ section.settings.file_ref | default: 'FILE REF: OEE-2025-001' }}</div>
+
+    <h2 class="next-title">
+      <span class="next-redact">█████████████</span>
+      {{ section.settings.title_fragment | default: '— A Story of ' }}
+      <span class="next-redact">████████████</span>
+    </h2>
+
+    <div class="next-meta">
+      <div class="next-meta-row">
+        <span class="next-meta-key">{{ section.settings.key_status | default: 'STATUS' }}</span>
+        <span class="next-meta-val">{{ section.settings.status | default: 'In Development' }}</span>
+      </div>
+      <div class="next-meta-row">
+        <span class="next-meta-key">{{ section.settings.key_format | default: 'FORMAT' }}</span>
+        <span class="next-meta-val">{{ section.settings.format | default: 'Short Film' }} / <span class="next-redact">███</span></span>
+      </div>
+      <div class="next-meta-row">
+        <span class="next-meta-key">{{ section.settings.key_genre | default: 'GENRE' }}</span>
+        <span class="next-meta-val"><span class="next-redact">█████████</span></span>
+      </div>
+      <div class="next-meta-row">
+        <span class="next-meta-key">{{ section.settings.key_role | default: 'ROLE' }}</span>
+        <span class="next-meta-val">{{ section.settings.role | default: 'Writer · Director' }}</span>
+      </div>
+    </div>
+
+    <p class="next-desc">{{ section.settings.description | default: 'A new original work currently in development. Details withheld pending production. Expression of interest and collaboration enquiries welcome.' }}</p>
+
+    <a href="#contact" class="next-cta">{{ section.settings.cta_label | default: 'Express Interest' }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Next Project",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "13 — Next Project"
+    },
+    {
+      "type": "text",
+      "id": "stamp",
+      "label": "Stamp text",
+      "default": "CLASSIFIED"
+    },
+    {
+      "type": "text",
+      "id": "file_ref",
+      "label": "File reference",
+      "default": "FILE REF: OEE-2025-001"
+    },
+    {
+      "type": "text",
+      "id": "title_fragment",
+      "label": "Title fragment (visible)",
+      "default": "— A Story of "
+    },
+    {
+      "type": "text",
+      "id": "status",
+      "label": "Status",
+      "default": "In Development"
+    },
+    {
+      "type": "text",
+      "id": "format",
+      "label": "Format",
+      "default": "Short Film"
+    },
+    {
+      "type": "text",
+      "id": "role",
+      "label": "Role",
+      "default": "Writer · Director"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "A new original work currently in development. Details withheld pending production. Expression of interest and collaboration enquiries welcome."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Express Interest"
+    },
+    {
+      "type": "text",
+      "id": "key_status",
+      "label": "Meta key: Status",
+      "default": "STATUS"
+    },
+    {
+      "type": "text",
+      "id": "key_format",
+      "label": "Meta key: Format",
+      "default": "FORMAT"
+    },
+    {
+      "type": "text",
+      "id": "key_genre",
+      "label": "Meta key: Genre",
+      "default": "GENRE"
+    },
+    {
+      "type": "text",
+      "id": "key_role",
+      "label": "Meta key: Role",
+      "default": "ROLE"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Next Project"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,160 @@
+<section id="breakdown" class="section" data-section-num="012">
+  <div class="s-label reveal">{{ section.settings.label | default: '11 — Script Analysis' }}</div>
+
+  <div style="margin-bottom:48px;" class="reveal">
+    <h2 style="font-family:var(--font-serif);font-size:clamp(32px,4vw,56px);font-weight:300;color:var(--text);letter-spacing:-.01em;margin-bottom:6px;">
+      {{ section.settings.film_title | default: 'Qahwet El Mayteen' }}
+    </h2>
+    {% if section.settings.film_arabic != blank %}
+      <div style="font-family:var(--font-serif);font-size:20px;color:var(--gold);font-style:italic;margin-bottom:8px;">{{ section.settings.film_arabic }}</div>
+    {% endif %}
+    <div class="s-label" style="margin-bottom:0;">{{ section.settings.subtitle | default: 'Scene Analysis — Act I, Scene 1' }}</div>
+  </div>
+
+  <div class="breakdown-wrap">
+    <div class="reveal">
+      <div class="breakdown-script">
+        {% for block in section.blocks %}
+          {% if block.type == 'script_line' %}
+            {% case block.settings.line_type %}
+              {% when 'slug' %}
+                <div class="script-line script-slug">{{ block.settings.text }}</div>
+              {% when 'action' %}
+                <div class="script-line script-action">{{ block.settings.text }}</div>
+              {% when 'character' %}
+                <div class="script-line script-char">{{ block.settings.text }}</div>
+              {% when 'parenthetical' %}
+                <div class="script-line script-paren">{{ block.settings.text }}</div>
+              {% when 'dialogue' %}
+                <div class="script-line script-dialogue">{{ block.settings.text }}</div>
+            {% endcase %}
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="breakdown-hint">{{ section.settings.hint | default: 'Click a note or a highlighted line to expand.' }}</div>
+    </div>
+
+    <div class="breakdown-annotations reveal reveal-delay-2">
+      <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:24px;">
+        {{ section.settings.writer_note_label | default: "Writer's Notes" }}
+      </div>
+      {% for block in section.blocks %}
+        {% if block.type == 'annotation' %}
+          <div class="annotation-card" {{ block.shopify_attributes }}>
+            <div class="annotation-anchor">&ldquo;{{ block.settings.anchor }}&rdquo;</div>
+            <p class="annotation-note">{{ block.settings.note }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Script Breakdown",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "11 — Script Analysis"
+    },
+    {
+      "type": "text",
+      "id": "film_title",
+      "label": "Film title",
+      "default": "Qahwet El Mayteen"
+    },
+    {
+      "type": "text",
+      "id": "film_arabic",
+      "label": "Arabic title (optional)",
+      "default": "قهوة الميتين"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Analysis subtitle",
+      "default": "Scene Analysis — Act I, Scene 1"
+    },
+    {
+      "type": "text",
+      "id": "writer_note_label",
+      "label": "Writer's Notes label",
+      "default": "Writer's Notes"
+    },
+    {
+      "type": "text",
+      "id": "hint",
+      "label": "Hint text",
+      "default": "Click a note or a highlighted line to expand."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "script_line",
+      "name": "Script line",
+      "settings": [
+        {
+          "type": "select",
+          "id": "line_type",
+          "label": "Line type",
+          "options": [
+            { "value": "slug",          "label": "Slug line" },
+            { "value": "action",        "label": "Action" },
+            { "value": "character",     "label": "Character name" },
+            { "value": "parenthetical", "label": "Parenthetical" },
+            { "value": "dialogue",      "label": "Dialogue" }
+          ],
+          "default": "action"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Script line text here."
+        }
+      ]
+    },
+    {
+      "type": "annotation",
+      "name": "Writer's annotation",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "anchor",
+          "label": "Quoted anchor line",
+          "default": "The key line being annotated."
+        },
+        {
+          "type": "textarea",
+          "id": "note",
+          "label": "Writer's note",
+          "default": "Explanation of the craft choice behind this line."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Script Breakdown",
+      "blocks": [
+        { "type": "script_line", "settings": { "line_type": "slug",          "text": "INT. QAHWA — LATE NIGHT" } },
+        { "type": "script_line", "settings": { "line_type": "action",        "text": "The room is almost empty. One table is lit. IBRAHIM, 60s, sits with the stillness of someone who has been here many times before. Two cups of coffee on the table. One untouched, perfectly placed." } },
+        { "type": "script_line", "settings": { "line_type": "action",        "text": "A YOUNG WAITER watches from across the room." } },
+        { "type": "script_line", "settings": { "line_type": "character",     "text": "WAITER" } },
+        { "type": "script_line", "settings": { "line_type": "parenthetical", "text": "(carefully)" } },
+        { "type": "script_line", "settings": { "line_type": "dialogue",      "text": "Uncle Ibrahim... the kitchen is closing." } },
+        { "type": "script_line", "settings": { "line_type": "action",        "text": "Ibrahim wraps both hands around his cup without looking up." } },
+        { "type": "script_line", "settings": { "line_type": "character",     "text": "IBRAHIM" } },
+        { "type": "script_line", "settings": { "line_type": "dialogue",      "text": "He's on his way." } },
+        { "type": "script_line", "settings": { "line_type": "action",        "text": "The waiter looks at the empty chair. Then at Ibrahim. He says nothing. He walks back." } },
+        { "type": "annotation", "settings": { "anchor": "Two cups of coffee. One untouched, perfectly placed.", "note": "The film's central tension is embedded in staging, not dialogue. Before a word is spoken, the audience understands: someone is absent but expected." } },
+        { "type": "annotation", "settings": { "anchor": "He's on his way.", "note": "Three words carry the entire dramatic question: Is Ibrahim delusional? Loyal? In denial? The ambiguity is the engine." } },
+        { "type": "annotation", "settings": { "anchor": "He says nothing. He walks back.", "note": "The waiter's silence is a structural choice, not absence of dialogue. A lesser draft had him offer condolences." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

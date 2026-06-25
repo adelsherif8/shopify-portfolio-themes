@@ -1,0 +1,101 @@
+<section id="gallery" class="section" data-section-num="006">
+  <div class="s-label reveal">{{ section.settings.label | default: '05 — From the Set' }}</div>
+  <h2 class="gallery-heading reveal">
+    {{ section.settings.heading_prefix | default: 'Behind the ' }}<em>{{ section.settings.heading_em | default: 'camera.' }}</em>
+  </h2>
+
+  <div class="gallery-grid">
+    {% for block in section.blocks %}
+      {% if block.type == 'item' %}
+        <div class="gallery-item reveal" style="transition-delay: {{ forloop.index0 | times: 0.07 }}s;" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | image_url: width: 800 }}"
+                 alt="{{ block.settings.title | escape }}"
+                 loading="lazy">
+          {% else %}
+            <div class="gallery-item-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="48" height="48" style="color:var(--gold);opacity:.2;">
+                <rect x="2" y="2" width="20" height="20" rx="2"/>
+                <line x1="7" y1="2" x2="7" y2="22"/>
+                <line x1="17" y1="2" x2="17" y2="22"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+              </svg>
+              <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);">{{ block.settings.title }}</span>
+            </div>
+          {% endif %}
+          <div class="gallery-overlay"></div>
+          <div class="gallery-frame"></div>
+          <div class="gallery-caption">
+            <div class="gallery-caption-title">{{ block.settings.title }}</div>
+            <div class="gallery-caption-tag">{{ block.settings.tag }}</div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gallery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "05 — From the Set"
+    },
+    {
+      "type": "text",
+      "id": "heading_prefix",
+      "label": "Heading prefix",
+      "default": "Behind the "
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Heading (italic gold)",
+      "default": "camera."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Gallery item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Behind the Scenes"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Production · On Set"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Gallery",
+      "blocks": [
+        { "type": "item", "settings": { "title": "قهوة الميتين",       "tag": "Short Film · Scriptwriting" } },
+        { "type": "item", "settings": { "title": "On the Page",         "tag": "Qahwet El Mayteen · Development" } },
+        { "type": "item", "settings": { "title": "Documentary · Field", "tag": "Sound Recording · On-Location" } },
+        { "type": "item", "settings": { "title": "Boom in the Room",    "tag": "Documentary · Audio Capture" } },
+        { "type": "item", "settings": { "title": "Placid Disruption",   "tag": "Placid Essentials · Campaign" } },
+        { "type": "item", "settings": { "title": "Creative Direction",  "tag": "Placid Essentials · Visual Identity" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

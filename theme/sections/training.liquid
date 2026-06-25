@@ -1,0 +1,122 @@
+<section id="training" class="section" data-section-num="011">
+  <div class="s-label reveal">{{ section.settings.label | default: '10 — Training & Education' }}</div>
+  <h2 class="training-heading reveal">
+    {{ section.settings.heading_prefix | default: 'The making of a ' }}<em>{{ section.settings.heading_em | default: 'filmmaker.' }}</em>
+  </h2>
+
+  <div class="training-list">
+    {% for block in section.blocks %}
+      {% if block.type == 'program' %}
+        <div class="training-item reveal {% if block.settings.active %}active{% endif %}"
+             style="transition-delay: {{ forloop.index0 | times: 0.08 }}s;"
+             {{ block.shopify_attributes }}>
+          <div>
+            <div class="training-school">{{ block.settings.school }}</div>
+          </div>
+          <div class="training-program">{{ block.settings.program }}</div>
+          <div class="training-status {% if block.settings.active %}active{% else %}done{% endif %}">
+            {% case block.settings.status %}
+              {% when 'In Progress' %}{{ section.settings.status_active | default: 'In Progress' }}
+              {% when 'Completed'   %}{{ section.settings.status_done | default: 'Completed' }}
+              {% when 'Graduated'   %}{{ section.settings.status_grad | default: 'Graduated' }}
+              {% else %}{{ block.settings.status }}
+            {% endcase %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Training & Education",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "10 — Training & Education"
+    },
+    {
+      "type": "text",
+      "id": "heading_prefix",
+      "label": "Heading prefix",
+      "default": "The making of a "
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Heading (italic gold)",
+      "default": "filmmaker."
+    },
+    {
+      "type": "text",
+      "id": "status_active",
+      "label": "Status: In Progress label",
+      "default": "In Progress"
+    },
+    {
+      "type": "text",
+      "id": "status_done",
+      "label": "Status: Completed label",
+      "default": "Completed"
+    },
+    {
+      "type": "text",
+      "id": "status_grad",
+      "label": "Status: Graduated label",
+      "default": "Graduated"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "program",
+      "name": "Education program",
+      "settings": [
+        {
+          "type": "text",
+          "id": "school",
+          "label": "School / Institution",
+          "default": "Film School"
+        },
+        {
+          "type": "text",
+          "id": "program",
+          "label": "Program / Degree",
+          "default": "Full Filmmaking Diploma"
+        },
+        {
+          "type": "select",
+          "id": "status",
+          "label": "Status",
+          "options": [
+            { "value": "In Progress", "label": "In Progress" },
+            { "value": "Completed",   "label": "Completed" },
+            { "value": "Graduated",   "label": "Graduated" }
+          ],
+          "default": "Completed"
+        },
+        {
+          "type": "checkbox",
+          "id": "active",
+          "label": "Currently active / in progress",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Training & Education",
+      "blocks": [
+        { "type": "program", "settings": { "school": "Arab Film School",            "program": "Full Filmmaking Diploma",                              "status": "In Progress", "active": true } },
+        { "type": "program", "settings": { "school": "We Can Film School",          "program": "Full Filmmaking Diploma",                              "status": "Completed",   "active": false } },
+        { "type": "program", "settings": { "school": "We Can Film School",          "program": "Filmmaking Level 1",                                   "status": "Completed",   "active": false } },
+        { "type": "program", "settings": { "school": "British University in Egypt", "program": "BSc Media & Mass Communication — Filmmaking Track",    "status": "Graduated",   "active": false } }
+      ]
+    }
+  ]
+}
+{% endschema %}

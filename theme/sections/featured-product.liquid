@@ -1,0 +1,177 @@
+{% assign fp = all_products[section.settings.product] %}
+
+<section class="section fp-section">
+
+  {% if fp != blank %}
+    <div class="fp-wrap">
+
+      <!-- Image side -->
+      <div class="fp-gallery reveal">
+        <div class="fp-img-main">
+          {% if fp.featured_image %}
+            <img src="{{ fp.featured_image | image_url: width: 900 }}"
+                 alt="{{ fp.featured_image.alt | escape | default: fp.title }}"
+                 class="fp-img" width="900" height="900" loading="lazy">
+          {% else %}
+            <div class="fp-img-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="60" height="60" style="color:var(--gold);opacity:.15;">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+              </svg>
+            </div>
+          {% endif %}
+          <div class="pdp-corner pdp-corner-tl"></div>
+          <div class="pdp-corner pdp-corner-tr"></div>
+          <div class="pdp-corner pdp-corner-bl"></div>
+          <div class="pdp-corner pdp-corner-br"></div>
+          <div class="pdp-media-scanlines"></div>
+        </div>
+
+        {% if fp.images.size > 1 %}
+          <div class="fp-thumbs">
+            {% for img in fp.images limit: 4 %}
+              <button class="fp-thumb {% if forloop.first %}active{% endif %}"
+                      data-src="{{ img | image_url: width: 900 }}"
+                      data-alt="{{ img.alt | escape }}"
+                      aria-label="View image {{ forloop.index }}">
+                <img src="{{ img | image_url: width: 120 }}" alt="" width="120" height="120" loading="lazy">
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Info side -->
+      <div class="fp-info reveal">
+
+        {% if section.settings.label != blank %}
+          <div class="s-label" style="margin-bottom:20px;">{{ section.settings.label }}</div>
+        {% endif %}
+
+        {% if fp.type != blank %}
+          <div class="pdp-product-type">{{ fp.type }}</div>
+        {% endif %}
+
+        <h2 class="fp-title">{{ fp.title }}</h2>
+
+        <div class="fp-price-row">
+          {% if fp.compare_at_price > fp.price %}
+            <s class="pdp-price-compare">{{ fp.compare_at_price | money }}</s>
+          {% endif %}
+          <span class="pdp-price">{{ fp.selected_or_first_available_variant.price | money }}</span>
+          {% if fp.compare_at_price > fp.price %}
+            <span class="pdp-price-save">Save {{ fp.compare_at_price | minus: fp.price | money }}</span>
+          {% endif %}
+        </div>
+
+        {% if fp.description != blank %}
+          <p class="fp-desc">{{ fp.description | strip_html | truncate: 200 }}</p>
+        {% endif %}
+
+        <div class="fp-actions">
+          <a href="{{ fp.url }}" class="fp-view-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="15" height="15"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            View product
+          </a>
+          {% if fp.available %}
+            {% form 'product', fp, class: 'fp-atc-form' %}
+              <input type="hidden" name="id" value="{{ fp.selected_or_first_available_variant.id }}">
+              <input type="hidden" name="quantity" value="1">
+              <button type="submit" class="fp-atc-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="15" height="15"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Add to Cart
+              </button>
+            {% endform %}
+          {% else %}
+            <button class="fp-atc-btn fp-atc-btn--disabled" disabled>Sold Out</button>
+          {% endif %}
+        </div>
+
+        {% if section.settings.show_tags and fp.tags.size > 0 %}
+          <div class="fp-tags">
+            {% for tag in fp.tags limit: 5 %}
+              <a href="{{ routes.collections_url }}/all/{{ tag | handle }}" class="fp-tag">{{ tag }}</a>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when '@app' %}
+              {% render block %}
+            {% when 'custom_liquid' %}
+              {{ block.settings.custom_liquid }}
+          {% endcase %}
+        {% endfor %}
+
+      </div>
+    </div>
+
+  {% else %}
+    <div class="fc-empty">
+      <p>Select a product in the theme editor to display it here.</p>
+    </div>
+  {% endif %}
+
+</section>
+
+<script>
+  (function() {
+    const thumbs = document.querySelectorAll('.fp-thumb');
+    const mainImg = document.querySelector('.fp-img');
+    if (!thumbs.length || !mainImg) return;
+    thumbs.forEach(btn => {
+      btn.addEventListener('click', function() {
+        thumbs.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        mainImg.src = this.dataset.src;
+        if (this.dataset.alt) mainImg.alt = this.dataset.alt;
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Featured product",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "— Featured"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show product tags",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "custom_liquid",
+      "name": "Custom liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Custom liquid"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured product"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,115 @@
+<section id="faq" class="section" data-section-num="019">
+  <div class="s-label reveal">{{ section.settings.label | default: 'Frequently Asked' }}</div>
+  <h2 class="faq-heading reveal">
+    {{ section.settings.heading_1 | default: 'Common ' }}<em>{{ section.settings.heading_2 | default: 'questions.' }}</em>
+  </h2>
+
+  <div class="faq-list">
+    {% for block in section.blocks %}
+      {% if block.type == 'item' %}
+        <div class="faq-item reveal" style="transition-delay:{{ forloop.index0 | times: 0.06 }}s;" {{ block.shopify_attributes }}>
+          <button class="faq-question" aria-expanded="false">
+            <span>{{ block.settings.question }}</span>
+            <div class="faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">{{ block.settings.answer }}</div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Frequently Asked"
+    },
+    {
+      "type": "text",
+      "id": "heading_1",
+      "label": "Heading prefix",
+      "default": "Common "
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Heading (italic gold)",
+      "default": "questions."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What types of projects do you take on?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Short films, documentaries, branded content, creative direction, and sound recording. Open to collaboration at any stage of production.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "question": "What types of projects do you take on?",
+            "answer": "<p>Short films, documentaries, branded content, creative direction, and sound recording. Open to collaboration at any stage of production.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How far in advance should I reach out?",
+            "answer": "<p>For productions with a fixed shoot date, 4–6 weeks minimum is ideal. For script or creative work, I can often start within 1–2 weeks.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "Do you work internationally?",
+            "answer": "<p>Based in Cairo, Egypt — but available for remote collaboration and international productions with the right scope and budget.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "What's your process for new projects?",
+            "answer": "<p>It starts with a conversation about your story, timeline, and goals. From there I'll outline an approach, scope, and rate — tailored to the specific project.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "Do you offer script consultation without full writing?",
+            "answer": "<p>Yes. I offer standalone story development sessions, script notes, and structural feedback without taking on full authorship.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

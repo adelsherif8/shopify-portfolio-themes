@@ -1,0 +1,84 @@
+<section id="clients" class="section clients-section" data-section-num="018">
+  <div class="s-label reveal">{{ section.settings.label | default: 'Collaborators & Clients' }}</div>
+  {% if section.settings.heading != blank %}
+    <h2 class="clients-heading reveal">{{ section.settings.heading }}</h2>
+  {% endif %}
+
+  <div class="clients-grid reveal">
+    {% for block in section.blocks %}
+      {% if block.type == 'client' %}
+        <div class="client-item" {{ block.shopify_attributes }}>
+          {% if block.settings.url != blank %}
+            <a href="{{ block.settings.url }}" target="_blank" rel="noopener" class="client-link">
+          {% endif %}
+            {% if block.settings.logo != blank %}
+              <img src="{{ block.settings.logo | image_url: width: 300 }}"
+                   alt="{{ block.settings.name | escape }}"
+                   class="client-logo" loading="lazy">
+            {% else %}
+              <div class="client-name-fallback">{{ block.settings.name }}</div>
+            {% endif %}
+          {% if block.settings.url != blank %}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Clients & Collaborators",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Collaborators & Clients"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (optional)",
+      "default": "Brands & studios I've worked with."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "client",
+      "name": "Client / brand",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name (shown if no logo)",
+          "default": "Brand Name"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link (optional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 16,
+  "presets": [
+    {
+      "name": "Clients & Collaborators",
+      "blocks": [
+        { "type": "client", "settings": { "name": "Placid Essentials" } },
+        { "type": "client", "settings": { "name": "British University in Egypt" } },
+        { "type": "client", "settings": { "name": "Arab Film School" } },
+        { "type": "client", "settings": { "name": "We Can Film School" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

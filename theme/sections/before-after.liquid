@@ -1,0 +1,180 @@
+<section id="before-after-{{ section.id }}" class="section ba-section" data-section-num="{{ section.settings.section_num | default: '0A' }}">
+
+  <div class="s-label reveal">{{ section.settings.label | default: 'Raw vs Graded' }}</div>
+
+  {% if section.settings.heading != blank %}
+    <div class="ba-head reveal">
+      <h2 class="ba-heading">{{ section.settings.heading }}</h2>
+      {% if section.settings.sub != blank %}
+        <p class="ba-sub">{{ section.settings.sub }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="ba-grid">
+    {% for block in section.blocks %}
+      {% if block.type == 'comparison' %}
+        <div class="ba-item reveal" data-ba="{{ block.id }}" {{ block.shopify_attributes }}>
+
+          <!-- After layer (graded — full width, bottom) -->
+          <div class="ba-layer ba-layer--after">
+            {% if block.settings.image_after != blank %}
+              <img src="{{ block.settings.image_after | image_url: width: 1400 }}"
+                   alt="{{ block.settings.title | escape | default: 'After' }}"
+                   class="ba-img" loading="lazy">
+            {% else %}
+              <div class="ba-placeholder ba-placeholder--after">
+                <span>GRADED</span>
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Before layer (raw — clipped to handle position) -->
+          <div class="ba-layer ba-layer--before">
+            {% if block.settings.image_before != blank %}
+              <img src="{{ block.settings.image_before | image_url: width: 1400 }}"
+                   alt="{{ block.settings.title | escape | default: 'Before' }}"
+                   class="ba-img" loading="lazy">
+            {% else %}
+              <div class="ba-placeholder ba-placeholder--before">
+                <span>RAW</span>
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Scanlines -->
+          <div class="ba-scanlines"></div>
+
+          <!-- Divider + Handle -->
+          <div class="ba-divider">
+            <div class="ba-handle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Labels -->
+          <div class="ba-label ba-label--before">{{ block.settings.label_before | default: 'RAW' }}</div>
+          <div class="ba-label ba-label--after">{{ block.settings.label_after | default: 'GRADED' }}</div>
+
+          <!-- Corner marks -->
+          <div class="ba-corner ba-corner-tl"></div>
+          <div class="ba-corner ba-corner-tr"></div>
+          <div class="ba-corner ba-corner-bl"></div>
+          <div class="ba-corner ba-corner-br"></div>
+
+          <!-- Info bar -->
+          {% if block.settings.title != blank %}
+            <div class="ba-info">
+              <span class="ba-info-title">{{ block.settings.title }}</span>
+              {% if block.settings.meta != blank %}
+                <span class="ba-info-meta">{{ block.settings.meta }}</span>
+              {% endif %}
+            </div>
+          {% endif %}
+
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if section.blocks.size == 0 %}
+    <div class="ba-empty">Add a Comparison block in the theme editor to get started.</div>
+  {% endif %}
+
+</section>
+
+{% schema %}
+{
+  "name": "Before / After Reveal",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Raw vs Graded"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The grade makes the frame."
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subtext",
+      "default": "Drag to reveal the difference."
+    },
+    {
+      "type": "text",
+      "id": "section_num",
+      "label": "Section number (for scene counter)",
+      "default": "0A"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "comparison",
+      "name": "Image comparison",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_before",
+          "label": "Before image (raw / ungraded)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_after",
+          "label": "After image (graded / final)"
+        },
+        {
+          "type": "text",
+          "id": "label_before",
+          "label": "Before label",
+          "default": "RAW"
+        },
+        {
+          "type": "text",
+          "id": "label_after",
+          "label": "After label",
+          "default": "GRADED"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Scene / project title",
+          "default": "Scene Title"
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Meta info (film · year)",
+          "default": "Film Name · 2024"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Before / After Reveal",
+      "blocks": [
+        {
+          "type": "comparison",
+          "settings": {
+            "label_before": "RAW",
+            "label_after": "GRADED",
+            "title": "Scene 001 · Qahwet El Mayteen",
+            "meta": "Short Film · 2024"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

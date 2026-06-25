@@ -1,0 +1,88 @@
+<section id="journal" class="section journal-section" data-section-num="019">
+  <div class="s-label reveal">{{ section.settings.label | default: '18 — Journal' }}</div>
+  <h2 class="journal-heading reveal">
+    {{ section.settings.heading | default: 'Thoughts on' }}<br>
+    <em>{{ section.settings.heading_em | default: 'the craft.' }}</em>
+  </h2>
+  <p class="journal-sub reveal reveal-delay-1">{{ section.settings.sub | default: 'Writing on filmmaking, process, and the things that shape the work.' }}</p>
+
+  <div class="journal-grid reveal reveal-delay-2">
+    {% for block in section.blocks %}
+      {% if block.type == 'entry' %}
+        <article class="journal-card" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            <div class="journal-card-img-wrap">
+              <img src="{{ block.settings.image | image_url: width: 600 }}"
+                   alt="{{ block.settings.title | escape }}"
+                   class="journal-card-img" width="600" height="340" loading="lazy">
+            </div>
+          {% else %}
+            <div class="journal-card-img-wrap journal-card-img-placeholder"></div>
+          {% endif %}
+          <div class="journal-card-body">
+            <div class="journal-card-meta">
+              <span class="journal-card-date">{{ block.settings.date | default: '—' }}</span>
+              {% if block.settings.tag != blank %}
+                <span class="journal-card-tag">{{ block.settings.tag }}</span>
+              {% endif %}
+            </div>
+            <h3 class="journal-card-title">{{ block.settings.title | default: 'Entry Title' }}</h3>
+            <p class="journal-card-excerpt">{{ block.settings.excerpt | default: 'A short excerpt from this journal entry.' }}</p>
+            {% if block.settings.url != blank %}
+              <a href="{{ block.settings.url }}" class="journal-card-link">
+                Read more
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            {% endif %}
+          </div>
+        </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if section.settings.blog_url != blank %}
+    <div class="journal-all reveal">
+      <a href="{{ section.settings.blog_url }}" class="journal-all-link">
+        {{ section.settings.blog_label | default: 'View all entries' }}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Journal",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Section label", "default": "18 — Journal" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Thoughts on" },
+    { "type": "text", "id": "heading_em", "label": "Heading (italic gold)", "default": "the craft." },
+    { "type": "textarea", "id": "sub", "label": "Subtext", "default": "Writing on filmmaking, process, and the things that shape the work." },
+    { "type": "url", "id": "blog_url", "label": "Link to full blog (optional)" },
+    { "type": "text", "id": "blog_label", "label": "Blog link label", "default": "View all entries" }
+  ],
+  "blocks": [
+    {
+      "type": "entry",
+      "name": "Journal entry",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Cover image (optional)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Entry Title" },
+        { "type": "text", "id": "date", "label": "Date", "default": "January 2024" },
+        { "type": "text", "id": "tag", "label": "Tag / category", "default": "Process" },
+        { "type": "textarea", "id": "excerpt", "label": "Excerpt", "default": "A short excerpt from this journal entry." },
+        { "type": "url", "id": "url", "label": "Link to full entry" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{
+    "name": "Journal",
+    "blocks": [
+      { "type": "entry", "settings": { "title": "On Writing the First Draft", "date": "January 2024", "tag": "Scriptwriting", "excerpt": "The first draft is never about being good. It is about excavating something true from the noise." } },
+      { "type": "entry", "settings": { "title": "What the Documentary Taught Me", "date": "November 2023", "tag": "Behind the Scenes", "excerpt": "Three weeks on location with a documentary crew strips away every assumption you had about controlled filmmaking." } },
+      { "type": "entry", "settings": { "title": "On Directing Your First Actor", "date": "September 2023", "tag": "Direction", "excerpt": "The director's job is not to direct performance. It is to create the conditions in which performance becomes inevitable." } }
+    ]
+  }]
+}
+{% endschema %}

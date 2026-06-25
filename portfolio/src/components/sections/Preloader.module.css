@@ -1,0 +1,37 @@
+.wrap {
+  position: fixed; inset: 0; z-index: 99999;
+  background: #000; display: flex; align-items: center;
+  justify-content: center; flex-direction: column; gap: 28px;
+}
+.curtainL, .curtainR {
+  position: absolute; top: 0; bottom: 0; width: 50%;
+  background: #000; z-index: 2; transform-origin: left;
+}
+.curtainL { left: 0; transform-origin: left; }
+.curtainR { right: 0; transform-origin: right; }
+.flash { position: absolute; inset: 0; background: rgba(255,255,255,.9); z-index: 3; pointer-events: none; }
+.board { width: 240px; position: relative; z-index: 1; }
+.clapTop {
+  display: flex; height: 52px; border: 1.5px solid #444; border-bottom: none;
+  overflow: hidden; transform-origin: top center;
+}
+.stripes {
+  flex: 1; background: repeating-linear-gradient(-45deg,#000 0,#000 14px,#fff 14px,#fff 28px);
+}
+.clapInfo {
+  width: 110px; background: #000; border-left: 1.5px solid #444;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 3px;
+}
+.clapInfo span { font-family: var(--font-mono); font-size: 8px; color: #fff; letter-spacing: .1em; }
+.clapBody {
+  background: #111; border: 1.5px solid #444; border-top: none;
+  padding: 16px 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px;
+}
+.field { display: flex; flex-direction: column; gap: 2px; }
+.field label { font-family: var(--font-mono); font-size: 6px; color: #555; text-transform: uppercase; letter-spacing: .15em; }
+.field span  { font-family: var(--font-mono); font-size: 9px; color: #fff; }
+.action {
+  font-family: var(--font-serif); font-size: 52px; font-weight: 200;
+  color: #fff; letter-spacing: .1em; position: relative; z-index: 1;
+}

@@ -1,0 +1,137 @@
+<section id="reel" class="reel" data-section-num="003">
+  <canvas id="reel-canvas" class="reel-canvas"></canvas>
+  <div class="reel-lb"></div>
+  <div class="reel-lb-bot"></div>
+
+  <div class="reel-center reveal">
+    <div class="reel-eyebrow">{{ section.settings.eyebrow | default: 'Cairo · Egypt' }}</div>
+    <h2 class="reel-title">
+      {{ section.settings.title_prefix | default: 'The ' }}<em>{{ section.settings.title_main | default: 'Showreel' }}</em>
+    </h2>
+
+    <div class="reel-player-wrap">
+      <div class="reel-thumb" id="reel-play-btn"
+           {% if section.settings.shopify_video != blank %}
+             data-video-type="native"
+             data-video-src="{{ section.settings.shopify_video.sources[0].url }}"
+           {% elsif section.settings.video_url != blank %}
+             data-video-type="url"
+             data-video-src="{{ section.settings.video_url }}"
+           {% elsif section.settings.youtube_id != blank %}
+             data-video-type="youtube"
+             data-video-id="{{ section.settings.youtube_id }}"
+           {% endif %}>
+        {% if section.settings.thumbnail != blank %}
+          <img src="{{ section.settings.thumbnail | image_url: width: 1200 }}"
+               alt="Showreel thumbnail"
+               width="1200" height="675"
+               class="reel-thumb-img" loading="lazy">
+        {% elsif section.settings.shopify_video != blank and section.settings.shopify_video.preview_image != blank %}
+          <img src="{{ section.settings.shopify_video.preview_image | image_url: width: 1200 }}"
+               alt="Showreel thumbnail"
+               class="reel-thumb-img" width="1200" height="675" loading="lazy">
+        {% else %}
+          <div class="reel-thumb-placeholder">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="40" height="40" style="color:var(--gold);opacity:.3;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:.3em;color:var(--dim);">ADD VIDEO IN SETTINGS</span>
+          </div>
+        {% endif %}
+        <div class="reel-overlay"></div>
+        <div class="reel-scanlines"></div>
+        <div class="reel-play">
+          <div class="reel-play-ring">
+            <svg viewBox="0 0 24 24" width="22" height="22"><polygon points="5,3 19,12 5,21" fill="var(--gold2)"/></svg>
+          </div>
+          <span class="reel-play-lbl">{{ section.settings.play_label | default: 'Play Showreel' }}</span>
+        </div>
+        <span class="reel-dur">{{ section.settings.reel_year | default: '2024 REEL' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="reel-modal" class="reel-modal">
+    <div id="reel-embed-wrap">
+      <iframe id="reel-iframe" class="reel-iframe" allowfullscreen allow="autoplay" title="Showreel" src=""></iframe>
+    </div>
+    <button id="reel-close-btn" class="reel-close">{{ section.settings.close_label | default: 'Close ✕' }}</button>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Showreel",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Video source — pick one"
+    },
+    {
+      "type": "video",
+      "id": "shopify_video",
+      "label": "Shopify-hosted video (upload in Files/Videos)"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Or: direct video URL (mp4, YouTube, Vimeo link)",
+      "info": "Paste full URL. e.g. https://vimeo.com/123456 or https://youtube.com/watch?v=abc"
+    },
+    {
+      "type": "text",
+      "id": "youtube_id",
+      "label": "Or: YouTube Video ID only (legacy)",
+      "info": "Just the ID part, e.g. dQw4w9WgXcQ"
+    },
+    {
+      "type": "header",
+      "content": "Thumbnail & labels"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail",
+      "label": "Custom thumbnail image (overrides video preview)"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Cairo · Egypt"
+    },
+    {
+      "type": "text",
+      "id": "title_prefix",
+      "label": "Title prefix",
+      "default": "The "
+    },
+    {
+      "type": "text",
+      "id": "title_main",
+      "label": "Title main word (italic gold)",
+      "default": "Showreel"
+    },
+    {
+      "type": "text",
+      "id": "play_label",
+      "label": "Play button label",
+      "default": "Play Showreel"
+    },
+    {
+      "type": "text",
+      "id": "reel_year",
+      "label": "Reel year label",
+      "default": "2024 REEL"
+    },
+    {
+      "type": "text",
+      "id": "close_label",
+      "label": "Close button label",
+      "default": "Close ✕"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Showreel"
+    }
+  ]
+}
+{% endschema %}

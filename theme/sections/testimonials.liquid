@@ -1,0 +1,80 @@
+<section id="testimonials" class="testimonials-wrap" data-section-num="008">
+  <div class="testimonials-inner">
+    <div class="testimonials-label">{{ section.settings.label | default: 'Words from the set' }}</div>
+
+    <div class="testimonials-screen">
+      <div class="testimonials-scanlines"></div>
+
+      {% for block in section.blocks %}
+        {% if block.type == 'testimonial' %}
+          <div class="testimonial-slide {% if forloop.first %}active{% endif %}" {{ block.shopify_attributes }}>
+            <p class="testimonial-text">&ldquo;{{ block.settings.quote }}&rdquo;</p>
+            <div class="testimonial-attribution">
+              <span class="testimonial-name">{{ block.settings.name }}</span>
+              <span class="testimonial-role">{{ block.settings.role }}</span>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <div class="testimonials-dots">
+        {% for block in section.blocks %}
+          {% if block.type == 'testimonial' %}
+            <button class="testimonial-dot {% if forloop.first %}active{% endif %}" aria-label="Testimonial {{ forloop.index }}"></button>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Words from the set"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Add a quote from a collaborator, director, or client you've worked with."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Collaborator Name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role / Title",
+          "default": "Their Role"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        { "type": "testimonial", "settings": { "quote": "Add a quote from a collaborator, director, or client you've worked with.", "name": "Collaborator Name", "role": "Their Role" } },
+        { "type": "testimonial", "settings": { "quote": "Add a quote from a collaborator, director, or client you've worked with.", "name": "Collaborator Name", "role": "Their Role" } },
+        { "type": "testimonial", "settings": { "quote": "Add a quote from a collaborator, director, or client you've worked with.", "name": "Collaborator Name", "role": "Their Role" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,211 @@
+<section id="social-proof-{{ section.id }}" class="section sp-section" data-section-num="{{ section.settings.section_num | default: '0B' }}">
+
+  <div class="s-label reveal">{{ section.settings.label | default: 'What they say' }}</div>
+
+  {% assign featured = '' %}
+  {% for block in section.blocks %}
+    {% if block.type == 'quote' and featured == '' %}
+      {% assign featured = block %}
+    {% endif %}
+  {% endfor %}
+
+  <!-- Featured pull-quote -->
+  {% if featured != '' %}
+    <div class="sp-featured reveal" {{ featured.shopify_attributes }}>
+      <div class="sp-featured-inner">
+        <div class="sp-scanlines"></div>
+        <div class="sp-quote-mark">&ldquo;</div>
+        <blockquote class="sp-featured-quote">{{ featured.settings.quote }}</blockquote>
+        <div class="sp-featured-attribution">
+          {% if featured.settings.avatar != blank %}
+            <img src="{{ featured.settings.avatar | image_url: width: 80 }}" alt="{{ featured.settings.name | escape }}" class="sp-avatar" width="40" height="40" loading="lazy">
+          {% else %}
+            <div class="sp-avatar-initials">{{ featured.settings.name | truncate: 2, '' | upcase }}</div>
+          {% endif %}
+          <div class="sp-featured-meta">
+            <span class="sp-name">{{ featured.settings.name }}</span>
+            <span class="sp-role">{{ featured.settings.role }}</span>
+            {% if featured.settings.project != blank %}
+              <span class="sp-project">{{ featured.settings.project }}</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="sp-corner sp-corner-tl"></div>
+        <div class="sp-corner sp-corner-tr"></div>
+        <div class="sp-corner sp-corner-bl"></div>
+        <div class="sp-corner sp-corner-br"></div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Additional quote cards -->
+  {% assign quote_count = 0 %}
+  {% for block in section.blocks %}
+    {% if block.type == 'quote' and forloop.index > 1 %}
+      {% assign quote_count = quote_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+
+  {% if quote_count > 0 %}
+    <div class="sp-cards-grid reveal">
+      {% assign is_first = true %}
+      {% for block in section.blocks %}
+        {% if block.type == 'quote' %}
+          {% unless is_first %}
+            <div class="sp-card" {{ block.shopify_attributes }}>
+              <div class="sp-card-quote">&ldquo;{{ block.settings.quote }}&rdquo;</div>
+              <div class="sp-card-attribution">
+                {% if block.settings.avatar != blank %}
+                  <img src="{{ block.settings.avatar | image_url: width: 60 }}" alt="{{ block.settings.name | escape }}" class="sp-card-avatar" width="30" height="30" loading="lazy">
+                {% else %}
+                  <div class="sp-card-avatar-initials">{{ block.settings.name | truncate: 2, '' | upcase }}</div>
+                {% endif %}
+                <div>
+                  <div class="sp-card-name">{{ block.settings.name }}</div>
+                  <div class="sp-card-role">{{ block.settings.role }}</div>
+                </div>
+              </div>
+              {% if block.settings.project != blank %}
+                <div class="sp-card-project">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+                  {{ block.settings.project }}
+                </div>
+              {% endif %}
+            </div>
+          {% endunless %}
+          {% assign is_first = false %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Client logos -->
+  {% assign has_logos = false %}
+  {% for block in section.blocks %}
+    {% if block.type == 'client' %}{% assign has_logos = true %}{% endif %}
+  {% endfor %}
+
+  {% if has_logos %}
+    <div class="sp-clients reveal">
+      <div class="sp-clients-label">{{ section.settings.clients_label | default: 'Trusted by' }}</div>
+      <div class="sp-clients-row">
+        {% for block in section.blocks %}
+          {% if block.type == 'client' %}
+            <div class="sp-client" {{ block.shopify_attributes }}>
+              {% if block.settings.url != blank %}<a href="{{ block.settings.url }}" target="_blank" rel="noopener" class="sp-client-link">{% endif %}
+                {% if block.settings.logo != blank %}
+                  <img src="{{ block.settings.logo | image_url: width: 280 }}"
+                       alt="{{ block.settings.name | escape }}"
+                       class="sp-client-logo" loading="lazy">
+                {% else %}
+                  <span class="sp-client-name">{{ block.settings.name }}</span>
+                {% endif %}
+              {% if block.settings.url != blank %}</a>{% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+</section>
+
+{% schema %}
+{
+  "name": "Social Proof",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "What they say"
+    },
+    {
+      "type": "text",
+      "id": "clients_label",
+      "label": "Clients row label",
+      "default": "Trusted by"
+    },
+    {
+      "type": "text",
+      "id": "section_num",
+      "label": "Section number (for scene counter)",
+      "default": "0B"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Testimonial quote",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Working with Omar was unlike any production experience I've had. The level of preparation and creative vision on set was exceptional."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Collaborator Name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role / Title",
+          "default": "Director of Photography"
+        },
+        {
+          "type": "text",
+          "id": "project",
+          "label": "Project name (optional)",
+          "default": "Qahwet El Mayteen"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Portrait photo (optional)"
+        }
+      ]
+    },
+    {
+      "type": "client",
+      "name": "Client / brand logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name (shown if no logo)",
+          "default": "Brand Name"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link (optional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 16,
+  "presets": [
+    {
+      "name": "Social Proof",
+      "blocks": [
+        { "type": "quote", "settings": { "quote": "Omar brings a rare combination of technical precision and emotional intelligence to every frame. The kind of collaborator you want on every project.", "name": "A. Collaborator", "role": "Film Director", "project": "Qahwet El Mayteen" } },
+        { "type": "quote", "settings": { "quote": "The creative direction for our campaign transformed how we think about brand storytelling.", "name": "B. Client", "role": "Brand Director", "project": "Placid Disruption" } },
+        { "type": "quote", "settings": { "quote": "Disciplined on set, inventive in the edit. Every decision was in service of the story.", "name": "C. Producer", "role": "Production Manager", "project": "Documentary" } },
+        { "type": "client", "settings": { "name": "Placid Essentials" } },
+        { "type": "client", "settings": { "name": "British University in Egypt" } },
+        { "type": "client", "settings": { "name": "Arab Film School" } },
+        { "type": "client", "settings": { "name": "We Can Film School" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

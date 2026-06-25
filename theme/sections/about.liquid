@@ -1,0 +1,155 @@
+<section id="about" class="section" data-section-num="002">
+  <div class="s-label reveal">01 — {{ section.settings.label | default: 'About' }}</div>
+
+  <div class="about-grid">
+    <div class="about-img-wrap reveal">
+      <div class="about-img">
+        {% if section.settings.photo != blank %}
+          <img src="{{ section.settings.photo | image_url: width: 800 }}"
+               alt="{{ section.settings.photo.alt | escape }}"
+               width="800" height="1067" loading="lazy">
+        {% else %}
+          <div class="about-img-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="36" height="36" style="color:var(--gold);opacity:.4;">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>
+            </svg>
+            <span>{{ section.settings.name | default: 'Your Name' }}</span>
+          </div>
+        {% endif %}
+      </div>
+      <div class="about-img-frame"></div>
+      <span class="about-img-tag" data-i18n-en="{{ section.settings.img_tag }}" data-i18n-ar="{{ section.settings.img_tag_ar }}">
+        {{ section.settings.img_tag | default: 'Director · Cairo' }}
+      </span>
+    </div>
+
+    <div class="reveal reveal-delay-2">
+      <h2 class="about-heading">
+        {{ section.settings.heading_line1 | default: 'Cinema is how I' }}<br>
+        <em>{{ section.settings.heading_line2 | default: 'understand the world.' }}</em>
+      </h2>
+
+      {% for block in section.blocks %}
+        {% if block.type == 'bio_paragraph' %}
+          <p class="about-body" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+        {% endif %}
+      {% endfor %}
+
+      <div class="about-stats">
+        {% assign stat_labels = section.settings.stat_labels | split: '|' %}
+        {% assign stat_values = section.settings.stat_values | split: '|' %}
+        {% assign stat_suffixes = section.settings.stat_suffixes | split: '|' %}
+        {% for label in stat_labels %}
+          {% assign val = stat_values[forloop.index0] %}
+          {% assign suf = stat_suffixes[forloop.index0] %}
+          <div class="about-stat">
+            <div class="about-stat-n">
+              <span data-countup="{{ val }}" data-suffix="{{ suf }}">{{ val }}{{ suf }}</span>
+            </div>
+            <div class="about-stat-d">{{ label }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "About"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Your name",
+      "default": "Omar Emad El Din"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo",
+      "label": "Your photo"
+    },
+    {
+      "type": "text",
+      "id": "img_tag",
+      "label": "Image tag (EN)",
+      "default": "Director · Cairo"
+    },
+    {
+      "type": "text",
+      "id": "img_tag_ar",
+      "label": "Image tag (AR)",
+      "default": "مخرج · القاهرة"
+    },
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading — line 1",
+      "default": "Cinema is how I"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading — line 2 (italic gold)",
+      "default": "understand the world."
+    },
+    {
+      "type": "text",
+      "id": "stat_labels",
+      "label": "Stat labels (pipe-separated)",
+      "default": "Film Productions|Diplomas & Courses|Campaign Directed|Stories to Tell"
+    },
+    {
+      "type": "text",
+      "id": "stat_values",
+      "label": "Stat values (pipe-separated, use 0 for ∞)",
+      "default": "3|3|1|0"
+    },
+    {
+      "type": "text",
+      "id": "stat_suffixes",
+      "label": "Stat suffixes (pipe-separated)",
+      "default": "+|||| "
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bio_paragraph",
+      "name": "Bio paragraph",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Paragraph",
+          "default": "<p>A filmmaker and storyteller with a passion for authentic human experience.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About",
+      "blocks": [
+        {
+          "type": "bio_paragraph",
+          "settings": {
+            "text": "<p>A filmmaking graduate from the <strong>British University in Egypt</strong>, Omar Emad El Din has spent years developing a voice rooted in authentic human experience — stories drawn from culture, memory, and the quiet tensions of everyday life.</p>"
+          }
+        },
+        {
+          "type": "bio_paragraph",
+          "settings": {
+            "text": "<p>From writing the graduation film <em>Qahwet El Mayteen</em> to directing brand campaigns and recording on documentary sets, Omar works at every layer of the filmmaking process with precision and deep passion.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

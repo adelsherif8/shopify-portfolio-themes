@@ -1,0 +1,77 @@
+<section id="collaborators" class="section collaborators-section" data-section-num="018">
+  <div class="s-label reveal">{{ section.settings.label | default: '17 — Collaborators' }}</div>
+  <h2 class="collab-heading reveal">
+    {{ section.settings.heading | default: 'The people behind' }}<br>
+    <em>{{ section.settings.heading_em | default: 'the frame.' }}</em>
+  </h2>
+  <p class="collab-sub reveal reveal-delay-1">{{ section.settings.sub | default: 'A recurring cast of collaborators who make the work possible.' }}</p>
+
+  <div class="collab-grid reveal reveal-delay-2">
+    {% for block in section.blocks %}
+      {% if block.type == 'person' %}
+        <div class="collab-card" {{ block.shopify_attributes }}>
+          <div class="collab-photo-wrap">
+            {% if block.settings.photo != blank %}
+              <img src="{{ block.settings.photo | image_url: width: 400 }}"
+                   alt="{{ block.settings.name | escape }}"
+                   class="collab-photo" width="400" height="400" loading="lazy">
+            {% else %}
+              <div class="collab-photo-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="32" height="32" style="color:var(--gold);opacity:.3;">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+          <div class="collab-info">
+            <div class="collab-name">{{ block.settings.name | default: 'Name' }}</div>
+            <div class="collab-role">{{ block.settings.role | default: 'Role' }}</div>
+            {% if block.settings.note != blank %}
+              <p class="collab-note">{{ block.settings.note }}</p>
+            {% endif %}
+            {% if block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" target="_blank" rel="noopener" class="collab-link">
+                View work
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="11" height="11"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collaborators",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Section label", "default": "17 — Collaborators" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The people behind" },
+    { "type": "text", "id": "heading_em", "label": "Heading (italic gold)", "default": "the frame." },
+    { "type": "textarea", "id": "sub", "label": "Subtext", "default": "A recurring cast of collaborators who make the work possible." }
+  ],
+  "blocks": [
+    {
+      "type": "person",
+      "name": "Collaborator",
+      "settings": [
+        { "type": "image_picker", "id": "photo", "label": "Photo" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Collaborator Name" },
+        { "type": "text", "id": "role", "label": "Role", "default": "Director of Photography" },
+        { "type": "textarea", "id": "note", "label": "Short note (optional)" },
+        { "type": "url", "id": "link", "label": "Website or portfolio link" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [{
+    "name": "Collaborators",
+    "blocks": [
+      { "type": "person", "settings": { "name": "Add Name", "role": "Director of Photography" } },
+      { "type": "person", "settings": { "name": "Add Name", "role": "Sound Recordist" } },
+      { "type": "person", "settings": { "name": "Add Name", "role": "Editor" } }
+    ]
+  }]
+}
+{% endschema %}

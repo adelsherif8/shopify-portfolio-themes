@@ -1,0 +1,207 @@
+<section id="films" class="films" data-section-num="004">
+  <div class="films-header">
+    <div class="s-label reveal">{{ section.settings.label | default: '02 — Films & Projects' }}</div>
+    <p class="films-intro reveal reveal-delay-1">
+      {{ section.settings.intro | default: 'Drag through a body of work spanning narrative short film, documentary production, and brand storytelling.' }}
+    </p>
+  </div>
+
+  <div class="films-carousel" id="films-carousel-{{ section.id }}">
+    <div class="films-track" id="films-track-{{ section.id }}">
+      {% for block in section.blocks %}
+        {% if block.type == 'film' %}
+          <div class="film-slide" {{ block.shopify_attributes }}>
+            <div class="film-card">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url: width: 800 }}"
+                     alt="{{ block.settings.title | escape }}"
+                     class="film-card-img" loading="lazy">
+              {% else %}
+                <div class="film-card-placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="40" height="40" style="color:var(--gold);opacity:.4;">
+                    <rect x="2" y="2" width="20" height="20" rx="2"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="7" x2="22" y2="7"/><line x1="2" y1="17" x2="22" y2="17"/>
+                  </svg>
+                  <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);">{{ block.settings.title }}</span>
+                </div>
+              {% endif %}
+
+              <div class="film-card-bg"></div>
+              <div class="film-card-overlay"></div>
+              <div class="film-scanlines"></div>
+
+              <div class="film-corner film-corner-tl"></div>
+              <div class="film-corner film-corner-tr"></div>
+              <div class="film-corner film-corner-bl"></div>
+              <div class="film-corner film-corner-br"></div>
+
+              <span class="film-num">{{ block.settings.scene_num | default: 'SCENE 001 · TAKE 01 · ROLL A' }}</span>
+
+              <div class="film-info">
+                <div class="film-tags">
+                  {% assign tags = block.settings.tags | split: ',' %}
+                  {% for tag in tags %}
+                    <span class="film-tag">{{ tag | strip }}</span>
+                  {% endfor %}
+                  <span class="film-role">{{ block.settings.role }}</span>
+                </div>
+                <h3 class="film-title">{{ block.settings.title }}</h3>
+                {% if block.settings.arabic_title != blank %}
+                  <div class="film-arabic">{{ block.settings.arabic_title }}</div>
+                {% endif %}
+                <p class="film-logline">{{ block.settings.logline }}</p>
+                <div class="film-subtitle">{{ block.settings.subtitle }}</div>
+                <p class="film-desc">{{ block.settings.description }}</p>
+              </div>
+              <div class="film-card-line"></div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="films-nav">
+      <button class="films-btn films-btn-prev" aria-label="Previous film" data-carousel="films-carousel-{{ section.id }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <div class="films-dots" id="films-dots-{{ section.id }}"></div>
+      <button class="films-btn films-btn-next" aria-label="Next film" data-carousel="films-carousel-{{ section.id }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Films & Projects",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "02 — Films & Projects"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "Drag through a body of work spanning narrative short film, documentary production, and brand storytelling."
+    },
+    {
+      "type": "text",
+      "id": "drag_hint",
+      "label": "Counter label (e.g. 'of')",
+      "default": "of"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "film",
+      "name": "Film / Project",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Film image (optional)"
+        },
+        {
+          "type": "text",
+          "id": "scene_num",
+          "label": "Scene number label",
+          "default": "SCENE 001 · TAKE 01 · ROLL A"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Film Title"
+        },
+        {
+          "type": "text",
+          "id": "arabic_title",
+          "label": "Arabic title (optional)"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "The Subtitle"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Your role",
+          "default": "Director"
+        },
+        {
+          "type": "text",
+          "id": "tags",
+          "label": "Tags (comma-separated)",
+          "default": "Short Film, Graduation"
+        },
+        {
+          "type": "textarea",
+          "id": "logline",
+          "label": "Logline (one sentence)",
+          "default": "A compelling story about the human condition."
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "A longer description of the project, its development, and your creative contribution."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Films & Projects",
+      "blocks": [
+        {
+          "type": "film",
+          "settings": {
+            "scene_num": "SCENE 001 · TAKE 01 · ROLL A",
+            "title": "Qahwet El Mayteen",
+            "arabic_title": "قهوة الميتين",
+            "subtitle": "The Coffee of the Dead",
+            "role": "Scriptwriter",
+            "tags": "Short Film, Graduation",
+            "logline": "A grieving father keeps a nightly table at a Cairo coffeehouse for a son who stopped coming — and cannot bring himself to stop waiting.",
+            "description": "An original screenplay rooted in Egyptian folklore — a dark, claustrophobic narrative balancing tragedy with black humour."
+          }
+        },
+        {
+          "type": "film",
+          "settings": {
+            "scene_num": "SCENE 002 · TAKE 03 · ROLL B",
+            "title": "Documentary Film",
+            "subtitle": "Untitled Documentary Production",
+            "role": "Sound Recordist",
+            "tags": "Documentary, On-Set",
+            "logline": "On-set audio capture across demanding locations — delivering broadcast-quality dialogue.",
+            "description": "Operated boom and field recording equipment, capturing broadcast-quality sound throughout production."
+          }
+        },
+        {
+          "type": "film",
+          "settings": {
+            "scene_num": "SCENE 003 · TAKE 01 · ROLL A",
+            "title": "Placid Disruption",
+            "subtitle": "Placid Essentials — Brand Campaign",
+            "role": "Creative Director",
+            "tags": "Brand Film, Commercial",
+            "logline": "A scent brand reimagined as cinema — controlled stillness as the ultimate disruption.",
+            "description": "Conceptualized and directed the full creative vision for Placid Essentials' flagship campaign."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

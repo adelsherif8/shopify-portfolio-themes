@@ -1,0 +1,27 @@
+{
+  "current": {
+    "site_title": "Omar Emad El Din",
+    "preloader_text": "Loading the frame...",
+    "color_gold": "#b8973a",
+    "color_gold2": "#d4af6a",
+    "color_bg_dark": "#040404",
+    "color_text_dark": "#e0d8c8",
+    "color_gold_day": "#8a6d1c",
+    "color_gold2_day": "#a07820",
+    "color_bg_day": "#f2ece0",
+    "color_text_day": "#140e04",
+    "enable_grain": true,
+    "enable_cursor": true,
+    "enable_letterbox": true,
+    "enable_preloader": true,
+    "enable_cookies": true,
+    "cookie_text": "This site uses cookies to ensure you get the best experience.",
+    "cookie_accept_label": "Accept",
+    "cookie_decline_label": "Decline",
+    "social_instagram": "",
+    "social_vimeo": "",
+    "social_youtube": "",
+    "social_imdb": "",
+    "social_linkedin": ""
+  }
+}

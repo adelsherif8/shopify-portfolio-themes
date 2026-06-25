@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300;1,400;1,600&family=Inter:wght@100;200;300;400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ── TOKENS ── */
+:root {
+  --black:  #040404;
+  --dark:   #0b0b0b;
+  --panel:  #0f0f0f;
+  --border: rgba(255,255,255,.06);
+  --border2:rgba(255,255,255,.1);
+  --gold:   #b8973a;
+  --gold2:  #d4af6a;
+  --gold3:  rgba(184,151,58,.12);
+  --dim:    rgba(255,255,255,.35);
+  --muted:  rgba(255,255,255,.12);
+  --text:   rgba(255,255,255,.88);
+  --bg:     #040404;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans:  'Inter', sans-serif;
+  --font-mono:  'Space Mono', monospace;
+}
+
+/* ── DAY MODE ── */
+[data-theme="day"] {
+  --black:  #f2ece0;
+  --dark:   #e8e0cc;
+  --panel:  #efe8d6;
+  --border: rgba(40,25,5,.08);
+  --border2:rgba(40,25,5,.14);
+  --gold:   #8a6d1c;
+  --gold2:  #a07820;
+  --gold3:  rgba(138,109,28,.1);
+  --dim:    rgba(30,20,5,.55);
+  --muted:  rgba(30,20,5,.28);
+  --text:   rgba(20,14,4,.88);
+  --bg:     #f2ece0;
+}
+
+/* ── DIRECTOR'S CUT ── */
+[data-theme="dc"] {
+  --gold:  #c4a050;
+  --gold2: #dbbf72;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+  transition: background .4s, color .4s;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+button { cursor: none; background: none; border: none; font-family: inherit; }
+
+/* ── SECTION SHARED ── */
+.section { padding: 120px 64px; }
+@media (max-width: 900px) { .section { padding: 80px 24px; } }
+
+.s-label {
+  font-size: 8px; text-transform: uppercase; letter-spacing: .38em;
+  color: var(--gold); display: flex; align-items: center; gap: 14px;
+  margin-bottom: 56px; font-family: var(--font-mono);
+}
+.s-label::after { content:''; flex:1; height:1px; background:var(--border); max-width:80px; }
+
+/* ── KEYFRAMES ── */
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1) }
+  50%      { opacity:.4; transform:scale(.7) }
+}
+@keyframes grainAnim {
+  0%   { transform:translate(0,0) }
+  20%  { transform:translate(-12%,5%) }
+  40%  { transform:translate(5%,-20%) }
+  60%  { transform:translate(15%,3%) }
+  80%  { transform:translate(-8%,18%) }
+  100% { transform:translate(6%,-8%) }
+}
+@keyframes tickerMove { from { transform:translateX(0) } to { transform:translateX(-50%) } }
+@keyframes scrollDown { 0%{ top:-40%;opacity:1 } 100%{ top:140%;opacity:0 } }
+@keyframes ripple {
+  0%   { transform:scale(1); opacity:1 }
+  100% { transform:scale(1.6); opacity:0 }
+}
+@keyframes dotPulse {
+  0%,100% { box-shadow:0 0 0 0 rgba(184,151,58,.4) }
+  50%     { box-shadow:0 0 0 8px rgba(184,151,58,0) }
+}
+@keyframes glitch1 {
+  0%  { clip-path:inset(0 0 96% 0); transform:translateX(-4px) }
+  25% { clip-path:inset(30% 0 45% 0); transform:translateX(4px) }
+  50% { clip-path:inset(60% 0 15% 0); transform:translateX(-3px) }
+  75% { clip-path:inset(80% 0 5% 0); transform:translateX(3px) }
+  100%{ clip-path:inset(10% 0 75% 0); transform:translateX(0) }
+}
+@keyframes glitch2 {
+  0%  { clip-path:inset(50% 0 30% 0); transform:translateX(4px) }
+  33% { clip-path:inset(20% 0 60% 0); transform:translateX(-4px) }
+  66% { clip-path:inset(70% 0 5% 0); transform:translateX(3px) }
+  100%{ clip-path:inset(40% 0 40% 0); transform:translateX(0) }
+}
+@keyframes scanLine {
+  0%  { top:-10% }
+  100%{ top:110% }
+}
+@keyframes typewriter { from{ width:0 } to{ width:100% } }
+@keyframes blink { 0%,100%{ opacity:1 } 50%{ opacity:0 } }

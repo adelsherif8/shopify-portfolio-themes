@@ -1,0 +1,223 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Cinematic Portfolio",
+    "theme_version": "1.2.0",
+    "theme_author": "Your Name",
+    "theme_documentation_url": "https://help.shopify.com",
+    "theme_support_url": "https://help.shopify.com"
+  },
+  {
+    "name": "General",
+    "settings": [
+      {
+        "type": "text",
+        "id": "site_title",
+        "label": "Site title",
+        "default": "Your Name"
+      },
+      {
+        "type": "text",
+        "id": "preloader_text",
+        "label": "Preloader text",
+        "default": "Loading the frame..."
+      },
+      {
+        "type": "image_picker",
+        "id": "preloader_image",
+        "label": "Preloader image"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32 x 32px .png recommended"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading font",
+        "default": "playfair_display_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_mono",
+        "label": "Monospace font",
+        "default": "roboto_mono_n4"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_gold",
+        "label": "Gold accent",
+        "default": "#b8973a"
+      },
+      {
+        "type": "color",
+        "id": "color_gold2",
+        "label": "Gold accent 2",
+        "default": "#d4af6a"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_dark",
+        "label": "Background",
+        "default": "#040404"
+      },
+      {
+        "type": "color",
+        "id": "color_text_dark",
+        "label": "Text",
+        "default": "#e0d8c8"
+      }
+    ]
+  },
+  {
+    "name": "Colors — day mode",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_gold_day",
+        "label": "Gold accent",
+        "default": "#8a6d1c"
+      },
+      {
+        "type": "color",
+        "id": "color_gold2_day",
+        "label": "Gold accent 2",
+        "default": "#a07820"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_day",
+        "label": "Background",
+        "default": "#f2ece0"
+      },
+      {
+        "type": "color",
+        "id": "color_text_day",
+        "label": "Text",
+        "default": "#140e04"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_vimeo",
+        "label": "Vimeo"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter",
+        "label": "X (Twitter)"
+      },
+      {
+        "type": "url",
+        "id": "social_imdb",
+        "label": "IMDb"
+      },
+      {
+        "type": "url",
+        "id": "social_linkedin",
+        "label": "LinkedIn"
+      }
+    ]
+  },
+  {
+    "name": "Social sharing",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "og_image",
+        "label": "Social sharing image",
+        "info": "Recommended: 1200 x 630px. Shown when your link is shared on social media."
+      }
+    ]
+  },
+  {
+    "name": "Features",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_grain",
+        "label": "Show grain overlay",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_cursor",
+        "label": "Show custom cursor",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_letterbox",
+        "label": "Show cinematic letterbox",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_preloader",
+        "label": "Show preloader animation",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Cookie consent",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_cookies",
+        "label": "Show cookie consent banner",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cookie_text",
+        "label": "Cookie message",
+        "default": "This site uses cookies to ensure you get the best experience."
+      },
+      {
+        "type": "text",
+        "id": "cookie_accept_label",
+        "label": "Accept button label",
+        "default": "Accept"
+      },
+      {
+        "type": "text",
+        "id": "cookie_decline_label",
+        "label": "Decline button label",
+        "default": "Decline"
+      }
+    ]
+  }
+]

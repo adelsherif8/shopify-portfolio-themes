@@ -1,0 +1,35 @@
+.films { background:var(--black); padding:120px 0 120px 64px; overflow:hidden; }
+.header { padding-right:64px; }
+.intro  { font-size:14px; color:var(--dim); line-height:1.9; max-width:480px; margin-bottom:52px; }
+.slider { display:flex; gap:2px; overflow-x:scroll; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; cursor:grab; padding-right:64px; }
+.slider::-webkit-scrollbar { display:none; }
+.slider.dragging { cursor:grabbing; user-select:none; }
+.card { min-width:65vw; height:72vh; scroll-snap-align:start; flex-shrink:0; position:relative; overflow:hidden; border:1px solid var(--border); transition:border-color .5s; }
+.card:hover { border-color:rgba(184,151,58,.35); }
+.cardImg { position:absolute; inset:-4%; width:108%; height:108%; object-fit:cover; transition:transform .6s; }
+.card:hover .cardImg { transform:scale(1.03); }
+.cardBg { position:absolute; inset:0; background:linear-gradient(160deg,rgba(15,8,0,.75),rgba(4,4,4,.5)); }
+.cardOverlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(4,4,4,.92) 0%,rgba(4,4,4,.1) 50%,transparent 100%); }
+.scanlines { position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 3px); pointer-events:none; }
+.corner { position:absolute; border-color:rgba(184,151,58,.2); border-style:solid; }
+.c_tl { top:22px; left:22px; width:18px; height:18px; border-width:1px 0 0 1px; }
+.c_tr { top:22px; right:22px; width:18px; height:18px; border-width:1px 1px 0 0; }
+.c_bl { bottom:22px; left:22px; width:18px; height:18px; border-width:0 0 1px 1px; }
+.c_br { bottom:22px; right:22px; width:18px; height:18px; border-width:0 1px 1px 0; }
+.cardNum { position:absolute; top:28px; left:32px; font-family:var(--font-mono); font-size:9px; color:rgba(255,255,255,.18); letter-spacing:.15em; }
+.cardInfo { position:absolute; bottom:0; left:0; right:0; padding:34px 36px 40px; }
+.cardTags { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; align-items:center; }
+.tag  { font-size:7.5px; text-transform:uppercase; letter-spacing:.18em; color:var(--gold); border:1px solid rgba(184,151,58,.25); padding:3px 9px; }
+.role { font-size:8px; text-transform:uppercase; letter-spacing:.12em; color:rgba(255,255,255,.28); }
+.cardTitle { font-family:var(--font-serif); font-size:clamp(26px,3.5vw,44px); font-weight:300; color:var(--text); line-height:1.1; transition:color .3s; margin-bottom:4px; }
+.card:hover .cardTitle { color:var(--gold2); }
+.cardArabic { font-family:var(--font-serif); font-size:16px; color:rgba(184,151,58,.45); margin-bottom:10px; direction:rtl; }
+.logline { font-size:12px; line-height:1.75; color:rgba(255,255,255,.55); max-width:480px; font-style:italic; margin-bottom:12px; border-left:2px solid rgba(184,151,58,.3); padding-left:12px; }
+.cardSub { font-size:11px; color:rgba(255,255,255,.22); margin-bottom:12px; }
+.cardDesc { font-size:12px; line-height:1.75; color:rgba(255,255,255,.38); max-width:480px; max-height:0; overflow:hidden; transition:max-height .5s ease; }
+.card:hover .cardDesc { max-height:100px; }
+.cardLine { position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,var(--gold),var(--gold2)); transform:scaleX(0); transform-origin:left; transition:transform .5s; }
+.card:hover .cardLine { transform:scaleX(1); }
+.hint { margin-top:28px; font-size:9px; text-transform:uppercase; letter-spacing:.25em; color:rgba(255,255,255,.15); display:flex; align-items:center; gap:12px; padding-right:64px; }
+.hint svg { width:28px; height:14px; color:rgba(255,255,255,.2); }
+@media (max-width:900px) { .films{padding-left:24px} .card{min-width:88vw} }

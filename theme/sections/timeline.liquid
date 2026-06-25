@@ -1,0 +1,115 @@
+<section id="timeline" class="section" data-section-num="010">
+  <div class="s-label reveal">{{ section.settings.label | default: '09 — Career Timeline' }}</div>
+  <h2 class="timeline-heading reveal">
+    {{ section.settings.heading_1 | default: 'The ' }}<em>{{ section.settings.heading_2 | default: 'journey' }}</em>{{ section.settings.heading_3 | default: ' so far.' }}
+  </h2>
+
+  <div class="timeline-list">
+    {% for block in section.blocks %}
+      {% if block.type == 'event' %}
+        <div class="timeline-item reveal" style="transition-delay: {{ forloop.index0 | times: 0.07 }}s;" {{ block.shopify_attributes }}>
+          <div class="timeline-left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">{{ block.settings.year | default: '—' }}</div>
+          </div>
+          <div class="timeline-right">
+            <div class="timeline-event"
+                 data-i18n-en="{{ block.settings.event }}"
+                 data-i18n-ar="{{ block.settings.event_ar }}">
+              {{ block.settings.event }}
+            </div>
+            <div class="timeline-desc"
+                 data-i18n-en="{{ block.settings.description }}"
+                 data-i18n-ar="{{ block.settings.description_ar }}">
+              {{ block.settings.description }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Timeline",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "09 — Career Timeline"
+    },
+    {
+      "type": "text",
+      "id": "heading_1",
+      "label": "Heading part 1",
+      "default": "The "
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Heading part 2 (italic gold)",
+      "default": "journey"
+    },
+    {
+      "type": "text",
+      "id": "heading_3",
+      "label": "Heading part 3",
+      "default": " so far."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "event",
+      "name": "Timeline event",
+      "settings": [
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "—"
+        },
+        {
+          "type": "text",
+          "id": "event",
+          "label": "Event title (EN)",
+          "default": "Event Title"
+        },
+        {
+          "type": "text",
+          "id": "event_ar",
+          "label": "Event title (AR)"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description (EN)",
+          "default": "A brief description of this milestone."
+        },
+        {
+          "type": "textarea",
+          "id": "description_ar",
+          "label": "Description (AR)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Timeline",
+      "blocks": [
+        { "type": "event", "settings": { "year": "—",   "event": "Enrolled at BUE",    "event_ar": "التحاق بـ BUE",       "description": "Began BSc in Media & Mass Communication, Filmmaking Track." } },
+        { "type": "event", "settings": { "year": "—",   "event": "Filmmaking Level 1", "event_ar": "دبلوم المستوى الأول", "description": "Completed Filmmaking Level 1 at We Can Film School." } },
+        { "type": "event", "settings": { "year": "—",   "event": "Full Diploma",       "event_ar": "دبلوم كامل",          "description": "Completed Full Filmmaking Diploma at We Can Film School." } },
+        { "type": "event", "settings": { "year": "—",   "event": "Documentary Sound",  "event_ar": "تسجيل صوت وثائقي",   "description": "Joined as Sound Recordist on documentary film production." } },
+        { "type": "event", "settings": { "year": "—",   "event": "Qahwet El Mayteen",  "event_ar": "قهوة الميتين",        "description": "Authored original screenplay for graduation short film." } },
+        { "type": "event", "settings": { "year": "—",   "event": "Placid Campaign",    "event_ar": "حملة Placid",         "description": "Led full creative direction for Placid Essentials flagship brand campaign." } },
+        { "type": "event", "settings": { "year": "—",   "event": "BUE Graduation",     "event_ar": "التخرج من BUE",       "description": "Received BSc in Media & Mass Communication." } },
+        { "type": "event", "settings": { "year": "Now", "event": "Arab Film School",   "event_ar": "مدرسة الفيلم العربي", "description": "Full Filmmaking Diploma — currently in progress." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

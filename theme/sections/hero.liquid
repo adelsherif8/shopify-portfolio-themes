@@ -1,0 +1,146 @@
+<section id="section-hero" class="hero" data-section-num="001">
+  <canvas id="hero-canvas" class="hero-canvas"></canvas>
+  <div id="hero-spotlight" class="hero-spotlight"></div>
+  <div class="hero-vline"></div>
+
+  <div class="hero-fc hero-fc-tl"></div>
+  <div class="hero-fc hero-fc-tr"></div>
+  <div class="hero-fc hero-fc-bl"></div>
+  <div class="hero-fc hero-fc-br"></div>
+
+  <div class="hero-meta-right">
+    <div class="hero-meta-num">001</div>
+    <span class="hero-meta-tag" data-i18n-en="Scene One" data-i18n-ar="المشهد الأول">{{ section.settings.meta_tag | default: 'Scene One' }}</span>
+  </div>
+
+  <div class="hero-content" id="hero-content">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      <span class="hero-eyebrow-text" data-i18n-en="{{ section.settings.eyebrow }}" data-i18n-ar="{{ section.settings.eyebrow_ar }}">
+        {{ section.settings.eyebrow | default: 'Filmmaker · Scriptwriter · Creative Director' }}
+      </span>
+    </div>
+
+    <h1 class="hero-name" id="hero-name" data-text="{{ section.settings.name_line1 | default: 'Omar' }} {{ section.settings.name_line2 | default: 'Emad El Din' }}">
+      <span class="hero-name-line">
+        <span>{{ section.settings.name_line1 | default: 'Omar' }}</span>
+      </span>
+      <span class="hero-name-line italic">
+        <span>{{ section.settings.name_line2 | default: 'Emad El Din' }}</span>
+      </span>
+    </h1>
+
+    <p class="hero-tagline" data-i18n-en="{{ section.settings.tagline }}" data-i18n-ar="{{ section.settings.tagline_ar }}">
+      {{ section.settings.tagline | default: 'Visual stories told with intention — from the written word to the final frame. Cairo-based filmmaker crafting cinema that feels, breathes, and endures.' }}
+    </p>
+
+    <div class="hero-chips">
+      {% for block in section.blocks %}
+        {% if block.type == 'chip' %}
+          <span class="hero-chip hoverable" {{ block.shopify_attributes }}>{{ block.settings.label }}</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.cv_file != blank %}
+      <div class="hero-cv-wrap">
+        <a href="{{ section.settings.cv_file }}" download class="hero-cv-btn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          {{ section.settings.cv_label | default: 'Download CV' }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-track"><div class="hero-scroll-thumb"></div></div>
+    <span class="hero-scroll-lbl" data-i18n="hero-scroll">Scroll</span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "name_line1",
+      "label": "Name — line 1",
+      "default": "Omar"
+    },
+    {
+      "type": "text",
+      "id": "name_line2",
+      "label": "Name — line 2 (italic)",
+      "default": "Emad El Din"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text (EN)",
+      "default": "Filmmaker · Scriptwriter · Creative Director"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_ar",
+      "label": "Eyebrow text (AR)",
+      "default": "مخرج · كاتب سيناريو · مدير إبداعي"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline (EN)",
+      "default": "Visual stories told with intention — from the written word to the final frame. Cairo-based filmmaker crafting cinema that feels, breathes, and endures."
+    },
+    {
+      "type": "textarea",
+      "id": "tagline_ar",
+      "label": "Tagline (AR)",
+      "default": "قصص بصرية بنية واضحة — من الكلمة المكتوبة إلى اللقطة الأخيرة."
+    },
+    {
+      "type": "text",
+      "id": "meta_tag",
+      "label": "Side meta label",
+      "default": "Scene One"
+    },
+    {
+      "type": "url",
+      "id": "cv_file",
+      "label": "CV / Resume file URL (upload to Files, paste URL here)"
+    },
+    {
+      "type": "text",
+      "id": "cv_label",
+      "label": "CV button label",
+      "default": "Download CV"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "chip",
+      "name": "Skill chip",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Chip label",
+          "default": "Scriptwriter"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        { "type": "chip", "settings": { "label": "Scriptwriter" } },
+        { "type": "chip", "settings": { "label": "Film Director" } },
+        { "type": "chip", "settings": { "label": "Sound Recordist" } },
+        { "type": "chip", "settings": { "label": "Creative Director" } },
+        { "type": "chip", "settings": { "label": "Cairo, Egypt" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

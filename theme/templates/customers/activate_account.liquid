@@ -1,0 +1,33 @@
+{% layout 'theme' %}
+
+<div class="auth-page section">
+  <div class="auth-wrap">
+    <div class="auth-num">Activate Account</div>
+    <h1 class="auth-heading">
+      Set your<br><em>password.</em>
+    </h1>
+    <p class="auth-sub">Create a password to activate your account and start ordering.</p>
+
+    {% form 'activate_customer_password' %}
+      {% if form.errors %}
+        <div class="auth-errors">
+          {{ form.errors | default_errors }}
+        </div>
+      {% endif %}
+
+      <div class="auth-form">
+        <div class="auth-form-group">
+          <label class="auth-label" for="activate-password">Password</label>
+          <input id="activate-password" class="auth-input" type="password"
+                 name="customer[password]" autocomplete="new-password" required>
+        </div>
+        <div class="auth-form-group">
+          <label class="auth-label" for="activate-password-confirm">Confirm password</label>
+          <input id="activate-password-confirm" class="auth-input" type="password"
+                 name="customer[password_confirmation]" autocomplete="new-password" required>
+        </div>
+        <button type="submit" class="auth-submit">Activate account</button>
+      </div>
+    {% endform %}
+  </div>
+</div>

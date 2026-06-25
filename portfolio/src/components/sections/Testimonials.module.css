@@ -1,0 +1,13 @@
+.wrap  { background:var(--dark); border-top:1px solid var(--border); padding:0; }
+.inner { max-width:800px; margin:0 auto; padding:80px 40px; text-align:center; }
+.label { font-family:var(--font-mono); font-size:8px; text-transform:uppercase; letter-spacing:.3em; color:var(--gold); margin-bottom:32px; }
+.screen { background:#000; border:1px solid var(--border2); position:relative; padding:56px 48px 40px; overflow:hidden; }
+.scanlines { position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.012) 2px,rgba(255,255,255,.012) 3px); pointer-events:none; }
+.subtitle { position:relative; z-index:1; }
+.text  { font-family:var(--font-serif); font-size:clamp(18px,2.5vw,26px); font-style:italic; line-height:1.55; color:rgba(255,255,255,.78); margin-bottom:28px; }
+.attribution { display:flex; flex-direction:column; gap:4px; align-items:center; }
+.name  { font-size:11px; text-transform:uppercase; letter-spacing:.2em; color:var(--gold); }
+.role  { font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); }
+.dots  { display:flex; gap:8px; justify-content:center; margin-top:28px; }
+.dot   { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.15); border:none; transition:background .3s; }
+.dotActive { background:var(--gold); }

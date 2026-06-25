@@ -1,0 +1,498 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "name_line1": "Omar",
+        "name_line2": "Emad El Din",
+        "eyebrow": "Filmmaker · Scriptwriter · Creative Director",
+        "eyebrow_ar": "مخرج · كاتب سيناريو · مدير إبداعي",
+        "tagline": "Visual stories told with intention — from the written word to the final frame. Cairo-based filmmaker crafting cinema that feels, breathes, and endures.",
+        "tagline_ar": "قصص بصرية بنية واضحة — من الكلمة المكتوبة إلى اللقطة الأخيرة.",
+        "meta_tag": "Scene One"
+      },
+      "blocks": {
+        "chip-1": { "type": "chip", "settings": { "label": "Scriptwriter" } },
+        "chip-2": { "type": "chip", "settings": { "label": "Film Director" } },
+        "chip-3": { "type": "chip", "settings": { "label": "Sound Recordist" } },
+        "chip-4": { "type": "chip", "settings": { "label": "Creative Director" } },
+        "chip-5": { "type": "chip", "settings": { "label": "Cairo, Egypt" } }
+      },
+      "block_order": ["chip-1", "chip-2", "chip-3", "chip-4", "chip-5"]
+    },
+    "filmstrip-1": {
+      "type": "filmstrip-section",
+      "settings": { "label": "35mm · CINEMATIC PORTFOLIO" }
+    },
+    "ticker": {
+      "type": "ticker-section",
+      "settings": {
+        "items": "Scriptwriter,Film Production,Sound Design,Creative Direction,Visual Storytelling,Story Development,Cairo Egypt,قهوة الميتين"
+      }
+    },
+    "about": {
+      "type": "about",
+      "settings": {
+        "label": "About",
+        "name": "Omar Emad El Din",
+        "img_tag": "Director · Cairo",
+        "img_tag_ar": "مخرج · القاهرة",
+        "heading_line1": "Cinema is how I",
+        "heading_line2": "understand the world.",
+        "stat_labels": "Film Productions|Diplomas & Courses|Campaign Directed|Stories to Tell",
+        "stat_values": "3|3|1|0",
+        "stat_suffixes": "+|||"
+      },
+      "blocks": {
+        "bio-1": {
+          "type": "bio_paragraph",
+          "settings": {
+            "text": "<p>A filmmaking graduate from the <strong>British University in Egypt</strong>, Omar Emad El Din has spent years developing a voice rooted in authentic human experience — stories drawn from culture, memory, and the quiet tensions of everyday life.</p>"
+          }
+        },
+        "bio-2": {
+          "type": "bio_paragraph",
+          "settings": {
+            "text": "<p>From writing the graduation film <em>Qahwet El Mayteen</em> to directing brand campaigns and recording on documentary sets, Omar works at every layer of the filmmaking process with precision and deep passion.</p>"
+          }
+        }
+      },
+      "block_order": ["bio-1", "bio-2"]
+    },
+    "reel": {
+      "type": "reel",
+      "settings": {
+        "eyebrow": "Cairo · Egypt",
+        "title_prefix": "The ",
+        "title_main": "Showreel",
+        "play_label": "Play Showreel",
+        "reel_year": "2024 REEL",
+        "close_label": "Close ✕",
+        "youtube_id": "YOUR_VIDEO_ID"
+      }
+    },
+    "films": {
+      "type": "films",
+      "settings": {
+        "label": "02 — Films & Projects",
+        "intro": "Drag through a body of work spanning narrative short film, documentary production, and brand storytelling.",
+        "drag_hint": "Drag to explore"
+      },
+      "blocks": {
+        "film-1": {
+          "type": "film",
+          "settings": {
+            "scene_num": "SCENE 001 · TAKE 01 · ROLL A",
+            "title": "Qahwet El Mayteen",
+            "arabic_title": "قهوة الميتين",
+            "subtitle": "The Coffee of the Dead",
+            "role": "Scriptwriter",
+            "tags": "Short Film, Graduation",
+            "logline": "A grieving father keeps a nightly table at a Cairo coffeehouse for a son who stopped coming — and cannot bring himself to stop waiting.",
+            "description": "An original screenplay rooted in Egyptian folklore — a dark, claustrophobic narrative balancing tragedy with black humour, developed for the BUE graduation film.",
+            "icon": "screenplay"
+          }
+        },
+        "film-2": {
+          "type": "film",
+          "settings": {
+            "scene_num": "SCENE 002 · TAKE 03 · ROLL B",
+            "title": "Documentary Film",
+            "arabic_title": "",
+            "subtitle": "Untitled Documentary Production",
+            "role": "Sound Recordist",
+            "tags": "Documentary, On-Set",
+            "logline": "On-set audio capture across demanding locations — delivering broadcast-quality dialogue and ambient sound with real-time monitoring throughout production.",
+            "description": "Operated boom and field recording equipment, capturing broadcast-quality sound. Real-time level monitoring adapting to changing on-location acoustics.",
+            "icon": "sound"
+          }
+        },
+        "film-3": {
+          "type": "film",
+          "settings": {
+            "scene_num": "SCENE 003 · TAKE 01 · ROLL A",
+            "title": "Placid Disruption",
+            "arabic_title": "",
+            "subtitle": "Placid Essentials — Brand Campaign",
+            "role": "Creative Director",
+            "tags": "Brand Film, Commercial",
+            "logline": "A scent brand reimagined as cinema — controlled stillness as the ultimate disruption.",
+            "description": "Conceptualized and directed the full creative vision for Placid Essentials flagship campaign — visual identity, storytelling concept, and tonal language from brief to final cut.",
+            "icon": "creative"
+          }
+        }
+      },
+      "block_order": ["film-1", "film-2", "film-3"]
+    },
+    "process": {
+      "type": "process",
+      "settings": {
+        "label": "04 — The Process",
+        "heading_prefix": "How a film ",
+        "heading_em": "comes to life."
+      },
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "icon": "pen",
+            "title": "The Script",
+            "title_ar": "السيناريو",
+            "description": "Every frame begins as a word. Character, conflict, and world are built on the page — where story logic, emotional truth, and visual possibility are tested before a single camera rolls.",
+            "description_ar": "كل لقطة تبدأ بكلمة. الشخصية والصراع والعالم تُبنى على الورق."
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "icon": "camera",
+            "title": "Production",
+            "title_ar": "التصوير",
+            "description": "On set, every department decision is a storytelling decision. From sound placement to actor blocking, the director's job is to translate the written word into something the camera can feel.",
+            "description_ar": "في موقع التصوير، كل قرار من أي قسم هو قرار سردي."
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "icon": "film",
+            "title": "The Cut",
+            "title_ar": "المونتاج",
+            "description": "The final story is found in the edit. Pacing, rhythm, and silence are the tools. What survives the cut is what the film actually says.",
+            "description_ar": "القصة الأخيرة تُكتشف في المونتاج. الإيقاع والصمت والتوقيت هي الأدوات."
+          }
+        }
+      },
+      "block_order": ["step-1", "step-2", "step-3"]
+    },
+    "filmstrip-2": {
+      "type": "filmstrip-section",
+      "settings": { "label": "35mm · CINEMATIC PORTFOLIO" }
+    },
+    "gallery": {
+      "type": "gallery",
+      "settings": {
+        "label": "05 — From the Set",
+        "heading_prefix": "Behind the ",
+        "heading_em": "camera."
+      },
+      "blocks": {
+        "gal-1": { "type": "item", "settings": { "title": "قهوة الميتين",        "tag": "Short Film · Scriptwriting" } },
+        "gal-2": { "type": "item", "settings": { "title": "On the Page",          "tag": "Qahwet El Mayteen · Development" } },
+        "gal-3": { "type": "item", "settings": { "title": "Documentary · Field",  "tag": "Sound Recording · On-Location" } },
+        "gal-4": { "type": "item", "settings": { "title": "Boom in the Room",     "tag": "Documentary · Audio Capture" } },
+        "gal-5": { "type": "item", "settings": { "title": "Placid Disruption",    "tag": "Placid Essentials · Campaign" } },
+        "gal-6": { "type": "item", "settings": { "title": "Creative Direction",   "tag": "Placid Essentials · Visual Identity" } }
+      },
+      "block_order": ["gal-1", "gal-2", "gal-3", "gal-4", "gal-5", "gal-6"]
+    },
+    "influences": {
+      "type": "influences",
+      "settings": {
+        "label": "06 — Influences",
+        "heading_prefix": "The films that ",
+        "heading_em": "shaped the eye.",
+        "dir_label": "dir."
+      },
+      "blocks": {
+        "inf-1": { "type": "film", "settings": { "title": "Add Film Title", "year": "—", "director": "Director Name", "quote": "What this film means to your work as a filmmaker.", "bg_gradient": "linear-gradient(135deg,#0a0400 0%,#1a0800 100%)" } },
+        "inf-2": { "type": "film", "settings": { "title": "Add Film Title", "year": "—", "director": "Director Name", "quote": "What this film means to your work as a filmmaker.", "bg_gradient": "linear-gradient(135deg,#000a04 0%,#001a08 100%)" } },
+        "inf-3": { "type": "film", "settings": { "title": "Add Film Title", "year": "—", "director": "Director Name", "quote": "What this film means to your work as a filmmaker.", "bg_gradient": "linear-gradient(135deg,#050500 0%,#0f0e00 100%)" } },
+        "inf-4": { "type": "film", "settings": { "title": "Add Film Title", "year": "—", "director": "Director Name", "quote": "What this film means to your work as a filmmaker.", "bg_gradient": "linear-gradient(135deg,#04040a 0%,#08081a 100%)" } }
+      },
+      "block_order": ["inf-1", "inf-2", "inf-3", "inf-4"]
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": { "label": "Words from the set" },
+      "blocks": {
+        "test-1": { "type": "testimonial", "settings": { "quote": "Add a quote from a collaborator, director, or client you have worked with.", "name": "Collaborator Name", "role": "Their Role" } },
+        "test-2": { "type": "testimonial", "settings": { "quote": "Add a quote from a collaborator, director, or client you have worked with.", "name": "Collaborator Name", "role": "Their Role" } },
+        "test-3": { "type": "testimonial", "settings": { "quote": "Add a quote from a collaborator, director, or client you have worked with.", "name": "Collaborator Name", "role": "Their Role" } }
+      },
+      "block_order": ["test-1", "test-2", "test-3"]
+    },
+    "craft": {
+      "type": "craft",
+      "settings": {
+        "label": "08 — Craft",
+        "heading_1": "Behind",
+        "heading_2": "the ",
+        "heading_3": "Lens",
+        "description": "Every discipline in service of the story. The tools are secondary to the intent behind them."
+      },
+      "blocks": {
+        "frame-1": { "type": "frame", "settings": { "icon": "camera", "label": "Directing",       "title": "The eye behind the frame" } },
+        "frame-2": { "type": "frame", "settings": { "icon": "pen",    "label": "Screenwriting",   "title": "Where every story begins" } },
+        "frame-3": { "type": "frame", "settings": { "icon": "mic",    "label": "Sound Recording", "title": "Capturing the invisible" } },
+        "skill-1": { "type": "skill", "settings": { "name": "Script Writing",      "sub": "Structure · Dialogue · Arc" } },
+        "skill-2": { "type": "skill", "settings": { "name": "Film Production",     "sub": "Pre · Shoot · Post" } },
+        "skill-3": { "type": "skill", "settings": { "name": "Sound Recording",     "sub": "Field · Boom · Location" } },
+        "skill-4": { "type": "skill", "settings": { "name": "Creative Direction",  "sub": "Vision · Identity · Campaign" } },
+        "skill-5": { "type": "skill", "settings": { "name": "Visual Storytelling", "sub": "Frame · Light · Composition" } },
+        "skill-6": { "type": "skill", "settings": { "name": "Set Collaboration",   "sub": "Crew · Communication · Flow" } },
+        "skill-7": { "type": "skill", "settings": { "name": "Story Development",   "sub": "Concept · Theme · Narrative" } },
+        "skill-8": { "type": "skill", "settings": { "name": "Directing",           "sub": "Cast · Frame · Emotion" } }
+      },
+      "block_order": ["frame-1", "frame-2", "frame-3", "skill-1", "skill-2", "skill-3", "skill-4", "skill-5", "skill-6", "skill-7", "skill-8"]
+    },
+    "timeline": {
+      "type": "timeline",
+      "settings": {
+        "label": "09 — Career Timeline",
+        "heading_1": "The ",
+        "heading_2": "journey",
+        "heading_3": " so far."
+      },
+      "blocks": {
+        "ev-1": { "type": "event", "settings": { "year": "—",   "event": "Enrolled at BUE",    "event_ar": "التحاق بـ BUE",          "description": "Began BSc in Media & Mass Communication, Filmmaking Track — British University in Egypt.", "description_ar": "بداية دراسة بكالوريوس الإعلام وصناعة الأفلام في الجامعة البريطانية بمصر." } },
+        "ev-2": { "type": "event", "settings": { "year": "—",   "event": "Filmmaking Level 1", "event_ar": "دبلوم المستوى الأول",    "description": "Completed Filmmaking Level 1 at We Can Film School.", "description_ar": "إتمام دبلوم المستوى الأول في صناعة الأفلام." } },
+        "ev-3": { "type": "event", "settings": { "year": "—",   "event": "Full Diploma",       "event_ar": "دبلوم كامل",             "description": "Completed Full Filmmaking Diploma at We Can Film School.", "description_ar": "إتمام الدبلوم الكامل في صناعة الأفلام." } },
+        "ev-4": { "type": "event", "settings": { "year": "—",   "event": "Documentary Sound",  "event_ar": "تسجيل صوت وثائقي",       "description": "Joined as Sound Recordist on documentary film production.", "description_ar": "الانضمام كمسجل صوت في إنتاج فيلم وثائقي." } },
+        "ev-5": { "type": "event", "settings": { "year": "—",   "event": "Qahwet El Mayteen",  "event_ar": "قهوة الميتين",            "description": "Authored original screenplay for graduation short film — dark Egyptian folklore narrative.", "description_ar": "كتابة سيناريو فيلم التخرج القصير." } },
+        "ev-6": { "type": "event", "settings": { "year": "—",   "event": "Placid Campaign",    "event_ar": "حملة Placid",             "description": "Led full creative direction for Placid Essentials flagship brand campaign.", "description_ar": "الإشراف على الإخراج الإبداعي الكامل لحملة Placid Essentials." } },
+        "ev-7": { "type": "event", "settings": { "year": "—",   "event": "BUE Graduation",     "event_ar": "التخرج من BUE",           "description": "Received BSc in Media & Mass Communication — Filmmaking Track.", "description_ar": "التخرج بدرجة البكالوريوس في الإعلام وصناعة الأفلام." } },
+        "ev-8": { "type": "event", "settings": { "year": "Now", "event": "Arab Film School",   "event_ar": "مدرسة الفيلم العربي",     "description": "Full Filmmaking Diploma — currently in progress.", "description_ar": "الدبلوم الكامل في صناعة الأفلام — جارٍ حالياً." } }
+      },
+      "block_order": ["ev-1", "ev-2", "ev-3", "ev-4", "ev-5", "ev-6", "ev-7", "ev-8"]
+    },
+    "training": {
+      "type": "training",
+      "settings": {
+        "label": "10 — Training & Education",
+        "heading_prefix": "The making of a ",
+        "heading_em": "filmmaker.",
+        "status_active": "In Progress",
+        "status_done": "Completed",
+        "status_grad": "Graduated"
+      },
+      "blocks": {
+        "tr-1": { "type": "program", "settings": { "school": "Arab Film School",            "program": "Full Filmmaking Diploma",                           "status": "In Progress", "active": true } },
+        "tr-2": { "type": "program", "settings": { "school": "We Can Film School",          "program": "Full Filmmaking Diploma",                           "status": "Completed",   "active": false } },
+        "tr-3": { "type": "program", "settings": { "school": "We Can Film School",          "program": "Filmmaking Level 1",                                "status": "Completed",   "active": false } },
+        "tr-4": { "type": "program", "settings": { "school": "British University in Egypt", "program": "BSc Media & Mass Communication — Filmmaking Track", "status": "Graduated",   "active": false } }
+      },
+      "block_order": ["tr-1", "tr-2", "tr-3", "tr-4"]
+    },
+    "breakdown": {
+      "type": "breakdown",
+      "settings": {
+        "label": "11 — Script Analysis",
+        "film_title": "Qahwet El Mayteen",
+        "film_arabic": "قهوة الميتين",
+        "subtitle": "Scene Analysis — Act I, Scene 1",
+        "writer_note_label": "Writer's Notes",
+        "hint": "Click a note or a highlighted line to expand."
+      },
+      "blocks": {
+        "sl-1":  { "type": "script_line", "settings": { "line_type": "slug",          "text": "INT. QAHWA — LATE NIGHT" } },
+        "sl-2":  { "type": "script_line", "settings": { "line_type": "action",        "text": "The room is almost empty. One table is lit. IBRAHIM, 60s, sits with the stillness of someone who has been here many times before. Two cups of coffee on the table. One untouched, perfectly placed." } },
+        "sl-3":  { "type": "script_line", "settings": { "line_type": "action",        "text": "A YOUNG WAITER watches from across the room." } },
+        "sl-4":  { "type": "script_line", "settings": { "line_type": "character",     "text": "WAITER" } },
+        "sl-5":  { "type": "script_line", "settings": { "line_type": "parenthetical", "text": "(carefully)" } },
+        "sl-6":  { "type": "script_line", "settings": { "line_type": "dialogue",      "text": "Uncle Ibrahim... the kitchen is closing." } },
+        "sl-7":  { "type": "script_line", "settings": { "line_type": "action",        "text": "Ibrahim wraps both hands around his cup without looking up." } },
+        "sl-8":  { "type": "script_line", "settings": { "line_type": "character",     "text": "IBRAHIM" } },
+        "sl-9":  { "type": "script_line", "settings": { "line_type": "dialogue",      "text": "He's on his way." } },
+        "sl-10": { "type": "script_line", "settings": { "line_type": "action",        "text": "The waiter looks at the empty chair. Then at Ibrahim. He says nothing. He walks back." } },
+        "an-1":  { "type": "annotation", "settings": { "anchor": "Two cups of coffee. One untouched, perfectly placed.", "note": "The film's central tension is embedded in staging, not dialogue. Before a word is spoken, the audience understands: someone is absent but expected. The perfectly placed detail signals ritual — this is not the first night." } },
+        "an-2":  { "type": "annotation", "settings": { "anchor": "He's on his way.",  "note": "Three words carry the entire dramatic question: Is Ibrahim delusional? Loyal? In denial? The ambiguity is the engine. The film refuses to answer this until it must." } },
+        "an-3":  { "type": "annotation", "settings": { "anchor": "He says nothing. He walks back.", "note": "The waiter's silence is a structural choice, not absence of dialogue. A lesser draft had him offer condolences. This version trusts that what the waiter does not say is more powerful than any spoken comfort." } }
+      },
+      "block_order": ["sl-1","sl-2","sl-3","sl-4","sl-5","sl-6","sl-7","sl-8","sl-9","sl-10","an-1","an-2","an-3"]
+    },
+    "press": {
+      "type": "press",
+      "settings": {
+        "label": "12 — Screenings & Work",
+        "heading_line1": "Where the work",
+        "heading_line2": "has been seen."
+      },
+      "blocks": {
+        "pr-1": { "type": "item", "settings": { "icon": "film",    "type": "Graduation Screening", "venue": "British University in Egypt", "project": "Qahwet El Mayteen — قهوة الميتين", "year": "—", "note": "Official graduation short film screening, BUE Faculty of Arts & Sciences, Media & Mass Communication.", "placeholder": false } },
+        "pr-2": { "type": "item", "settings": { "icon": "brand",   "type": "Brand Release",        "venue": "Placid Essentials",           "project": "Placid Disruption Campaign",          "year": "—", "note": "Full campaign launched across Placid Essentials brand platforms.", "placeholder": false } },
+        "pr-3": { "type": "item", "settings": { "icon": "press",   "type": "Placeholder",          "venue": "Add Festival or Press",        "project": "—",                                   "year": "—", "note": "Replace this with real festival selections, press features, or screening events.", "placeholder": true } }
+      },
+      "block_order": ["pr-1", "pr-2", "pr-3"]
+    },
+    "next-project": {
+      "type": "next-project",
+      "settings": {
+        "label": "13 — Next Project",
+        "stamp": "CLASSIFIED",
+        "file_ref": "FILE REF: OEE-2025-001",
+        "title_fragment": "— A Story of ",
+        "status": "In Development",
+        "format": "Short Film",
+        "role": "Writer · Director",
+        "description": "A new original work currently in development. Details withheld pending production. Expression of interest and collaboration enquiries welcome.",
+        "cta_label": "Express Interest",
+        "key_status": "STATUS",
+        "key_format": "FORMAT",
+        "key_genre": "GENRE",
+        "key_role": "ROLE"
+      }
+    },
+    "contact": {
+      "type": "contact",
+      "settings": {
+        "label": "14 — Contact",
+        "availability_badge": "Available for Projects",
+        "heading_1": "Let's make",
+        "heading_2": "something",
+        "heading_3": "real.",
+        "sub_text": "Available for film projects, creative direction, and collaborative storytelling. Cairo-based, globally minded.",
+        "email": "hello@yourname.com",
+        "cta_label": "Get in touch",
+        "show_form": true,
+        "label_name": "Name",
+        "label_email": "Email",
+        "label_project": "Project type",
+        "label_message": "Message",
+        "placeholder_name": "Your name",
+        "placeholder_email": "your@email.com",
+        "placeholder_message": "Tell me about your project...",
+        "project_types": "Short Film,Documentary,Brand Campaign,Creative Direction,Sound Recording,Other",
+        "submit_label": "Send Message",
+        "success_message": "Message sent. I'll be in touch.",
+        "location": "Cairo, Egypt",
+        "location_sub": "Available Worldwide"
+      }
+    },
+    "showreel": {
+      "type": "showreel",
+      "settings": {
+        "label": "15 — Video Work",
+        "heading": "A body of",
+        "heading_em": "moving work.",
+        "sub": "Selected video projects — click to watch."
+      },
+      "blocks": {
+        "vid-1": { "type": "video", "settings": { "platform": "youtube", "video_id": "dQw4w9WgXcQ", "title": "Add Your Film Title", "tag": "Short Film", "year": "2024" } }
+      },
+      "block_order": ["vid-1"]
+    },
+    "collaborators": {
+      "type": "collaborators",
+      "settings": {
+        "label": "17 — Collaborators",
+        "heading": "The people behind",
+        "heading_em": "the frame.",
+        "sub": "A recurring cast of collaborators who make the work possible."
+      },
+      "blocks": {
+        "collab-1": { "type": "person", "settings": { "name": "Add Name", "role": "Director of Photography" } },
+        "collab-2": { "type": "person", "settings": { "name": "Add Name", "role": "Sound Recordist" } },
+        "collab-3": { "type": "person", "settings": { "name": "Add Name", "role": "Editor" } }
+      },
+      "block_order": ["collab-1", "collab-2", "collab-3"]
+    },
+    "gear": {
+      "type": "gear",
+      "settings": {
+        "label": "20 — Gear",
+        "heading": "Tools of",
+        "heading_em": "the trade.",
+        "sub": "The equipment behind every frame."
+      },
+      "blocks": {
+        "gear-1": { "type": "category", "settings": { "icon": "camera", "name": "Camera", "items": "Sony FX3\nSony A7 IV\nDJI RS3 Pro Gimbal" } },
+        "gear-2": { "type": "category", "settings": { "icon": "audio", "name": "Audio", "items": "Sennheiser MKH416\nZoom F6 Field Recorder\nRode Wireless GO II" } },
+        "gear-3": { "type": "category", "settings": { "icon": "light", "name": "Lighting", "items": "Aputure 300d II\nNanlite Forza 60\nV-flat diffusion panels" } },
+        "gear-4": { "type": "category", "settings": { "icon": "edit", "name": "Post", "items": "DaVinci Resolve Studio\nAdobe Premiere Pro\nAfter Effects" } }
+      },
+      "block_order": ["gear-1", "gear-2", "gear-3", "gear-4"]
+    },
+    "journal": {
+      "type": "journal",
+      "settings": {
+        "label": "18 — Journal",
+        "heading": "Thoughts on",
+        "heading_em": "the craft.",
+        "sub": "Writing on filmmaking, process, and the things that shape the work."
+      },
+      "blocks": {
+        "j-1": { "type": "entry", "settings": { "title": "On Writing the First Draft", "date": "January 2024", "tag": "Scriptwriting", "excerpt": "The first draft is never about being good. It is about excavating something true from the noise." } },
+        "j-2": { "type": "entry", "settings": { "title": "What the Documentary Taught Me", "date": "November 2023", "tag": "Behind the Scenes", "excerpt": "Three weeks on location with a documentary crew strips away every assumption you had about controlled filmmaking." } },
+        "j-3": { "type": "entry", "settings": { "title": "On Directing Your First Actor", "date": "September 2023", "tag": "Direction", "excerpt": "The director's job is not to direct performance. It is to create the conditions in which performance becomes inevitable." } }
+      },
+      "block_order": ["j-1", "j-2", "j-3"]
+    },
+    "pricing": {
+      "type": "pricing",
+      "settings": {
+        "label": "16 — Pricing",
+        "heading": "Invest in",
+        "heading_em": "the story.",
+        "sub": "Transparent pricing for every stage of production. Custom scopes available on request.",
+        "note": "All rates are starting points. Final pricing depends on scope, location, and timeline."
+      },
+      "blocks": {
+        "tier-1": { "type": "tier", "settings": { "tier": "Essential", "price": "1,500", "price_suffix": "/project", "description": "Ideal for smaller productions and brand content.", "features": "Up to 2 shoot days\nBasic colour grade\n1 revision round\nDigital delivery", "cta_label": "Get started" } },
+        "tier-2": { "type": "tier", "settings": { "featured": true, "badge": "Most Popular", "tier": "Production", "price": "4,000", "price_suffix": "/project", "description": "Full creative direction and end-to-end production.", "features": "Up to 5 shoot days\nFull colour grade\n3 revision rounds\nOriginal score consultation\nDigital + DCP delivery", "cta_label": "Get in touch" } },
+        "tier-3": { "type": "tier", "settings": { "tier": "Custom", "price": "Let's talk", "price_suffix": "", "description": "For feature-length, series, or long-term creative partnerships.", "features": "Unlimited scope\nDedicated creative development\nFull post-production\nFestival delivery package", "cta_label": "Start the conversation" } }
+      },
+      "block_order": ["tier-1", "tier-2", "tier-3"]
+    },
+    "availability": {
+      "type": "availability",
+      "settings": {
+        "label": "19 — Availability",
+        "heading": "What's",
+        "heading_em": "coming next.",
+        "sub": "Current booking status and upcoming availability.",
+        "status": "available",
+        "status_label": "Currently available for new projects",
+        "cta_label": "Book a call"
+      },
+      "blocks": {
+        "m-1": { "type": "month", "settings": { "month": "January 2025", "status": "booked", "label": "Booked" } },
+        "m-2": { "type": "month", "settings": { "month": "February 2025", "status": "limited", "label": "Limited", "note": "1 slot remaining" } },
+        "m-3": { "type": "month", "settings": { "month": "March 2025", "status": "open", "label": "Open" } },
+        "m-4": { "type": "month", "settings": { "month": "April 2025", "status": "open", "label": "Open" } },
+        "m-5": { "type": "month", "settings": { "month": "May 2025", "status": "open", "label": "Open" } },
+        "m-6": { "type": "month", "settings": { "month": "June 2025", "status": "open", "label": "Open" } }
+      },
+      "block_order": ["m-1", "m-2", "m-3", "m-4", "m-5", "m-6"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "label": "21 — Newsletter",
+        "heading": "Stay in the",
+        "heading_em": "frame.",
+        "sub": "New work, behind-the-scenes notes, and occasional thoughts on cinema — no noise.",
+        "promise": "No spam. Unsubscribe any time.",
+        "btn_label": "Subscribe",
+        "success_msg": "You're in. I'll be in touch."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "filmstrip-1",
+    "ticker",
+    "about",
+    "reel",
+    "films",
+    "showreel",
+    "process",
+    "filmstrip-2",
+    "gallery",
+    "influences",
+    "testimonials",
+    "craft",
+    "timeline",
+    "training",
+    "breakdown",
+    "press",
+    "collaborators",
+    "gear",
+    "journal",
+    "pricing",
+    "availability",
+    "newsletter",
+    "next-project",
+    "contact"
+  ]
+}

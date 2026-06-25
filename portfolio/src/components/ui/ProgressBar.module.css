@@ -1,0 +1,6 @@
+.bar {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  z-index: 10000; box-shadow: 0 0 14px rgba(184,151,58,.7);
+  transition: width .05s linear;
+}

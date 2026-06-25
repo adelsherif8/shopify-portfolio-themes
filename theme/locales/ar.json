@@ -1,0 +1,99 @@
+{
+  "general": {
+    "close": "إغلاق",
+    "loading": "جارٍ التحميل...",
+    "drag_hint": "اسحب للاستكشاف",
+    "search": "بحث",
+    "next": "التالي",
+    "previous": "السابق"
+  },
+  "nav": {
+    "about": "عن عمر",
+    "reel": "ريل",
+    "films": "الأفلام",
+    "gallery": "المعرض",
+    "craft": "الأسلوب",
+    "breakdown": "التفكيك",
+    "press": "الصحافة",
+    "contact": "تواصل"
+  },
+  "hero": {
+    "scroll": "مرر",
+    "scene_one": "المشهد الأول"
+  },
+  "accessibility": {
+    "skip_to_content": "انتقل إلى المحتوى"
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "بطاقة هدية بقيمة %(value)s من %(shop)s"
+    },
+    "subtext": "استخدم هذا الرمز عند الدفع",
+    "remaining_balance": "الرصيد المتبقي",
+    "print": "طباعة بطاقة الهدية",
+    "shop_link": "تسوق الآن",
+    "expired": "انتهت صلاحية بطاقة الهدية",
+    "label": "بطاقة هدية"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "أضف إلى السلة",
+      "sold_out": "نفدت الكمية",
+      "unavailable": "غير متاح",
+      "quantity": "الكمية"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "السلة",
+      "empty": "سلتك فارغة.",
+      "checkout": "إتمام الشراء",
+      "subtotal": "المجموع الجزئي",
+      "view_cart": "عرض السلة"
+    }
+  },
+  "customer": {
+    "login": {
+      "title": "تسجيل الدخول",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "forgot_password": "نسيت كلمة المرور؟",
+      "submit": "دخول",
+      "register_link": "إنشاء حساب"
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "first_name": "الاسم الأول",
+      "last_name": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "submit": "إنشاء حساب",
+      "login_link": "لديك حساب بالفعل؟"
+    },
+    "account": {
+      "title": "حسابي",
+      "orders": "الطلبات",
+      "details": "تفاصيل الحساب",
+      "logout": "تسجيل الخروج"
+    },
+    "addresses": {
+      "title": "العناوين",
+      "add_new": "إضافة عنوان جديد",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "set_default": "تعيين كافتراضي",
+      "default": "افتراضي",
+      "submit": "حفظ العنوان",
+      "cancel": "إلغاء"
+    }
+  },
+  "search": {
+    "placeholder": "ابحث عن المنتجات والمقالات...",
+    "title": "بحث",
+    "no_results": "لا نتائج لـ \"%(terms)s\""
+  },
+  "pagination": {
+    "previous": "→ السابق",
+    "next": "التالي ←"
+  }
+}

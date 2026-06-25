@@ -1,0 +1,182 @@
+<div class="coll-page section">
+
+  <!-- Header -->
+  <div class="coll-header">
+    <div class="s-label reveal">Collection</div>
+    <h1 class="coll-title reveal">
+      {% if collection.image %}
+        <span class="coll-title-text">{{ collection.title }}</span>
+      {% else %}
+        {{ collection.title }}
+      {% endif %}
+    </h1>
+    {% if collection.description != blank %}
+      <p class="coll-desc reveal reveal-delay-1">{{ collection.description }}</p>
+    {% endif %}
+    <div class="coll-count reveal reveal-delay-1">{{ collection.products_count }} {{ collection.products_count | pluralize: 'item', 'items' }}</div>
+  </div>
+
+  <!-- Filters + Sort -->
+  {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+  <form class="coll-toolbar reveal" method="get" action="{{ collection.url }}">
+    <input type="hidden" name="sort_by" value="{{ sort_by }}">
+    <div class="coll-filter-wrap">
+      {% for filter in collection.filters %}
+        <details class="coll-filter-group" {% if filter.active_values.size > 0 %}open{% endif %}>
+          <summary class="coll-filter-label">
+            {{ filter.label }}
+            {% if filter.active_values.size > 0 %}
+              <span class="coll-filter-active-count">{{ filter.active_values.size }}</span>
+            {% endif %}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="coll-filter-options">
+            {% for value in filter.values %}
+              <label class="coll-filter-option">
+                <input type="checkbox"
+                       name="{{ value.param_name }}"
+                       value="{{ value.value }}"
+                       {% if value.active %}checked{% endif %}
+                       onchange="this.form.submit()">
+                <span>{{ value.label }}</span>
+                <span class="coll-filter-count">({{ value.count }})</span>
+              </label>
+            {% endfor %}
+          </div>
+        </details>
+      {% endfor %}
+      {% if collection.filters.size > 0 %}
+        {%- assign active_filters_count = 0 -%}
+        {%- for filter in collection.filters -%}
+          {%- assign active_filters_count = active_filters_count | plus: filter.active_values.size -%}
+        {%- endfor -%}
+        {% if active_filters_count > 0 %}
+          <a href="{{ collection.url }}" class="coll-filter-clear">Clear all</a>
+        {% endif %}
+      {% endif %}
+    </div>
+    <div class="coll-sort-wrap">
+      <label class="coll-sort-label" for="coll-sort">Sort</label>
+      <select id="coll-sort" class="coll-sort-select" name="sort_by" onchange="this.form.submit()">
+        {% for option in collection.sort_options %}
+          <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>
+            {{ option.name }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+  </form>
+
+  <!-- Grid -->
+  {% paginate collection.products by 24 %}
+    {% if collection.products.size > 0 %}
+      <div class="coll-grid">
+        {% for product in collection.products %}
+          <div class="coll-card reveal" style="transition-delay: {{ forloop.index0 | modulo: 6 | times: 0.06 }}s;">
+            <a href="{{ product.url }}" class="coll-card-link">
+              <div class="coll-card-img-wrap">
+                {% if product.featured_image %}
+                  <img src="{{ product.featured_image | image_url: width: 600 }}"
+                       alt="{{ product.featured_image.alt | escape | default: product.title }}"
+                       class="coll-card-img" width="600" height="600" loading="lazy">
+                  {% if product.images[1] %}
+                    <img src="{{ product.images[1] | image_url: width: 600 }}"
+                         alt="{{ product.title | escape }}"
+                         class="coll-card-img coll-card-img--hover" width="600" height="600" loading="lazy">
+                  {% endif %}
+                {% else %}
+                  <div class="coll-card-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="36" height="36" style="color:var(--gold);opacity:.2;">
+                      <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                  </div>
+                {% endif %}
+
+                <!-- badges -->
+                <div class="coll-card-badges">
+                  {% if product.available == false %}
+                    <span class="coll-badge coll-badge--soldout">Sold out</span>
+                  {% elsif product.compare_at_price > product.price %}
+                    <span class="coll-badge coll-badge--sale">Sale</span>
+                  {% endif %}
+                  {% if product.tags contains 'new' or product.tags contains 'New' %}
+                    <span class="coll-badge coll-badge--new">New</span>
+                  {% endif %}
+                </div>
+
+                <!-- quick view trigger -->
+                <button class="coll-qv-btn" data-product-url="{{ product.url }}" aria-label="Quick view {{ product.title | escape }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Quick View
+                </button>
+              </div>
+
+              <div class="coll-card-info">
+                {% if product.type != blank %}
+                  <div class="coll-card-type">{{ product.type }}</div>
+                {% endif %}
+                <h3 class="coll-card-title">{{ product.title }}</h3>
+                <div class="coll-card-price-row">
+                  {% if product.compare_at_price_max > product.price_min %}
+                    <s class="coll-card-compare">{{ product.compare_at_price_max | money }}</s>
+                  {% endif %}
+                  {% if product.price_varies %}
+                    <span class="coll-card-price">{{ product.price_min | money }} – {{ product.price_max | money }}</span>
+                  {% else %}
+                    <span class="coll-card-price">{{ product.price | money }}</span>
+                  {% endif %}
+                  {% assign first_variant = product.variants.first %}
+                  {% if first_variant.unit_price %}
+                    <div class="coll-card-unit-price">{{ first_variant.unit_price | money }}/{{ first_variant.unit_price_measurement.reference_value }}{{ first_variant.unit_price_measurement.reference_unit }}</div>
+                  {% endif %}
+                </div>
+                {% unless product.has_only_default_variant %}
+                  <div class="coll-card-variants">{{ product.variants.size }} options</div>
+                {% endunless %}
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Pagination -->
+      {% if paginate.pages > 1 %}
+        <div class="coll-pagination">
+          {% if paginate.previous %}
+            <a href="{{ paginate.previous.url }}" class="coll-page-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M15 18l-6-6 6-6"/></svg>
+              Prev
+            </a>
+          {% endif %}
+          {% for part in paginate.parts %}
+            {% if part.is_link %}
+              <a href="{{ part.url }}" class="coll-page-num">{{ part.title }}</a>
+            {% elsif part.title == paginate.current_page %}
+              <span class="coll-page-num active">{{ part.title }}</span>
+            {% else %}
+              <span class="coll-page-ellipsis">{{ part.title }}</span>
+            {% endif %}
+          {% endfor %}
+          {% if paginate.next %}
+            <a href="{{ paginate.next.url }}" class="coll-page-btn">
+              Next
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="coll-empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="48" height="48" style="color:var(--gold);opacity:.2;margin-bottom:20px;">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <p>No products found.</p>
+        <a href="{{ routes.root_url }}" class="coll-empty-link">Back to home</a>
+      </div>
+    {% endif %}
+  {% endpaginate %}
+</div>
+
+{% schema %}
+{ "name": "Collection", "settings": [] }
+{% endschema %}

@@ -1,0 +1,71 @@
+<section id="newsletter" class="section newsletter-section" data-section-num="022">
+  <div class="newsletter-inner reveal">
+    <div class="newsletter-left">
+      <div class="s-label" style="position:relative;margin-bottom:24px;">{{ section.settings.label | default: '21 — Newsletter' }}</div>
+      <h2 class="newsletter-heading">
+        {{ section.settings.heading | default: 'Stay in the' }}<br>
+        <em>{{ section.settings.heading_em | default: 'frame.' }}</em>
+      </h2>
+      <p class="newsletter-sub">{{ section.settings.sub | default: 'New work, behind-the-scenes notes, and occasional thoughts on cinema — no noise.' }}</p>
+      <div class="newsletter-promise">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        {{ section.settings.promise | default: 'No spam. Unsubscribe any time.' }}
+      </div>
+    </div>
+
+    <div class="newsletter-right">
+      {% form 'customer', id: 'newsletter-form', class: 'newsletter-form' %}
+        {% if form.posted_successfully? %}
+          <div class="newsletter-success">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg>
+            {{ section.settings.success_msg | default: "You're in. I'll be in touch." }}
+          </div>
+        {% else %}
+          {% if form.errors %}
+            <div class="newsletter-error">{{ form.errors | default_errors }}</div>
+          {% endif %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="newsletter-fields">
+            <div class="newsletter-field-group">
+              <label class="newsletter-label" for="nl-email">{{ section.settings.label_email | default: 'Email address' }}</label>
+              <input id="nl-email" class="newsletter-input" type="email" name="contact[email]"
+                     placeholder="{{ section.settings.placeholder | default: 'your@email.com' }}" required>
+            </div>
+            {% if section.settings.show_name %}
+              <div class="newsletter-field-group">
+                <label class="newsletter-label" for="nl-name">{{ section.settings.label_name | default: 'Name (optional)' }}</label>
+                <input id="nl-name" class="newsletter-input" type="text" name="contact[first_name]"
+                       placeholder="{{ section.settings.placeholder_name | default: 'Your name' }}">
+              </div>
+            {% endif %}
+            <button type="submit" class="newsletter-btn">
+              {{ section.settings.btn_label | default: 'Subscribe' }}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Section label", "default": "21 — Newsletter" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Stay in the" },
+    { "type": "text", "id": "heading_em", "label": "Heading (italic gold)", "default": "frame." },
+    { "type": "textarea", "id": "sub", "label": "Subtext", "default": "New work, behind-the-scenes notes, and occasional thoughts on cinema — no noise." },
+    { "type": "text", "id": "promise", "label": "Privacy promise", "default": "No spam. Unsubscribe any time." },
+    { "type": "text", "id": "label_email", "label": "Email field label", "default": "Email address" },
+    { "type": "text", "id": "placeholder", "label": "Email placeholder", "default": "your@email.com" },
+    { "type": "checkbox", "id": "show_name", "label": "Show name field", "default": false },
+    { "type": "text", "id": "label_name", "label": "Name field label", "default": "Name (optional)" },
+    { "type": "text", "id": "placeholder_name", "label": "Name placeholder", "default": "Your name" },
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "Subscribe" },
+    { "type": "text", "id": "success_msg", "label": "Success message", "default": "You're in. I'll be in touch." }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

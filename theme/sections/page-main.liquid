@@ -1,0 +1,49 @@
+<div class="page-main section">
+
+  {% if page.image %}
+    <div class="page-hero">
+      <img src="{{ page.image | image_url: width: 1600 }}"
+           alt="{{ page.title | escape }}"
+           class="page-hero-img" width="1600" height="700" loading="eager">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-inner">
+        {% if section.settings.label != blank %}
+          <div class="s-label" style="justify-content:center;color:var(--gold);">{{ section.settings.label }}</div>
+        {% endif %}
+        <h1 class="page-hero-title">{{ page.title }}</h1>
+      </div>
+      <div class="pdp-corner pdp-corner-tl"></div>
+      <div class="pdp-corner pdp-corner-tr"></div>
+      <div class="pdp-corner pdp-corner-bl"></div>
+      <div class="pdp-corner pdp-corner-br"></div>
+    </div>
+  {% else %}
+    <div class="page-title-wrap">
+      {% if section.settings.label != blank %}
+        <div class="s-label" style="justify-content:center;">{{ section.settings.label }}</div>
+      {% endif %}
+      <h1 class="page-title">{{ page.title }}</h1>
+    </div>
+  {% endif %}
+
+  <div class="page-body">
+    <div class="page-content rte">
+      {{ page.content }}
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Page content",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label (optional)",
+      "info": "Displayed above the page title in monospace gold"
+    }
+  ]
+}
+{% endschema %}

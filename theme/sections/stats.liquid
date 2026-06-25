@@ -1,0 +1,72 @@
+<section id="stats" class="stats-section" data-section-num="020">
+  <div class="stats-inner">
+    {% for block in section.blocks %}
+      {% if block.type == 'stat' %}
+        <div class="stat-item reveal" style="transition-delay:{{ forloop.index0 | times: 0.1 }}s;" {{ block.shopify_attributes }}>
+          <div class="stat-num">
+            <span data-countup="{{ block.settings.number }}" data-suffix="{{ block.settings.suffix }}">
+              {{ block.settings.number }}{{ block.settings.suffix }}
+            </span>
+          </div>
+          <div class="stat-label">{{ block.settings.label }}</div>
+          {% if block.settings.sub != blank %}
+            <div class="stat-sub">{{ block.settings.sub }}</div>
+          {% endif %}
+        </div>
+        {% unless forloop.last %}
+          <div class="stat-divider"></div>
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Stats bar",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "5"
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Suffix (e.g. +, %, yrs)",
+          "default": "+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Films"
+        },
+        {
+          "type": "text",
+          "id": "sub",
+          "label": "Sub-label (optional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Stats bar",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "5",  "suffix": "+",   "label": "Film Productions",   "sub": "Short & Documentary" } },
+        { "type": "stat", "settings": { "number": "3",  "suffix": "",    "label": "Diplomas & Courses", "sub": "Film Schools" } },
+        { "type": "stat", "settings": { "number": "3",  "suffix": "",    "label": "Countries Worked",   "sub": "& Counting" } },
+        { "type": "stat", "settings": { "number": "10", "suffix": "+",   "label": "Brand Campaigns",    "sub": "Creative Direction" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

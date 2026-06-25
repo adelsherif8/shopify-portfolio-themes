@@ -1,0 +1,78 @@
+<article class="section article-page">
+
+  <!-- Header -->
+  <div class="article-header">
+    <a href="{{ blog.url }}" class="article-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      {{ blog.title }}
+    </a>
+    <div class="article-meta reveal">
+      <span class="article-date">{{ article.published_at | date: '%B %d, %Y' }}</span>
+      {% for tag in article.tags limit: 2 %}
+        <span class="journal-card-tag">{{ tag }}</span>
+      {% endfor %}
+      <span class="article-read-time">{{ article.content | strip_html | split: ' ' | size | divided_by: 200 | plus: 1 }} min read</span>
+    </div>
+    <h1 class="article-title reveal">{{ article.title }}</h1>
+    {% if article.author != blank %}
+      <div class="article-author reveal reveal-delay-1">by {{ article.author }}</div>
+    {% endif %}
+  </div>
+
+  <!-- Cover image -->
+  {% if article.image %}
+    <div class="article-cover reveal">
+      <img src="{{ article.image | image_url: width: 1400 }}" alt="{{ article.image.alt | escape | default: article.title }}" class="article-cover-img" width="1400" height="700" loading="eager">
+      <div class="pdp-media-scanlines"></div>
+    </div>
+  {% endif %}
+
+  <!-- Body -->
+  <div class="article-body rte reveal">
+    {{ article.content }}
+  </div>
+
+  <!-- Tags -->
+  {% if article.tags.size > 0 %}
+    <div class="article-tags reveal">
+      <span class="article-tags-label">Tags</span>
+      {% for tag in article.tags %}
+        <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="journal-card-tag">{{ tag }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Share -->
+  <div class="article-share reveal">
+    <span class="pdp-share-label">Share this</span>
+    <a href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ article.url }}&text={{ article.title | url_encode }}" target="_blank" rel="noopener" class="pdp-share-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ article.url }}" target="_blank" rel="noopener" class="pdp-share-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    </a>
+  </div>
+
+  <!-- Prev / Next -->
+  <div class="article-nav reveal">
+    {% if blog.previous_article %}
+      <a href="{{ blog.previous_article }}" class="article-nav-link article-nav-link--prev">
+        <span class="article-nav-dir">← Previous</span>
+        <span class="article-nav-title">{{ blog.previous_article.title }}</span>
+      </a>
+    {% else %}
+      <div></div>
+    {% endif %}
+    {% if blog.next_article %}
+      <a href="{{ blog.next_article }}" class="article-nav-link article-nav-link--next">
+        <span class="article-nav-dir">Next →</span>
+        <span class="article-nav-title">{{ blog.next_article.title }}</span>
+      </a>
+    {% endif %}
+  </div>
+
+</article>
+
+{% schema %}
+{ "name": "Article", "settings": [] }
+{% endschema %}

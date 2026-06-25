@@ -1,0 +1,177 @@
+<section id="awards" class="section" data-section-num="017">
+  <div class="s-label reveal">{{ section.settings.label | default: 'Awards & Recognition' }}</div>
+  <h2 class="awards-heading reveal">
+    {{ section.settings.heading_1 | default: 'Where the work ' }}<em>{{ section.settings.heading_2 | default: 'was recognised.' }}</em>
+  </h2>
+
+  <!-- Laurels row -->
+  {% assign laurels = section.blocks | where: 'type', 'laurel' %}
+  {% if laurels.size > 0 %}
+    <div class="awards-laurels reveal">
+      {% for block in section.blocks %}
+        {% if block.type == 'laurel' %}
+          <div class="laurel-card" {{ block.shopify_attributes }}>
+            {% if block.settings.logo != blank %}
+              <img src="{{ block.settings.logo | image_url: width: 300 }}"
+                   alt="{{ block.settings.festival | escape }}" class="laurel-logo" loading="lazy">
+            {% else %}
+              <div class="laurel-placeholder">
+                {% render 'icon', icon: 'award', size: 36 %}
+              </div>
+            {% endif %}
+            <div class="laurel-award">{{ block.settings.award }}</div>
+            <div class="laurel-festival">{{ block.settings.festival }}</div>
+            <div class="laurel-year">{{ block.settings.year }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Award list -->
+  {% assign list_items = section.blocks | where: 'type', 'award' %}
+  {% if list_items.size > 0 %}
+    <div class="awards-list">
+      {% for block in section.blocks %}
+        {% if block.type == 'award' %}
+          <div class="award-item reveal" style="transition-delay:{{ forloop.index0 | times: 0.08 }}s;" {{ block.shopify_attributes }}>
+            <div class="award-item-left">
+              <div class="award-icon-wrap">
+                {% render 'icon', icon: block.settings.icon, size: 18 %}
+              </div>
+            </div>
+            <div class="award-item-body">
+              <div class="award-item-meta">
+                <span class="award-type">{{ block.settings.type }}</span>
+                {% if block.settings.year != blank %}<span class="award-year">{{ block.settings.year }}</span>{% endif %}
+              </div>
+              <div class="award-name">{{ block.settings.name }}</div>
+              <div class="award-project">{{ block.settings.project }}</div>
+              {% if block.settings.note != blank %}
+                <p class="award-note">{{ block.settings.note }}</p>
+              {% endif %}
+            </div>
+            <div class="award-item-line"></div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Awards & Recognition",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Awards & Recognition"
+    },
+    {
+      "type": "text",
+      "id": "heading_1",
+      "label": "Heading prefix",
+      "default": "Where the work "
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Heading (italic gold)",
+      "default": "was recognised."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "laurel",
+      "name": "Festival laurel",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Festival laurel / logo image"
+        },
+        {
+          "type": "text",
+          "id": "award",
+          "label": "Award",
+          "default": "Official Selection"
+        },
+        {
+          "type": "text",
+          "id": "festival",
+          "label": "Festival name",
+          "default": "Film Festival"
+        },
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "2024"
+        }
+      ]
+    },
+    {
+      "type": "award",
+      "name": "Award item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "trophy",
+          "options": [
+            { "value": "trophy",      "label": "Trophy" },
+            { "value": "star",        "label": "Star" },
+            { "value": "award",       "label": "Award ribbon" },
+            { "value": "recognition", "label": "Recognition / Check" },
+            { "value": "film",        "label": "Film strip" },
+            { "value": "festival",    "label": "Festival / Ticket" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "type",
+          "label": "Award type",
+          "default": "Best Short Film"
+        },
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "2024"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Award name / festival",
+          "default": "Film Festival Name"
+        },
+        {
+          "type": "text",
+          "id": "project",
+          "label": "Project",
+          "default": "Film Title"
+        },
+        {
+          "type": "textarea",
+          "id": "note",
+          "label": "Note (optional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Awards & Recognition",
+      "blocks": [
+        { "type": "laurel", "settings": { "award": "Official Selection", "festival": "Add Festival Name", "year": "2024" } },
+        { "type": "laurel", "settings": { "award": "Best Short Film",    "festival": "Add Festival Name", "year": "2024" } },
+        { "type": "award",  "settings": { "icon": "trophy", "type": "Best Screenplay", "year": "2024", "name": "Add Festival Name", "project": "Film Title" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

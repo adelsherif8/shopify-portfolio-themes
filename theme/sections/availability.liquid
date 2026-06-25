@@ -1,0 +1,88 @@
+<section id="availability" class="section availability-section" data-section-num="020">
+  <div class="s-label reveal">{{ section.settings.label | default: '19 — Availability' }}</div>
+  <h2 class="avail-heading reveal">
+    {{ section.settings.heading | default: "What's" }}<br>
+    <em>{{ section.settings.heading_em | default: 'coming next.' }}</em>
+  </h2>
+  <p class="avail-sub reveal reveal-delay-1">{{ section.settings.sub | default: 'Current booking status and upcoming availability.' }}</p>
+
+  <div class="avail-status-wrap reveal reveal-delay-1">
+    <span class="avail-status-dot avail-status-dot--{{ section.settings.status | default: 'available' }}"></span>
+    <span class="avail-status-label">{{ section.settings.status_label | default: 'Currently available for new projects' }}</span>
+  </div>
+
+  <div class="avail-grid reveal reveal-delay-2">
+    {% for block in section.blocks %}
+      {% if block.type == 'month' %}
+        <div class="avail-month avail-month--{{ block.settings.status | default: 'open' }}" {{ block.shopify_attributes }}>
+          <div class="avail-month-name">{{ block.settings.month | default: 'Month' }}</div>
+          <div class="avail-month-status">
+            {% case block.settings.status %}
+              {% when 'open' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>
+                {{ block.settings.label | default: 'Open' }}
+              {% when 'limited' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                {{ block.settings.label | default: 'Limited' }}
+              {% when 'booked' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                {{ block.settings.label | default: 'Booked' }}
+            {% endcase %}
+          </div>
+          {% if block.settings.note != blank %}
+            <div class="avail-month-note">{{ block.settings.note }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if section.settings.cta_label != blank %}
+    <div class="avail-cta reveal">
+      <a href="{{ section.settings.cta_url | default: '#contact' }}" class="avail-cta-btn">
+        {{ section.settings.cta_label }}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Availability",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Section label", "default": "19 — Availability" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What's" },
+    { "type": "text", "id": "heading_em", "label": "Heading (italic gold)", "default": "coming next." },
+    { "type": "textarea", "id": "sub", "label": "Subtext", "default": "Current booking status and upcoming availability." },
+    { "type": "select", "id": "status", "label": "Overall status", "options": [{ "value": "available", "label": "Available" }, { "value": "limited", "label": "Limited" }, { "value": "booked", "label": "Fully Booked" }], "default": "available" },
+    { "type": "text", "id": "status_label", "label": "Status message", "default": "Currently available for new projects" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Book a call" },
+    { "type": "url", "id": "cta_url", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "month",
+      "name": "Month",
+      "settings": [
+        { "type": "text", "id": "month", "label": "Month", "default": "January 2025" },
+        { "type": "select", "id": "status", "label": "Status", "options": [{ "value": "open", "label": "Open" }, { "value": "limited", "label": "Limited" }, { "value": "booked", "label": "Booked" }], "default": "open" },
+        { "type": "text", "id": "label", "label": "Status label", "default": "Open" },
+        { "type": "text", "id": "note", "label": "Note (optional)" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [{
+    "name": "Availability",
+    "blocks": [
+      { "type": "month", "settings": { "month": "January 2025", "status": "booked", "label": "Booked" } },
+      { "type": "month", "settings": { "month": "February 2025", "status": "limited", "label": "Limited", "note": "1 slot remaining" } },
+      { "type": "month", "settings": { "month": "March 2025", "status": "open", "label": "Open" } },
+      { "type": "month", "settings": { "month": "April 2025", "status": "open", "label": "Open" } },
+      { "type": "month", "settings": { "month": "May 2025", "status": "open", "label": "Open" } },
+      { "type": "month", "settings": { "month": "June 2025", "status": "open", "label": "Open" } }
+    ]
+  }]
+}
+{% endschema %}

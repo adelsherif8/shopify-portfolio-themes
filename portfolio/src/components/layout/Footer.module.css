@@ -1,0 +1,4 @@
+.footer { padding: 22px 64px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--black); }
+.copy  { font-size: 9px; color: rgba(255,255,255,.13); letter-spacing: .1em; }
+.mark  { font-family: var(--font-serif); font-size: 13px; color: rgba(184,151,58,.4); font-style: italic; }
+@media (max-width: 900px) { .footer { flex-direction: column; gap: 10px; padding: 20px 24px; } }

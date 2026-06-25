@@ -1,0 +1,42 @@
+.wrap { background:var(--dark); border-top:1px solid var(--border); }
+.header { margin-bottom:52px; }
+.heading { font-family:var(--font-serif); font-size:clamp(32px,4.5vw,60px); font-weight:200; line-height:1.1; color:var(--text); }
+.heading em { font-style:normal; color:rgba(184,151,58,.45); font-size:.65em; margin-left:12px; }
+.sub { font-size:9px; text-transform:uppercase; letter-spacing:.3em; color:var(--muted); margin-top:10px; }
+
+.body { display:grid; grid-template-columns:1fr 1fr; gap:2px; align-items:start; }
+
+/* Script */
+.script { background:var(--black); border:1px solid var(--border); overflow:hidden; }
+.scriptHeader { padding:18px 32px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.scriptTitle { font-family:var(--font-serif); font-size:13px; color:rgba(255,255,255,.5); font-style:italic; }
+.scriptMeta  { font-family:var(--font-mono); font-size:7px; color:var(--muted); letter-spacing:.2em; }
+.page { padding:32px 40px; font-family:'Courier New', Courier, monospace; font-size:12px; line-height:1.85; color:rgba(255,255,255,.55); }
+
+.slug     { text-transform:uppercase; color:rgba(255,255,255,.8); font-weight:700; margin:18px 0 10px; font-size:11px; }
+.action   { margin:0 0 8px; }
+.char     { text-align:center; margin-top:14px; margin-bottom:2px; color:rgba(255,255,255,.75); font-weight:700; text-transform:uppercase; font-size:11px; }
+.paren    { text-align:center; color:rgba(255,255,255,.38); font-style:italic; margin-bottom:2px; }
+.dialogue { text-align:center; max-width:260px; margin:0 auto 10px; color:rgba(255,255,255,.65); }
+
+.annotated { cursor:pointer; border-left:2px solid rgba(184,151,58,.3); padding-left:10px; margin-left:-12px; transition:border-color .3s,color .3s; }
+.annotated:hover { border-color:rgba(184,151,58,.7); color:rgba(255,255,255,.8); }
+.highlighted { border-color:var(--gold) !important; color:rgba(255,255,255,.9) !important; background:rgba(184,151,58,.04); }
+.pin { font-size:7px; color:var(--gold); margin-left:6px; vertical-align:middle; }
+
+/* Annotations */
+.annotations { padding:32px; border:1px solid var(--border); background:var(--panel); }
+.annotTitle { font-size:9px; text-transform:uppercase; letter-spacing:.3em; color:var(--muted); margin-bottom:28px; display:flex; align-items:center; gap:10px; }
+.annotTitle i { color:rgba(184,151,58,.5); }
+
+.note { display:flex; gap:16px; padding:18px 0; border-bottom:1px solid var(--border); cursor:pointer; transition:background .2s; }
+.note:last-of-type { border-bottom:none; }
+.note:hover .noteAnchor { color:rgba(255,255,255,.75); }
+.noteActive .noteAnchor { color:var(--gold2) !important; }
+.noteNum { font-family:var(--font-mono); font-size:9px; color:rgba(184,151,58,.4); flex-shrink:0; padding-top:2px; }
+.noteAnchor { font-size:11px; font-style:italic; color:rgba(255,255,255,.38); line-height:1.6; transition:color .3s; }
+.noteText   { font-size:12px; line-height:1.85; color:var(--dim); margin-top:10px; overflow:hidden; }
+
+.hint { font-size:8px; color:rgba(255,255,255,.12); text-transform:uppercase; letter-spacing:.2em; margin-top:24px; text-align:center; }
+
+@media (max-width:900px) { .body{grid-template-columns:1fr} .page{padding:20px 20px} .annotations{padding:20px} }

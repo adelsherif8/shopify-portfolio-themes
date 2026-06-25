@@ -1,0 +1,12 @@
+{% assign ticker_items = items | default: 'Scriptwriter,Film Production,Sound Design,Creative Direction,Visual Storytelling,Story Development,Cairo, Egypt,قهوة الميتين' %}
+{% assign ticker_arr = ticker_items | split: ',' %}
+
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    {% for i in (1..2) %}
+      {% for item in ticker_arr %}
+        <span class="ticker-item">{{ item | strip }}</span>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>

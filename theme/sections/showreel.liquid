@@ -1,0 +1,78 @@
+<section id="showreel" class="section showreel-section" data-section-num="016">
+  <div class="s-label reveal">{{ section.settings.label | default: '15 — Video Work' }}</div>
+  <h2 class="showreel-heading reveal">
+    {{ section.settings.heading | default: 'A body of' }}<br>
+    <em>{{ section.settings.heading_em | default: 'moving work.' }}</em>
+  </h2>
+  <p class="showreel-sub reveal reveal-delay-1">{{ section.settings.sub | default: 'Selected video projects — click to watch.' }}</p>
+
+  <div class="showreel-grid reveal reveal-delay-2">
+    {% for block in section.blocks %}
+      {% if block.type == 'video' %}
+        {% assign video_id = block.settings.video_id %}
+        {% assign platform  = block.settings.platform | default: 'youtube' %}
+        {% if platform == 'vimeo' %}
+          {% assign thumb_url = 'https://vumbnail.com/' | append: video_id | append: '.jpg' %}
+          {% assign embed_url = 'https://player.vimeo.com/video/' | append: video_id | append: '?autoplay=1' %}
+        {% else %}
+          {% assign thumb_url = 'https://img.youtube.com/vi/' | append: video_id | append: '/maxresdefault.jpg' %}
+          {% assign embed_url = 'https://www.youtube.com/embed/' | append: video_id | append: '?autoplay=1' %}
+        {% endif %}
+        <div class="showreel-card" data-embed="{{ embed_url }}" {{ block.shopify_attributes }}>
+          {% if block.settings.thumbnail != blank %}
+            <img src="{{ block.settings.thumbnail | image_url: width: 800 }}" alt="{{ block.settings.title | escape }}" class="showreel-thumb" width="800" height="450" loading="lazy">
+          {% else %}
+            <img src="{{ thumb_url }}" alt="{{ block.settings.title | escape }}" class="showreel-thumb" width="800" height="450" loading="lazy">
+          {% endif %}
+          <div class="showreel-card-overlay">
+            <div class="showreel-play">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div class="showreel-card-info">
+            <div class="showreel-card-tag">{{ block.settings.tag | default: 'Short Film' }}</div>
+            <div class="showreel-card-title">{{ block.settings.title | default: 'Video Title' }}</div>
+            <div class="showreel-card-year">{{ block.settings.year }}</div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <!-- Video modal -->
+  <div class="video-modal" id="video-modal">
+    <div class="video-modal-bg" id="video-modal-bg"></div>
+    <button class="video-modal-close" id="video-modal-close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="video-modal-frame" id="video-modal-frame"></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Showreel / Videos",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Section label", "default": "15 — Video Work" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A body of" },
+    { "type": "text", "id": "heading_em", "label": "Heading (italic gold)", "default": "moving work." },
+    { "type": "text", "id": "sub", "label": "Subtext", "default": "Selected video projects — click to watch." }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        { "type": "select", "id": "platform", "label": "Platform", "options": [{ "value": "youtube", "label": "YouTube" }, { "value": "vimeo", "label": "Vimeo" }], "default": "youtube" },
+        { "type": "text", "id": "video_id", "label": "Video ID (from URL)", "default": "dQw4w9WgXcQ" },
+        { "type": "image_picker", "id": "thumbnail", "label": "Custom thumbnail (optional)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Video Title" },
+        { "type": "text", "id": "tag", "label": "Tag / category", "default": "Short Film" },
+        { "type": "text", "id": "year", "label": "Year", "default": "2024" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [{ "name": "Showreel / Videos" }]
+}
+{% endschema %}

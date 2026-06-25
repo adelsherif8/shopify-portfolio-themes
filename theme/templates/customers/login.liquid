@@ -1,0 +1,56 @@
+<div class="section account-page">
+  <div class="account-form-wrap">
+    <div class="s-label" style="text-align:center;justify-content:center;margin-bottom:32px;">Account</div>
+    <h1 class="account-title">Sign<br><em>in.</em></h1>
+
+    {% form 'customer_login', class: 'account-form' %}
+      {% if form.errors %}
+        <div class="account-errors">{{ form.errors | default_errors }}</div>
+      {% endif %}
+      <div class="account-field">
+        <label class="account-label" for="CustomerEmail">Email</label>
+        <input id="CustomerEmail" class="account-input" type="email" name="customer[email]" autocomplete="email" required>
+      </div>
+      <div class="account-field">
+        <label class="account-label" for="CustomerPassword">Password</label>
+        <input id="CustomerPassword" class="account-input" type="password" name="customer[password]" autocomplete="current-password" required>
+      </div>
+      <div class="account-links">
+        <a href="#recover" class="account-link" id="forgot-link">Forgot password?</a>
+      </div>
+      <button type="submit" class="account-btn">Sign in</button>
+      <a href="{{ routes.account_register_url }}" class="account-alt-link">No account? Create one →</a>
+    {% endform %}
+
+    <!-- Recovery form -->
+    <div id="recover-form" style="display:none;">
+      <h2 class="account-title" style="font-size:clamp(24px,3vw,40px);margin-bottom:24px;">Reset<br><em>password.</em></h2>
+      {% form 'recover_customer_password', class: 'account-form' %}
+        {% if form.posted_successfully? %}
+          <div class="account-success">Check your email for a reset link.</div>
+        {% endif %}
+        <div class="account-field">
+          <label class="account-label" for="RecoverEmail">Email</label>
+          <input id="RecoverEmail" class="account-input" type="email" name="email" required>
+        </div>
+        <button type="submit" class="account-btn">Send reset link</button>
+        <a href="#login" class="account-alt-link" id="back-to-login">← Back to login</a>
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('forgot-link')?.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector('.account-form').style.display = 'none';
+    document.querySelector('.account-links').style.display = 'none';
+    document.getElementById('recover-form').style.display = 'block';
+  });
+  document.getElementById('back-to-login')?.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector('.account-form').style.display = 'flex';
+    document.querySelector('.account-links').style.display = 'block';
+    document.getElementById('recover-form').style.display = 'none';
+  });
+</script>

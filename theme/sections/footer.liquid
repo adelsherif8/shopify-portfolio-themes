@@ -1,0 +1,138 @@
+<footer class="site-footer">
+  <div class="footer-top">
+
+    <div class="footer-brand">
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | image_url: width: 240 }}"
+             alt="{{ section.settings.name | default: shop.name }}"
+             class="footer-logo-img" width="240" height="60" loading="lazy">
+      {% else %}
+        <div class="footer-logo-text">
+          {{ section.settings.name | default: 'Omar Emad El Din' }}
+        </div>
+      {% endif %}
+      <p class="footer-tagline">{{ section.settings.tagline | default: 'Filmmaker · Scriptwriter · Creative Director' }}</p>
+      {% if section.settings.email != blank %}
+        <a href="mailto:{{ section.settings.email }}" class="footer-email">{{ section.settings.email }}</a>
+      {% endif %}
+    </div>
+
+    <nav class="footer-nav">
+      <div class="footer-nav-col">
+        <div class="footer-nav-label">{{ section.settings.col1_label | default: 'Work' }}</div>
+        <a href="#films">Films</a>
+        <a href="#reel">Reel</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#breakdown">Breakdown</a>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-label">{{ section.settings.col2_label | default: 'About' }}</div>
+        <a href="#about">About</a>
+        <a href="#craft">Craft</a>
+        <a href="#press">Press</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <div class="footer-social">
+      <div class="footer-nav-label">{{ section.settings.social_label | default: 'Follow' }}</div>
+      {% if settings.social_instagram != blank %}
+        <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" class="footer-social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+          Instagram
+        </a>
+      {% endif %}
+      {% if settings.social_vimeo != blank %}
+        <a href="{{ settings.social_vimeo }}" target="_blank" rel="noopener" class="footer-social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M22 7.4c-.1 2.8-2 6.6-5.7 11.4C12.4 23.6 9.4 24 7.8 24c-1.8 0-3.3-1.7-4.6-5L1.8 14C.9 11 0 9.3 0 9.3c0 0 1.4 1.1 2.6 0C4 8 5.5 6 6.4 4.7 7.9 2.7 9 1.8 9.7 1.8c.9 0 1.4.7 1.7 2l1.5 5.8c.4 1.6.9 2.4 1.4 2.4.4 0 1.1-.5 2-1.6.9-1.1 1.4-1.9 1.4-2.6 0-1-.8-1.5-2.4-1.5.9-2.8 2.5-4.2 4.9-4.2 1.8.1 2.6 1.2 2.8 3.3z"/></svg>
+          Vimeo
+        </a>
+      {% endif %}
+      {% if settings.social_youtube != blank %}
+        <a href="{{ settings.social_youtube }}" target="_blank" rel="noopener" class="footer-social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+          YouTube
+        </a>
+      {% endif %}
+      {% if settings.social_imdb != blank %}
+        <a href="{{ settings.social_imdb }}" target="_blank" rel="noopener" class="footer-social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M7 15V9M11 9v6M11 12h3M14 9v6M17 9v6"/></svg>
+          IMDb
+        </a>
+      {% endif %}
+      {% if settings.social_linkedin != blank %}
+        <a href="{{ settings.social_linkedin }}" target="_blank" rel="noopener" class="footer-social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      {% endif %}
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copy">{{ section.settings.copyright | default: '© 2024 Your Name — All rights reserved' }}</span>
+    <span class="footer-mark">{{ section.settings.mark | default: 'قهوة الميتين' }}</span>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image (optional, replaces text name)"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name / brand",
+      "default": "Omar Emad El Din"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Filmmaker · Scriptwriter · Creative Director"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Contact email",
+      "default": "hello@yourname.com"
+    },
+    {
+      "type": "text",
+      "id": "col1_label",
+      "label": "Nav column 1 label",
+      "default": "Work"
+    },
+    {
+      "type": "text",
+      "id": "col2_label",
+      "label": "Nav column 2 label",
+      "default": "About"
+    },
+    {
+      "type": "text",
+      "id": "social_label",
+      "label": "Social column label",
+      "default": "Follow"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright text",
+      "default": "© 2024 Your Name — All rights reserved"
+    },
+    {
+      "type": "text",
+      "id": "mark",
+      "label": "Footer signature / mark",
+      "default": "قهوة الميتين"
+    }
+  ]
+}
+{% endschema %}

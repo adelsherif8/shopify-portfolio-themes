@@ -1,0 +1,20 @@
+{% render 'filmstrip', label: section.settings.label %}
+
+{% schema %}
+{
+  "name": "Filmstrip divider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label text",
+      "default": "35mm · CINEMATIC PORTFOLIO"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Filmstrip divider"
+    }
+  ]
+}
+{% endschema %}

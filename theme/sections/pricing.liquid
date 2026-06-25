@@ -1,0 +1,91 @@
+<section id="pricing" class="section pricing-section" data-section-num="017">
+  <div class="s-label reveal">{{ section.settings.label | default: '16 — Pricing' }}</div>
+  <h2 class="pricing-heading reveal">
+    {{ section.settings.heading | default: 'Invest in' }}<br>
+    <em>{{ section.settings.heading_em | default: 'the story.' }}</em>
+  </h2>
+  <p class="pricing-sub reveal reveal-delay-1">{{ section.settings.sub | default: 'Transparent pricing for every stage of production. Custom scopes available on request.' }}</p>
+
+  <div class="pricing-grid reveal reveal-delay-2">
+    {% for block in section.blocks %}
+      {% if block.type == 'tier' %}
+        <div class="pricing-card {% if block.settings.featured %}pricing-card--featured{% endif %}" {{ block.shopify_attributes }}>
+          {% if block.settings.featured %}
+            <div class="pricing-badge">{{ block.settings.badge | default: 'Most Popular' }}</div>
+          {% endif %}
+          <div class="pricing-tier-label">{{ block.settings.tier | default: 'Tier Name' }}</div>
+          <div class="pricing-price">
+            <span class="pricing-currency">{{ block.settings.currency | default: '$' }}</span>
+            <span class="pricing-amount">{{ block.settings.price | default: '—' }}</span>
+            {% if block.settings.price_suffix != blank %}
+              <span class="pricing-suffix">{{ block.settings.price_suffix }}</span>
+            {% endif %}
+          </div>
+          <p class="pricing-desc">{{ block.settings.description }}</p>
+          <ul class="pricing-features">
+            {% assign features = block.settings.features | split: '
+' %}
+            {% for feature in features %}
+              {% if feature != blank %}
+                <li class="pricing-feature">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
+                  {{ feature | strip }}
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          {% if block.settings.cta_label != blank %}
+            <a href="{{ block.settings.cta_url | default: '#contact' }}" class="pricing-cta">
+              {{ block.settings.cta_label }}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if section.settings.note != blank %}
+    <p class="pricing-note reveal">{{ section.settings.note }}</p>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Pricing",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Section label", "default": "16 — Pricing" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Invest in" },
+    { "type": "text", "id": "heading_em", "label": "Heading (italic gold)", "default": "the story." },
+    { "type": "textarea", "id": "sub", "label": "Subtext", "default": "Transparent pricing for every stage of production. Custom scopes available on request." },
+    { "type": "textarea", "id": "note", "label": "Footer note (optional)", "default": "All rates are starting points. Final pricing depends on scope, location, and timeline. Get in touch to discuss your project." }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Pricing tier",
+      "settings": [
+        { "type": "checkbox", "id": "featured", "label": "Featured / highlighted tier", "default": false },
+        { "type": "text", "id": "badge", "label": "Featured badge text", "default": "Most Popular" },
+        { "type": "text", "id": "tier", "label": "Tier name", "default": "Essential" },
+        { "type": "text", "id": "currency", "label": "Currency symbol", "default": "$" },
+        { "type": "text", "id": "price", "label": "Price", "default": "1,500" },
+        { "type": "text", "id": "price_suffix", "label": "Price suffix (e.g. /day)", "default": "/project" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Ideal for smaller productions and brand content." },
+        { "type": "textarea", "id": "features", "label": "Features (one per line)", "default": "Up to 2 shoot days\nBasic colour grade\n1 revision round\nDigital delivery" },
+        { "type": "text", "id": "cta_label", "label": "Button label", "default": "Get in touch" },
+        { "type": "url", "id": "cta_url", "label": "Button link" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{
+    "name": "Pricing",
+    "blocks": [
+      { "type": "tier", "settings": { "tier": "Essential", "price": "1,500", "price_suffix": "/project", "description": "Ideal for smaller productions and brand content.", "features": "Up to 2 shoot days\nBasic colour grade\n1 revision round\nDigital delivery", "cta_label": "Get started" } },
+      { "type": "tier", "settings": { "featured": true, "tier": "Production", "price": "4,000", "price_suffix": "/project", "description": "Full creative direction and end-to-end production.", "features": "Up to 5 shoot days\nFull colour grade\n3 revision rounds\nOriginal score consultation\nDigital + DCP delivery", "cta_label": "Get in touch" } },
+      { "type": "tier", "settings": { "tier": "Custom", "price": "Let's talk", "price_suffix": "", "description": "For feature-length, series, or long-term creative partnerships.", "features": "Unlimited scope\nDedicated creative development\nFull post-production\nFestival delivery package", "cta_label": "Start the conversation" } }
+    ]
+  }]
+}
+{% endschema %}
